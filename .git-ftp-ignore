@@ -5,3 +5,9 @@ requirements.txt
 tests/*
 phpunit.xml
 .travis.yml
+.gitignore
+.git-ftp-ignore
+.gitmodules
+contributing.md
+license.txt
+README.md
