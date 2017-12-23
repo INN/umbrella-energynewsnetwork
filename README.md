@@ -78,11 +78,27 @@ After reviewing the options and creating the new install, partake in the followi
 
 ## Merging SEEN and MWEN
 
-From a fresh copy of the fresh-energy db:
+From a fresh copy of the fresh-energy db, newly imported:
 
-1. `wp post delete $(wp post list --format=ids --post_type=post)`
-2. `wp post delete $(wp post list --format=ids --post_type=page)`
-3. `wp post delete $(wp post list --format=ids --post_type=attachment)`
-4. `wp post delete $(wp post list --format=ids --post_type=revision)`
-5. `wp post delete $(wp post list --format=ids --post_type=nav_menu_item)`
-6. Repeat `wp post delete $(wp post list --format=ids --post_type=_term_meta --posts_per_page=10000)` until all those posts are deleted.
+1. `wp post delete $(wp post list --format=ids --post_type=post --force)`
+2. `wp post delete $(wp post list --format=ids --post_type=page --force)`
+3. `wp post delete $(wp post list --format=ids --post_type=attachment --force)`
+4. `wp post delete $(wp post list --format=ids --post_type=revision --force)`
+5. `wp post delete $(wp post list --format=ids --post_type=nav_menu_item --force)`
+6. Repeat `wp post delete $(wp post list --format=ids --post_type=_term_meta --posts_per_page=10000 --force)` until all those posts are deleted.
+7. `wp term delete post_tag $(wp term list post_tag --format=ids)`
+8. `wp term delete prominence $(wp term list prominence --format=ids)`
+9. `wp term delete series $(wp term list series --format=ids)`
+10. `wp term delete prominence $(wp term list prominence --format=ids)` &mdash; note that this will immediately be repopulated with new terms. Don't worry about that after the initial deletion.
+11. `wp term delete category $(wp term list category --format=ids)`
+
+To export the db for integration on wpengine:
+
+1. `wp db export --add-drop-table wpengine.sql`
+
+To import the db on wpengine:
+
+1. upload it via ftp to the `_wpeprivate` directory of the install
+2. ask support to import it, pretty please: "On the usenergynews install, can you drop all tables and import the SQL database dump stored in the install at usenergynews/_wpeprivate/wpengine.sql, please? I'd do it myself, but it's too large to import using consumer-facing tools."
+3. In https://my.wpengine.com/installs/usenergynews/advanced , in the wp-cli box, run `wp search-replace usenergynews.test usenergynews.wpengine.com`
+

@@ -2,6 +2,7 @@ local_fabfile.py
 .vagrant
 wp-content/themes/twenty*
 *.sql
+.yeopress
 data/*
 wp-scripts/*
 
@@ -115,7 +116,4 @@ wp-content/debug.log
 
 /.htaccess
 # do version-control the theme we care about
-!/wp-content/themes/freshenergy
-!/wp-content/themes/fresh-energy
 !/wp-content/themes/midwestenergynews
-
