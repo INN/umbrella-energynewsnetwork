@@ -11,3 +11,5 @@ phpunit.xml
 contributing.md
 license.txt
 README.md
+*.bash
+*.sql

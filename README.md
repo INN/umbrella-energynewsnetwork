@@ -89,7 +89,7 @@ From a fresh copy of the fresh-energy db, newly imported:
 7. `wp term delete post_tag $(wp term list post_tag --format=ids)`
 8. `wp term delete prominence $(wp term list prominence --format=ids)`
 9. `wp term delete series $(wp term list series --format=ids)`
-10. `wp term delete prominence $(wp term list prominence --format=ids)` &mdash; note that this will immediately be repopulated with new terms. Don't worry about that after the initial deletion.
+10. `wp term delete prominence $(wp term list prominence --format=ids)` &mdash; note that this will immediately be repopulated with new terms, because of Largo. Don't worry about that after the initial deletion.
 11. `wp term delete category $(wp term list category --format=ids)`
 
 To export the db for integration on wpengine:
