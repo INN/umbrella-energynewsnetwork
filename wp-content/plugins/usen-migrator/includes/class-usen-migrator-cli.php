@@ -63,7 +63,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT ID
-				FROM wp_" . $this->site_id . "_posts
+				FROM " . $wpdb->prefix . $this->site_id . "_posts
 				ORDER BY ID ASC
 			"
 		);
@@ -117,7 +117,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			// update wp_57_postmeta featured_media with new featured media
 			$rows = $wpdb->get_results(
 				"
-					SELECT * FROM wp_" . $this->site_id . "_postmeta
+					SELECT * FROM " . $wpdb->prefix . $this->site_id . "_postmeta
 						WHERE meta_key = 'featured_media'
 						AND meta_value LIKE '%$old%'
 				",
@@ -218,7 +218,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_postmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_postmeta
 				ORDER BY meta_id DESC limit 0,1
 			"
 		);
@@ -232,7 +232,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_postmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_postmeta
 				ORDER BY meta_id ASC
 			"
 		);
@@ -278,7 +278,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT term_taxonomy_id
-				FROM wp_" . $this->site_id . "_term_taxonomy
+				FROM " . $wpdb->prefix . $this->site_id . "_term_taxonomy
 				ORDER BY term_taxonomy_id DESC limit 0,1
 			"
 		);
@@ -292,7 +292,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT term_taxonomy_id
-				FROM wp_" . $this->site_id . "_term_taxonomy
+				FROM " . $wpdb->prefix . $this->site_id . "_term_taxonomy
 				ORDER BY term_taxonomy_id ASC
 			"
 		);
@@ -352,7 +352,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT term_id
-				FROM wp_" . $this->site_id . "_terms
+				FROM " . $wpdb->prefix . $this->site_id . "_terms
 				ORDER BY term_id DESC limit 0,1
 			"
 		);
@@ -366,7 +366,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT term_id
-				FROM wp_" . $this->site_id . "_terms
+				FROM " . $wpdb->prefix . $this->site_id . "_terms
 				ORDER BY term_id ASC
 			"
 		);
@@ -429,7 +429,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			$full_term = $wpdb->get_results(
 				"
 					SELECT a.taxonomy
-					FROM wp_" . $this->site_id . "_term_taxonomy a
+					FROM " . $wpdb->prefix . $this->site_id . "_term_taxonomy a
 					WHERE a.term_id = $new
 				",
 				'ARRAY_A'
@@ -440,10 +440,10 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			$term_meta_posts = $wpdb->get_results(
 				"
 					SELECT a.ID
-					FROM wp_" . $this->site_id . "_posts a
-					INNER JOIN wp_" . $this->site_id . "_term_relationships b
+					FROM " . $wpdb->prefix . $this->site_id . "_posts a
+					INNER JOIN " . $wpdb->prefix . $this->site_id . "_term_relationships b
 						ON a.ID = b.object_ID
-					INNER JOIN wp_" . $this->site_id . "_term_taxonomy c
+					INNER JOIN " . $wpdb->prefix . $this->site_id . "_term_taxonomy c
 						ON b.term_taxonomy_id = c.term_taxonomy_id
 					WHERE c.term_id = $new
 					AND a.post_type = '_term_meta'
@@ -495,7 +495,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_termmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_termmeta
 				ORDER BY meta_id DESC limit 0,1
 			"
 		);
@@ -509,7 +509,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_termmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_termmeta
 				ORDER BY meta_id ASC
 			"
 		);
@@ -604,7 +604,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT comment_id
-				FROM wp_" . $this->site_id . "_comments
+				FROM " . $wpdb->prefix . $this->site_id . "_comments
 				ORDER BY comment_id DESC limit 0,1
 			"
 		);
@@ -618,7 +618,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT comment_id
-				FROM wp_" . $this->site_id . "_comments
+				FROM " . $wpdb->prefix . $this->site_id . "_comments
 				ORDER BY comment_id ASC
 			"
 		);
@@ -665,7 +665,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_commentmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_commentmeta
 				ORDER BY meta_id DESC limit 0,1
 			"
 		);
@@ -679,7 +679,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT meta_id
-				FROM wp_" . $this->site_id . "_commentmeta
+				FROM " . $wpdb->prefix . $this->site_id . "_commentmeta
 				ORDER BY meta_id ASC
 			"
 		);
@@ -719,7 +719,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT id
-				FROM wp_" . $this->site_id . "_redirection_items
+				FROM " . $wpdb->prefix . $this->site_id . "_redirection_items
 				ORDER BY id DESC limit 0,1
 			"
 		);
@@ -733,7 +733,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$olds = $wpdb->get_col(
 			"
 				SELECT id
-				FROM wp_" . $this->site_id . "_redirection_items
+				FROM " . $wpdb->prefix . $this->site_id . "_redirection_items
 				ORDER BY id ASC
 			"
 		);
@@ -746,8 +746,8 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
 
-			// increment id in wp_57_commentmeta
-		// increment id in wp_57_redirection_items
+			// increment id in _commentmeta
+		// increment id in _redirection_items
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_redirection_items',
 				array( 'id' => $new ),
@@ -766,8 +766,8 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * @author benlk
 	 */
 	private function update_catalyst_redirection_groups() {
-		// increment id in wp_57_redirection_groups
-		// update group_id in wp_57_redirection_items
+		// increment id in _redirection_groups
+		// update group_id in _redirection_items
 	}
 
 	/**
@@ -802,24 +802,29 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * This should only be run once IDs have been updated
 	 */
 	private function merge_catalyst_tables() {
-		$tables = array(
-			'wp_57_commentmeta' => 'wp_commentmeta',
-			'wp_57_comments' => 'wp_comments',
-			// 'wp_57_links' => '', // can be ignored because it is empty
-			// 'wp_57_options' => 'wp_options', // we're keeping Reporter options
-			'wp_57_postmeta' => 'wp_postmeta',
-			'wp_57_posts' => 'wp_posts',
-			// 'wp_57_redirection_404' => '', // can be ignored because it's useless
-			// 'wp_57_redirection_groups' => 'wp_redirection_groups', // can be ignored because it's the same as Reporter
-			'wp_57_redirection_items' => 'wp_redirection_items',
-			// 'wp_57_redirection_logs' => '', // can be ignored because it's empty
-			'wp_57_term_relationships' => 'wp_term_relationships',
-			'wp_57_term_taxonomy' => 'wp_term_taxonomy',
-			'wp_57_termmeta' => 'wp_termmeta',
-			'wp_57_terms' => 'wp_terms',
+		global $wpdb;
+		$tables = array();
+		$tablenames = array(
+			'_commentmeta',
+			'_comments',
+			// '_links', // can be ignored because it is empty
+			// '_options', // because we're keeping the new site's options
+			'_posts',
+			'_postmeta',
+			// '_redirection_404', // can be ignored because it's useless
+			'_redirection_groups',
+			'_redirection_items',
+			// '_redirection_logs', // can be ignored because it's empty
+			'_term_relationships',
+			'_term_taxonomy',
+			'_termmeta',
+			'_terms'
 		);
 
-		global $wpdb;
+		// generate the table list of from -> to for moving content
+		foreach ( $tablenames as $name ) {
+			$table[ $wpdb->prefix . $this->site_id . $name ] = $wpdb->prefix . $name ;
+		}
 
 		// this technique from http://sqlblog.com/blogs/merrill_aldrich/archive/2011/08/17/handy-trick-move-rows-in-one-statement.aspx
 		foreach ( $tables as $catalyst => $reporter ) {
