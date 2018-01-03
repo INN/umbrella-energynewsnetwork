@@ -18,10 +18,12 @@ The decision was made to do this as a plugin because it doesn't need to live in 
 
 If you're looking at this in the future (after, say, February 2018), please:
 
-- rewrite it as a standalone wp-cli command
+- rewrite it as a standalone wp-cli command using https://github.com/wp-cli/scaffold-package-command
 - give it a sensible name
 - publish it on its own on github
 - publish it to the wp-cli package repository
+
+This plugin derives from https://github.com/INN/umbrella-chicagoreporter/blob/01c31a296db20abe671ae0e8a54dca7fb8ef44af/wp-content/themes/chicago-reporter/inc/cli.php and the associated documentation.
 
 ## Installation ##
 
