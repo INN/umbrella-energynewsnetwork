@@ -117,3 +117,4 @@ wp-content/debug.log
 /.htaccess
 # do version-control the theme we care about
 !/wp-content/themes/midwestenergynews
+!/wp-content/plugins/usen-migrator
