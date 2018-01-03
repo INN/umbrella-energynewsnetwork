@@ -136,7 +136,7 @@ final class USEN_Migrator {
 		// ONLY activate this functionality if we're running WP CLI
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			require_once $this->path . '/includes/class-usen-migrator-cli.php';
-			WP_CLI::add_command( 'usen', 'CR_WP_CLI' );
+			WP_CLI::add_command( 'usen', 'USEN_Migrator_CLI' );
 		}
 	}
 

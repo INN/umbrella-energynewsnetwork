@@ -10,9 +10,9 @@ define( 'MWEN_ID', 64 );
 define( 'SEEN_ID', 58 );
 
 /**
- * Create migration commands for Catalyst
+ * Copy all content from single site within a multisite to the primary site.
  */
-class MWEN_Migrator_CLI extends WP_CLI_Command {
+class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 * Contains an array(
