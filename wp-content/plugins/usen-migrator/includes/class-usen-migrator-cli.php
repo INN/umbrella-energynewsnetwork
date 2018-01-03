@@ -21,13 +21,24 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 */
 	private $oldnew = array();
 
+	/**
+	 * @var int $site_id the site ID
+	 */
+	private $site_id = null;
+
+	/**
+	 * For logging things
+	 *
+	 * @private
+	 */
 	private function log( $stuff ) {
 		WP_CLI::line( var_export( $stuff, true ) );
 	}
 
 	/**
+	 * Update post IDs
 	 */
-	public function update_catalyst_posts() {
+	private function update_catalyst_posts() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -196,7 +207,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 */
-	public function update_catalyst_postmeta() {
+	private function update_catalyst_postmeta() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -256,7 +267,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 *
 	 * Also, we're going to move all Catalyst terms in the 'series' taxonomy to the 'catalyst-issues' taxonomy.
 	 */
-	public function update_catalyst_term_taxonomy() {
+	private function update_catalyst_term_taxonomy() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -330,7 +341,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 */
-	public function update_catalyst_terms() {
+	private function update_catalyst_terms() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -473,7 +484,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 */
-	public function update_catalyst_termmeta() {
+	private function update_catalyst_termmeta() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -551,10 +562,10 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 * Convert user roles to match the new site's singlesite nature
-	 * 
+	 *
 	 * This fixes a shortfall in INN/sql-utils/prepare_for_export.sql
 	 */
-	public function update_all_usermeta() {
+	private function update_all_usermeta() {
 		global $wpdb;
 
 		$site_ids = array(
@@ -585,12 +596,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				);
 			}
 		}
-
 	}
 
 	/**
 	 */
-	public function update_catalyst_comments() {
+	private function update_catalyst_comments() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -651,7 +661,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 */
-	public function update_catalyst_commentmeta() {
+	private function update_catalyst_commentmeta() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -705,7 +715,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 */
-	public function update_catalyst_redirection_items() {
+	private function update_catalyst_redirection_items() {
 		global $wpdb;
 		$highest_reporter = $wpdb->get_var(
 			"
@@ -769,7 +779,9 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
-	 * This command runs the following commands:
+	 * Adjust every single ID in the site post DB
+	 *
+	 * This command runs the following commands, fixing their IDs:
 	 * - update_catalyst_posts
 	 * - update_catalyst_postmeta
 	 * - update_catalyst_term_taxonomy
@@ -779,7 +791,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * - update_catalyst_commentmeta
 	 * - update_catalyst_redirection_items
 	 */
-	public function adjust_all_ids() {
+	private function adjust_all_ids() {
 		$this->update_catalyst_posts();
 		$this->update_catalyst_postmeta();
 		$this->update_catalyst_term_taxonomy();
@@ -794,8 +806,10 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 	/**
 	 * Copy rows from Catalyst's tables into Reporter's tables
+	 *
+	 * This should only be run once IDs have been updated
 	 */
-	public function merge_catalyst_tables() {
+	private function merge_catalyst_tables() {
 		$tables = array(
 			'wp_57_commentmeta' => 'wp_commentmeta',
 			'wp_57_comments' => 'wp_comments',
@@ -830,7 +844,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	/**
 	 * Drop Catalyst's tables
 	 */
-	public function drop_catalyst_tables() {
+	private function drop_catalyst_tables() {
 		global $wpdb;
 		$drop = $wpdb->query(
 			"
@@ -855,23 +869,72 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
-	 * Move all Reporter series to Reporter Issues taxonomy
+	 * Perform all migration steps
 	 */
-	public function reporter_series_to_reporter_issues() {
-		global $wpdb;
-
-		// they're all gonna go
-		$ret = $wpdb->update(
-			'wp_term_taxonomy',
-			array( 'taxonomy' => 'reporter-issues' ),
-			array( 'taxonomy' => 'series' )
-		);
-	}
-
-	public function perform_all_migrations() {
+	private function perform_all_migrations() {
 		$this->adjust_all_ids();
-		$this->reporter_series_to_reporter_issues();
 		$this->merge_catalyst_tables();
 		$this->drop_catalyst_tables();
+	}
+
+	/**
+	 * Test function to make sure that you're sending an ID that actually works
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
+	 *
+	 * @subcommand test
+	 */
+	public function _test( $args = null ) {
+		if ( ! is_numeric( $args[0] ) || floatval( $args[0] ) != intval( $args[0] ) ) {
+			WP_CLI::error( sprintf(
+				'%1$s is not a site ID',
+				var_export( $args[0], true )
+			) );
+		}
+
+		WP_CLI::log( sprintf(
+			'Checking if %1$s is the ID of an existing site...',
+			$args[0]
+		) );
+
+		$id = (int) $args[0];
+
+		try {
+			global $wpdb;
+			$table_like = $wpdb->prefix . $id;
+			$tables = $wpdb->get_results("SHOW TABLES LIKE '$table_like%'");
+			WP_CLI::log( var_export( $tables, true ) );
+			foreach ( $tables as $table ) {
+			}
+		} catch ( Exception $e ) {
+			WP_CLI::log( $e->getMessage() );
+			WP_CLI::error( 'Looks like that was not a thing we were meant to see.' );
+		}
+
+		// if there were no tables or if the table query did not run:
+		if ( empty( $tables ) ) {
+			WP_CLI::error( "$id does not appear to have any tables in this database." );
+		}
+
+		return $id;
+	}
+
+	/**
+	 * Given a site ID, move all content (posts, terms, comments) from that ID's db to the primary site
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
+	 *
+	 * @subcommand migrate
+	 */
+	public function migrate( $args ) {
+		// make sure that this is what we want it to do.
+		$this->site_id = $this->_test( $args );
+		$this->perform_all_migrations( $this->site_id );
 	}
 }
