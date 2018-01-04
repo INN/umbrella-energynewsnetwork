@@ -46,6 +46,8 @@ prune_wp_users() {
 
 # run the munging commands
 munge() {
+	wp usen migrate 58
+	wp usen migrate 64
 }
 
 # export
@@ -68,7 +70,9 @@ main() {
 	check
 	destroy_posts
 	destroy_terms
+	munge
 	prune_wp_users
+	export
 	reminders
 }
 
