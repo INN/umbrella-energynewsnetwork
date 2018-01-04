@@ -49,7 +49,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_catalyst = $wpdb->get_var(
 			"
 				SELECT ID
-				FROM" $wpdb->prefix . $this->site_id . "_posts
+				FROM " . $wpdb->prefix . $this->site_id . "_posts
 				ORDER BY ID DESC limit 0,1
 			"
 		);
