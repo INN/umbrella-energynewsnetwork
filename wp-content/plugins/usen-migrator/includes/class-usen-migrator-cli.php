@@ -299,20 +299,8 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
 			"Updating term_taxonomy_ids of catalyst term_taxonomies...",
-			count( $olds ) + 1 // +1 for the series -> catalyst-issue migration
+			count( $olds )
 		);
-
-		// convert all series into catalyst issues
-		$ret = $wpdb->update(
-			$wpdb->prefix . $this->site_id . '_term_taxonomy',
-			array(
-				'taxonomy' => 'catalyst-issues'
-			),
-			array(
-				'taxonomy' => 'series'
-			)
-		);
-		$progress->tick();
 
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
