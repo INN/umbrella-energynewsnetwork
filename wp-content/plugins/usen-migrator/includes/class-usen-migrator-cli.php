@@ -891,9 +891,6 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			global $wpdb;
 			$table_like = $wpdb->prefix . $id;
 			$tables = $wpdb->get_results("SHOW TABLES LIKE '$table_like%'");
-			WP_CLI::log( var_export( $tables, true ) );
-			foreach ( $tables as $table ) {
-			}
 		} catch ( Exception $e ) {
 			WP_CLI::log( $e->getMessage() );
 			WP_CLI::error( 'Looks like that was not a thing we were meant to see.' );
