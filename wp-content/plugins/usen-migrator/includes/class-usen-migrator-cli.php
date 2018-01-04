@@ -83,28 +83,28 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				array( 'ID' => $old )
 			);
 
-			// update wp_57_posts where post_parent = old
+			// update _posts where post_parent = old
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_posts',
 				array( 'post_parent' => $new ),
 				array( 'post_parent' => $old )
 			);
 
-			// update wp_57_term_relationships with new object_id
+			// update _term_relationships with new object_id
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_term_relationships',
 				array( 'object_id' => $new ),
 				array( 'object_id' => $old )
 			);
 
-			// update wp_57_postmeta with new post_id
+			// update _postmeta with new post_id
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_postmeta',
 				array( 'post_id' => $new ),
 				array( 'post_id' => $old )
 			);
 
-			// update wp_57_postmeta _thumbnail_id with new thumbnail_id
+			// update _postmeta _thumbnail_id with new thumbnail_id
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_postmeta',
 				array( 'meta_value' => $new ),
@@ -114,7 +114,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				)
 			);
 
-			// update wp_57_postmeta featured_media with new featured media
+			// update _postmeta featured_media with new featured media
 			$rows = $wpdb->get_results(
 				"
 					SELECT * FROM " . $wpdb->prefix . $this->site_id . "_postmeta
@@ -312,7 +312,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				array( 'term_taxonomy_id' => $old )
 			);
 
-			// update wp_57_term_relationships with new term_taxonomy_id
+			// update _term_relationships with new term_taxonomy_id
 			// increment term_taxonomy_id
 			$ret = $wpdb->update(
 				$wpdb->prefix . $this->site_id . '_term_relationships',
@@ -377,21 +377,21 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				array( 'term_id' => $old )
 			);
 
-			// update wp_57_term_taxonomy with new term_id
+			// update _term_taxonomy with new term_id
 			$ret = $wpdb->update(
 				$wpdb->prefix . $this->site_id . '_term_taxonomy',
 				array( 'term_id' => $new ),
 				array( 'term_id' => $old )
 			);
 
-			// update wp_57_termmeta with new term_id
+			// update _termmeta with new term_id
 			$ret = $wpdb->update(
 				$wpdb->prefix . $this->site_id . '_termmeta',
 				array( 'term_id' => $new ),
 				array( 'term_id' => $old )
 			);
 
-			// update wp_57_postmeta with top term's new term_id
+			// update _postmeta with top term's new term_id
 			$ret = $wpdb->update(
 				$wpdb->prefix . $this->site_id . '_postmeta',
 				array( 'meta_value' => $new ),
@@ -401,14 +401,14 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				)
 			);
 
-			// update wp_57_postmeta series_order with new term_id
+			// update _57_postmeta series_order with new term_id
 			$ret = $wpdb->update(
 				$wpdb->prefix . $this->site_id . '_postmeta',
 				array( 'meta_key' => 'series_' . $new . '_order' ),
 				array( 'meta_key' => 'series_' . $old . '_order' )
 			);
 
-			// update wp_57_posts where post_title = $taxonomy:$old_id with new $taxonomy:$new_id
+			// update _posts where post_title = $taxonomy:$old_id with new $taxonomy:$new_id
 			// this is the term meta post
 
 
@@ -511,7 +511,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
 
-			// increment meta_id in wp_57_termmeta
+			// increment meta_id in _termmeta
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_termmeta',
 				array( 'ID' => $new ),
