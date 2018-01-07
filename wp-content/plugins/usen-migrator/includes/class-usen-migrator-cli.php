@@ -694,6 +694,42 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
+	 * Determine whether to run redirection items
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
+	 */
+	public function detect_redirection_tables( $args ) {
+		// because this is a public function
+		if ( ! isset( $this->site_id ) ) {
+			if ( is_array( $args ) ) {
+				$this->site_id = $this->_test( $args );
+			} else {
+				WP_CLI::error( 'sorry, something went wrong when trying to detect the site. Here\'s the arguments:' );
+				WP_CLI::log( var_export( $args, true ) );
+				return false;
+			}
+		}
+
+		// make sure that this is what we want it to do.
+		// make sure that this is what we want it to do.
+		try {
+			global $wpdb;
+			$table_like = $wpdb->prefix . $this->site_id . "_redirection";
+			$tables = $wpdb->get_results("SHOW TABLES LIKE '$table_like%'");
+		} catch ( Exception $e ) {
+			WP_CLI::log( $e->getMessage() );
+			WP_CLI::error( 'Looks like that was not a thing we were meant to see.' );
+			return false;
+		}
+
+		$return = ! empty( $tables );
+		return $return;
+	}
+
+	/**
 	 */
 	private function update_catalyst_redirection_items() {
 		global $wpdb;
@@ -779,9 +815,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$this->update_catalyst_termmeta();
 		$this->update_catalyst_comments();
 		$this->update_catalyst_commentmeta();
-		$this->update_catalyst_redirection_items();
+		if ( $this->redirection ) {
+			$this->update_catalyst_redirection_items();
+			# $this->update_catalyst_redirection_groups();
+		}
 		$this->update_all_usermeta();
-		# $this->update_catalyst_redirection_groups();
 	}
 
 	/**
@@ -799,15 +837,23 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			// '_options', // because we're keeping the new site's options
 			'_posts',
 			'_postmeta',
-			// '_redirection_404', // can be ignored because it's useless
-			'_redirection_groups',
-			'_redirection_items',
-			// '_redirection_logs', // can be ignored because it's empty
 			'_term_relationships',
 			'_term_taxonomy',
 			'_termmeta',
 			'_terms'
 		);
+
+		if ( $this->redirection ) {
+			array_merge(
+				$tablenames,
+				array(
+					// '_redirection_404', // can be ignored because it's useless
+					// '_redirection_logs', // can be ignored because it's empty
+					'_redirection_groups',
+					'_redirection_items'
+				)
+			);
+		}
 
 		// generate the table list of from -> to for moving content
 		foreach ( $tablenames as $name ) {
@@ -879,12 +925,6 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				var_export( $args[0], true )
 			) );
 		}
-
-		WP_CLI::log( sprintf(
-			'Checking if %1$s is the ID of an existing site...',
-			$args[0]
-		) );
-
 		$id = (int) $args[0];
 
 		try {
@@ -917,6 +957,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	public function migrate( $args ) {
 		// make sure that this is what we want it to do.
 		$this->site_id = $this->_test( $args );
+		$this->redirection = $this->detect_redirection_tables( $args );
 		$this->perform_all_migrations( $this->site_id );
 	}
 }
