@@ -13,7 +13,6 @@ destroy_posts() {
 	for post_type in $( wp post-type list --field=name )
 	do
 		echo "Deleting the posts of post_type $post_type"
-		echo $post_type
 
 		while [ $( wp post list --format=count --post_type=$post_type ) -gt 1 ]
 		do
@@ -27,9 +26,7 @@ destroy_terms() {
 	for taxonomy in $( wp taxonomy list --field=name )
 	do
 		echo "Deleting the terms of taxonomies $taxonomy"
-		echo $taxonomy
-
-		wp term delete $(wp term list $taxonomy --format=ids ) --force
+		wp term delete $taxonomy $(wp term list $taxonomy --format=ids ) --by=id
 	done
 }
 
@@ -42,6 +39,12 @@ prune_wp_users() {
 		echo >&2 "Not sure what happened; but prune_wp_users.sql is missing. Aborting.";
 		exit 1;
 	fi
+}
+
+# activate the plugin that contains the command
+activate() {
+	wp plugin activate usen-migrator
+	wp plugin activate redirection
 }
 
 # run the munging commands
@@ -57,7 +60,7 @@ export() {
 
 # reminders
 reminders() {
-	echo "Please remember to run cleamup tasks after you have imported the database."
+	echo "Please remember to run cleanup tasks after you have imported the database."
 	echo "You'll need to replace names."
 	echo "   wp search-replace 'usenergynews.test' 'usenergynews.wpengine.com'"
 	echo "   wp search-replace 'southeastenergynews.com' 'usenergynews.wpengine.com'"
@@ -70,6 +73,7 @@ main() {
 	check
 	destroy_posts
 	destroy_terms
+	activate
 	munge
 	prune_wp_users
 	export
