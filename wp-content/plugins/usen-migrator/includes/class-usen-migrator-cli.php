@@ -69,7 +69,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating IDs of catalyst posts...",
+			"Updating IDs of the old site's posts...",
 			count( $olds )
 		);
 
@@ -238,7 +238,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of catalyst postmeta...",
+			"Updating meta_ids of the old site's postmeta...",
 			count( $olds )
 		);
 
@@ -298,7 +298,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating term_taxonomy_ids of catalyst term_taxonomies...",
+			"Updating term_taxonomy_ids of the old site's term_taxonomies...",
 			count( $olds )
 		);
 
@@ -360,7 +360,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating term_ids of catalyst terms...",
+			"Updating term_ids of the old site's terms...",
 			count( $olds )
 		);
 
@@ -503,7 +503,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of catalyst termmettermmeta...",
+			"Updating meta_ids of the old site's termmettermmeta...",
 			count( $olds )
 		);
 
@@ -612,7 +612,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating comment_ids of catalyst comments...",
+			"Updating comment_ids of the old site's comments...",
 			count( $olds )
 		);
 
@@ -673,7 +673,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of catalyst commentmeta...",
+			"Updating meta_ids of the old site's commentmeta...",
 			count( $olds )
 		);
 
@@ -763,14 +763,13 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating ids of catalyst redirection items...",
+			"Updating ids of the old site's redirection items...",
 			count( $olds )
 		);
 
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
 
-			// increment id in _commentmeta
 		// increment id in _redirection_items
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_redirection_items',
