@@ -878,14 +878,14 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		}
 
 		// this technique from http://sqlblog.com/blogs/merrill_aldrich/archive/2011/08/17/handy-trick-move-rows-in-one-statement.aspx
-		foreach ( $tables as $catalyst => $reporter ) {
+		foreach ( $tables as $old => $new ) {
 			$ret = $wpdb->query(
 				"
-					INSERT INTO $reporter
-					SELECT * FROM $catalyst
+					INSERT INTO $new
+					SELECT * FROM $old
 				"
 			);
-			$this->log( "$ret rows affected when copying rows from $catalyst into $reporter." );
+			$this->log( "$ret rows affected when copying rows from $old into $new." );
 		}
 	}
 
