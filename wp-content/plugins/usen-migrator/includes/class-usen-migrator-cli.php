@@ -77,7 +77,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating IDs of the old site's posts...",
+			"Updating IDs of site " . $this->site_id . "'s posts...",
 			count( $olds )
 		);
 
@@ -246,7 +246,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of the old site's postmeta...",
+			"Updating meta_ids of site " . $this->site_id . "'s postmeta...",
 			count( $olds )
 		);
 
@@ -306,7 +306,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating term_taxonomy_ids of the old site's term_taxonomies...",
+			"Updating term_taxonomy_ids of site " . $this->site_id . "'s term_taxonomies...",
 			count( $olds )
 		);
 
@@ -368,7 +368,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating term_ids of the old site's terms...",
+			"Updating term_ids of site " . $this->site_id . "'s terms...",
 			count( $olds )
 		);
 
@@ -511,7 +511,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of the old site's termmettermmeta...",
+			"Updating meta_ids of site " . $this->site_id . "'s termmettermmeta...",
 			count( $olds )
 		);
 
@@ -620,7 +620,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating comment_ids of the old site's comments...",
+			"Updating comment_ids of site " . $this->site_id . "'s comments...",
 			count( $olds )
 		);
 
@@ -681,7 +681,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of the old site's commentmeta...",
+			"Updating meta_ids of site " . $this->site_id . "'s commentmeta...",
 			count( $olds )
 		);
 
@@ -771,7 +771,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating ids of the old site's redirection items...",
+			"Updating ids of site " . $this->site_id . "'s redirection items...",
 			count( $olds )
 		);
 
