@@ -45,8 +45,7 @@ prune_wp_users() {
 
 # activate the plugin that contains the command
 activate() {
-	wp plugin activate usen-migrator
-	wp plugin activate redirection
+	wp plugin activate usen-migrator redirection --quiet
 }
 
 # run the munging commands
