@@ -900,7 +900,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		}
 		foreach ( $this->table_names as $table ) {
 		$drop = $wpdb->query(
-			"DROP TABLE IF EXISTS" . $wpdb->prefix . $this->site_id . $table );
+			"DROP TABLE IF EXISTS " . $wpdb->prefix . $this->site_id . $table );
 		}
 		$this->log( $drop );
 	}
