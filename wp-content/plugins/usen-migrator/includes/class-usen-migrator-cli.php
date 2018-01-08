@@ -835,7 +835,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * @return Array $table_names An array of unprefixed table names for this site.
 	 */
 	private function generate_table_names() {
-		$tablenames = array(
+		$table_names = array(
 			'_commentmeta',
 			'_comments',
 			// '_links', // can be ignored because it is empty
@@ -850,7 +850,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 		if ( $this->redirection ) {
 			array_merge(
-				$tablenames,
+				$table_names,
 				array(
 					// '_redirection_404', // can be ignored because it's useless
 					// '_redirection_logs', // can be ignored because it's empty
@@ -860,7 +860,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			);
 		}
 
-		return $tablenames;
+		return $table_names;
 	}
 
 	/**
@@ -873,7 +873,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$tables = array();
 
 		// generate the table list of from -> to for moving content
-		foreach ( $this->tablenames as $name ) {
+		foreach ( $this->table_names as $name ) {
 			$table[ $wpdb->prefix . $this->site_id . $name ] = $wpdb->prefix . $name ;
 		}
 
