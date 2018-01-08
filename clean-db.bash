@@ -14,9 +14,10 @@ destroy_posts() {
 	do
 		echo "Deleting the posts of post_type $post_type"
 
+		# gotta page through this, because more than ~10k arguments at a time is too many for wp-cli.
 		while [ $( wp post list --format=count --post_type=$post_type ) -gt 1 ]
 		do
-			wp post delete $(wp post list --format=ids --post_type=$post_type --posts_per_page=10000 ) --force
+			wp post delete $(wp post list --format=ids --post_type=$post_type --posts_per_page=10000 ) --force --quiet
 		done
 	done
 }
@@ -26,7 +27,8 @@ destroy_terms() {
 	for taxonomy in $( wp taxonomy list --field=name )
 	do
 		echo "Deleting the terms of taxonomies $taxonomy"
-		wp term delete $taxonomy $(wp term list $taxonomy --format=ids ) --by=id
+		# This might cause some log output if there are no terms in the taxonomy
+		wp term delete $taxonomy $(wp term list $taxonomy --format=ids ) --by=id --quiet
 	done
 }
 
@@ -81,4 +83,3 @@ main() {
 }
 
 main;
-
