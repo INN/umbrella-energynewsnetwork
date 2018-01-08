@@ -29,6 +29,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	private $redirection = false;
 
 	/**
+	 * @var Array $table_names An array of unprefixed table names for this site.
+	 */
+	private $table_names = null;
+
+	/**
 	 * For logging things
 	 *
 	 * @private
@@ -544,10 +549,10 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 */
 	private function update_catalyst_users() {
 		// otherwise:
-		// increment ID in wp_57_users
-		// update post_author in wp_57_posts
-		// update wp_57_usermeta with new user_id
-		// update wp_57_comments with new user_id
+		// increment ID in _users
+		// update post_author in _posts
+		// update _usermeta with new user_id
+		// update _comments with new user_id
 	}
 
 	/**
@@ -623,13 +628,13 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
 
-			// increment comment_id in wp_57_comments
+			// increment comment_id in _comments
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_comments',
 				array( 'comment_id' => $new ),
 				array( 'comment_id' => $old )
 			);
-			// update comment_id in wp_57_commentmeta
+			// update comment_id in _commentmeta
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_commentmeta',
 				array( 'comment_id' => $new ),
@@ -683,7 +688,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
 
-			// increment meta_id in wp_57_commentmeta
+			// increment meta_id in _commentmeta
 			$wpdb->update(
 				$wpdb->prefix . $this->site_id . '_commentmeta',
 				array( 'meta_id' => $new ),
@@ -825,13 +830,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
-	 * Copy rows from Catalyst's tables into Reporter's tables
+	 * Return a list of unprefixed table names for this site
 	 *
-	 * This should only be run once IDs have been updated
+	 * @return Array $table_names An array of unprefixed table names for this site.
 	 */
-	private function merge_catalyst_tables() {
-		global $wpdb;
-		$tables = array();
+	private function generate_table_names() {
 		$tablenames = array(
 			'_commentmeta',
 			'_comments',
@@ -857,8 +860,20 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			);
 		}
 
+		return $tablenames;
+	}
+
+	/**
+	 * Copy rows from Catalyst's tables into Reporter's tables
+	 *
+	 * This should only be run once IDs have been updated
+	 */
+	private function merge_catalyst_tables() {
+		global $wpdb;
+		$tables = array();
+
 		// generate the table list of from -> to for moving content
-		foreach ( $tablenames as $name ) {
+		foreach ( $this->tablenames as $name ) {
 			$table[ $wpdb->prefix . $this->site_id . $name ] = $wpdb->prefix . $name ;
 		}
 
@@ -877,27 +892,16 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	/**
 	 * Drop Catalyst's tables
 	 */
-	private function drop_catalyst_tables() {
+	private function drop_tables() {
 		global $wpdb;
+
+		if ( empty ( $this->table_names ) ) {
+			WP_CLI::error( 'tried to run drop_tables but no tables were specified in $this->tables' );
+		}
+		foreach ( $this->table_names as $table ) {
 		$drop = $wpdb->query(
-			"
-				DROP TABLE IF EXISTS
-					wp_57_commentmeta,
-					wp_57_comments,
-					wp_57_links,
-					wp_57_options,
-					wp_57_postmeta,
-					wp_57_posts,
-					wp_57_redirection_404,
-					wp_57_redirection_groups,
-					wp_57_redirection_items,
-					wp_57_redirection_logs,
-					wp_57_term_relationships,
-					wp_57_term_taxonomy,
-					wp_57_termmeta,
-					wp_57_terms
-			"
-		);
+			"DROP TABLE IF EXISTS" . $wpdb->prefix . $this->site_id . $table );
+		}
 		$this->log( $drop );
 	}
 
@@ -907,7 +911,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	private function perform_all_migrations() {
 		$this->adjust_all_ids();
 		$this->merge_catalyst_tables();
-		$this->drop_catalyst_tables();
+		$this->drop_tables();
 	}
 
 	/**
@@ -989,6 +993,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		// make sure that this is what we want it to do.
 		$this->site_id = $this->_test( $args );
 		$this->redirection = $this->detect_redirection_tables( $args );
+		$this->table_names = $this->generate_table_names();
 		$this->perform_all_migrations( $this->site_id );
 	}
 }
