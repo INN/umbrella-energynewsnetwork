@@ -734,7 +734,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_reporter = $wpdb->get_var(
 			"
 				SELECT id
-				from " . $wpdb->prefix ." redirection_items
+				from " . $wpdb->prefix ."_redirection_items
 				ORDER BY id DESC limit 0,1
 			"
 		);
