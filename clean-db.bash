@@ -53,6 +53,7 @@ activate() {
 munge() {
 	wp usen migrate 58
 	wp usen migrate 64
+	wp usen largo_reset_options
 }
 
 # export

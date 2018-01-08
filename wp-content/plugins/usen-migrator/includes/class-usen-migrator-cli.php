@@ -947,6 +947,35 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
+	 * Reset certain Largo theme options in the primary site
+	 *
+	 * @uses optionsframework_init from Largo/lib/options-framework/options-framework.php
+	 * @uses of_get_default_values from Largo/options.php
+	 * @since Largo 0.5.5.4
+	 */
+	public function largo_reset_options() {
+		if ( ! function_exists( 'of_get_default_values' ) || ! function_exists( 'optionsframework_init' ) ) {
+			WP_CLI::error( 'The command largo_partial_reset is depends upon the function of_get_default_values, optionsframework_options, and optionsframework_init  from the Largo theme. `wp usen largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
+		}
+
+		if ( ! function_exists( 'optionsframework_options' ) ) {
+			optionsframework_init();
+
+			if ( ! function_exists( 'optionsframework_options' ) ) {
+				WP_CLI::error( 'The command largo_partial_reset is depends upon the function optionsframework_options from the Largo theme. `wp usen largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
+			}
+		}
+
+		WP_CLI::log( 'Resetting the Largo theme options...' );
+
+		// logic borrowed from largo_set_new_option_defaults, but in this case we're not merging them.
+		$options = of_get_default_values();
+		$config = get_option( 'optionsframework' );
+
+		update_option( $config['id'], $options );
+	}
+
+	/**
 	 * Given a site ID, move all content (posts, terms, comments) from that ID's db to the primary site
 	 *
 	 * ## OPTIONS
