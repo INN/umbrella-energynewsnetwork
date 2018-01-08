@@ -24,6 +24,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	private $site_id = null;
 
 	/**
+	 * @var bool $redirection Whether this site has tables from the Redirection plugin.
+	 */
+	private $redirection = false;
+
+	/**
 	 * For logging things
 	 *
 	 * @private
