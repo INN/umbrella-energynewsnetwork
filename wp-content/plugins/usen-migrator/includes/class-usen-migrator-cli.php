@@ -5,8 +5,6 @@
  * Usage:
  *     wp usen perform_all_migrations
  */
-define( 'MWEN_ID', 64 );
-define( 'SEEN_ID', 58 );
 
 /**
  * Copy all content from single site within a multisite to the primary site.
