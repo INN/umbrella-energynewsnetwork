@@ -20,6 +20,11 @@ destroy_posts() {
 			wp post delete $(wp post list --format=ids --post_type=$post_type --posts_per_page=10000 ) --force --quiet
 		done
 	done
+
+	# because this doesn't happen in the above. >:|
+	wp post delete $(wp post list --format=ids --post_type=wpcf7_contact_form ) --force --quiet
+	wp post delete $(wp post list --format=ids --post_type=optionsframework ) --force --quiet
+	wp db query "DELETE FROM wp_posts WHERE post_status = 'auto-draft';"
 }
 
 # destroy the database's terms
