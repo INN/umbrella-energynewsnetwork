@@ -14,7 +14,9 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	/**
 	 * Contains an array(
 	 *     (int) old id => (int) new id,
-	 * );
+	 * ); of post IDs from the Old ID to the new ID, where the new ID was bumped by the maximum ID of the site that posts from the old site are being imported to.
+	 *
+	 * @var array $oldnew array( int => int ) of post IDs
 	 */
 	private $oldnew = array();
 
@@ -88,6 +90,9 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 
 		foreach ( $olds as $old ) {
 			$new = $old + $highest;
+
+			// remember this ID for further use
+			$this->oldnew[$old] = $new;
 
 			// update ID in posts
 			$wpdb->update(
@@ -917,7 +922,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		}
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating posts from site " . $this->site_id . "'s posts with the new term...",
+			"Updating" . count( $this->oldnew ) . "  posts from site " . $this->site_id . "'s posts with the new term...",
 			count( $this->oldnew )
 		);
 
@@ -1040,7 +1045,8 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$this->merge_catalyst_tables();
 
 		if ( ! isset( $this->term ) ) {
-			// don't try to create the specific term name if it already exists; it'll cause an error; it'll cause an error.
+			// don't try to create the specific term name if it already exists;
+			// it'll cause an error.
 			$this->term = $this->create_term();
 		}
 		$this->add_term( $this->term );
