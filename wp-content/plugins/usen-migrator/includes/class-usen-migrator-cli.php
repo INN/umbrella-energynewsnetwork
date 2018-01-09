@@ -34,6 +34,11 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	private $table_names = null;
 
 	/**
+	 * @var array( 'term_id' => INT, 'term_taxonomy_id' => INT ) The return of wp_insert_term, for creating a term that is specific to the posts in this migration
+	 */
+	private $term = null;
+
+	/**
 	 * For logging things
 	 *
 	 * @private
@@ -846,6 +851,91 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
+	 * Create a new term for posts in this migration
+	 *
+	 * safety first; this doesn't play well if the term has already been created.
+	 * the term name is set in stone; recreating it fails.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
+	 *
+	 * @return array( 'term_id' => INT, 'term_taxonomy_id' => INT, 'taxonomy' => string ) The return of wp_insert_term, for creating a term that is specific to the posts in this migration, plus the taxnomy
+	 * @uses $this->site_id the ID of the site that is being migrated.
+	 * @link https://codex.wordpress.org/Function_Reference/wp_insert_term
+	 */
+	public function create_term( $args = null ) {
+		// because this is a public function
+		if ( ! isset( $this->site_id ) ) {
+			if ( is_array( $args ) ) {
+				$this->site_id = $this->_test( $args );
+			} else {
+				WP_CLI::error( 'sorry, something went wrong when trying to detect the site. Here\'s the arguments:' );
+				WP_CLI::log( var_export( $args, true ) );
+				return false;
+			}
+		}
+
+		$taxonomy = 'category';
+
+		$return = wp_insert_term(
+			'Posts from site ID ' . $this->site_id,
+			$taxonomy,
+			array(
+				'description' => sprintf( 
+					__( 'These posts were migrated from former site ID %1$s', 'usen-migrator' ),
+					$this->site_id
+				),
+			)
+		);
+		$return['taxnomy'] = $taxnomy;
+		return $return;
+	}
+
+	/**
+	 * Apply a term to all posts in this migration
+	 *
+	 * @uses $oldnew = array( (int) old id => (int) new id )
+	 * @param array( 'term_id' => INT, 'term_taxonomy_id' => INT, 'taxonomy' => string ) The return of $this->create_term
+	 */
+	private function add_term( $term ) {
+		// if $term isn't what we were expecting, throw a fit.
+		if (
+			! is_array( $term )
+			||
+ 			(
+				! array_key_exists( 'term_id', $term )
+				||
+				! array_key_exists( 'term_taxonomy_id', $term )
+				||
+				! array_key_exists( 'taxnomy', $term )
+			)
+		) {
+			WP_CLI::error( 'something is wrong with the $term argument on this call to add_term. It should have an integer term ID, integer term_taxnomy_id, and string taxonomy name:' );
+			WP_CLI::error( var_export( $term , true ) );
+		}
+
+		$progress = \WP_CLI\Utils\make_progress_bar(
+			"Updating posts from site " . $this->site_id . "'s posts with the new term...",
+			count( $this->oldnew )
+		);
+
+		foreach ( $this->oldnew as $new ) {
+			$post_type = get_post_type( $new );
+
+			// Not all post IDs are for the types of posts we want to have this term.
+			if ( in_array( $post_type, array( 'post', 'page', 'roundup' ), true ) ) {
+				wp_set_object_terms( $new, $term['term_taxonomy_id'], $term['taxonomy'] );
+			}
+
+			$progress->tick();
+		}
+
+		$progress->finish();
+	}
+
+	/**
 	 * Return a list of unprefixed table names for this site
 	 *
 	 * @return Array $table_names An array of unprefixed table names for this site. By "unprefixed" I mean that they don't have $wpdb->prefix, the site ID, or any leading underscore.
@@ -948,6 +1038,13 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	private function perform_all_migrations() {
 		$this->adjust_all_ids();
 		$this->merge_catalyst_tables();
+
+		if ( ! isset( $this->term ) ) {
+			// don't try to create the specific term name if it already exists; it'll cause an error; it'll cause an error.
+			$this->term = $this->create_term();
+		}
+		$this->add_term( $this->term );
+
 		$this->drop_tables();
 	}
 
