@@ -511,7 +511,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		);
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating meta_ids of site " . $this->site_id . "'s termmettermmeta...",
+			"Updating meta_ids of site " . $this->site_id . "'s termmeta...",
 			count( $olds )
 		);
 
