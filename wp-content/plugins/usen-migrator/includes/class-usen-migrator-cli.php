@@ -922,7 +922,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		}
 
 		$progress = \WP_CLI\Utils\make_progress_bar(
-			"Updating" . count( $this->oldnew ) . "  posts from site " . $this->site_id . "'s posts with the new term...",
+			"Updating " . count( $this->oldnew ) . " posts from site " . $this->site_id . "'s posts with the new term...",
 			count( $this->oldnew )
 		);
 
