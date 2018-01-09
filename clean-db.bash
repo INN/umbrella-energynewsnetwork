@@ -56,7 +56,7 @@ activate() {
 # run the munging commands
 munge() {
 	wp usen migrate 58
-	#wp usen migrate 64
+	wp usen migrate 64
 	wp usen largo_reset_options
 }
 
