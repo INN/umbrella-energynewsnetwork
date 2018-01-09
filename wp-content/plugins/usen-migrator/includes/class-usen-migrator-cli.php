@@ -714,7 +714,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * <id>
 	 * : The ID of the site from which to draw content
 	 */
-	public function detect_redirection_tables( $args ) {
+	public function detect_redirection_tables( $args = null ) {
 		// because this is a public function
 		if ( ! isset( $this->site_id ) ) {
 			if ( is_array( $args ) ) {
@@ -824,7 +824,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * <id>
 	 * : The ID of the site from which to draw content
 	 */
-	public function adjust_all_ids( $args ) {
+	public function adjust_all_ids( $args = null ) {
 		// because this is a public function
 		if ( ! isset( $this->site_id ) ) {
 			if ( is_array( $args ) ) {
@@ -941,7 +941,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * @return Array $table_names An array of unprefixed table names for this site. By "unprefixed" I mean that they don't have $wpdb->prefix, the site ID, or any leading underscore.
 	 * @param Array $args the WP-CLI arguments for the command that's running this command.
 	 */
-	private function generate_table_names( $args ) {
+	private function generate_table_names( $args = null ) {
 		// because this is a public function
 		if ( ! isset( $this->site_id ) ) {
 			if ( is_array( $args ) ) {
@@ -991,7 +991,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * <id>
 	 * : The ID of the site from which to draw content
 	 */
-	public function merge_catalyst_tables( $args ) {
+	public function merge_catalyst_tables( $args = null ) {
 		global $wpdb;
 		$tables = array();
 
