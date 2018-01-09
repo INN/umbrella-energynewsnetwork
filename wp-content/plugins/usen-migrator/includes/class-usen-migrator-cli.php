@@ -744,7 +744,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		$highest_reporter = $wpdb->get_var(
 			"
 				SELECT id
-				from " . $wpdb->prefix ."_redirection_items
+				from " . $wpdb->prefix . $this->site_id . "_redirection_items
 				ORDER BY id DESC limit 0,1
 			"
 		);
@@ -813,8 +813,24 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * - update_catalyst_comments
 	 * - update_catalyst_commentmeta
 	 * - update_catalyst_redirection_items
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
 	 */
-	private function adjust_all_ids() {
+	public function adjust_all_ids( $args ) {
+		// because this is a public function
+		if ( ! isset( $this->site_id ) ) {
+			if ( is_array( $args ) ) {
+				$this->site_id = $this->_test( $args );
+			} else {
+				WP_CLI::error( 'sorry, something went wrong when trying to detect the site. Here\'s the arguments:' );
+				WP_CLI::log( var_export( $args, true ) );
+				return false;
+			}
+		}
+
 		$this->update_catalyst_posts();
 		$this->update_catalyst_postmeta();
 		$this->update_catalyst_term_taxonomy();
@@ -832,30 +848,42 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	/**
 	 * Return a list of unprefixed table names for this site
 	 *
-	 * @return Array $table_names An array of unprefixed table names for this site.
+	 * @return Array $table_names An array of unprefixed table names for this site. By "unprefixed" I mean that they don't have $wpdb->prefix, the site ID, or any leading underscore.
+	 * @param Array $args the WP-CLI arguments for the command that's running this command.
 	 */
-	private function generate_table_names() {
+	private function generate_table_names( $args ) {
+		// because this is a public function
+		if ( ! isset( $this->site_id ) ) {
+			if ( is_array( $args ) ) {
+				$this->site_id = $this->_test( $args );
+			} else {
+				WP_CLI::error( 'sorry, something went wrong when trying to detect the site. Here\'s the arguments:' );
+				WP_CLI::log( var_export( $args, true ) );
+				return false;
+			}
+		}
+
 		$table_names = array(
-			'_commentmeta',
-			'_comments',
-			// '_links', // can be ignored because it is empty
-			// '_options', // because we're keeping the new site's options
-			'_posts',
-			'_postmeta',
-			'_term_relationships',
-			'_term_taxonomy',
-			'_termmeta',
-			'_terms'
+			'commentmeta',
+			'comments',
+			// 'links', // can be ignored because it is empty
+			// 'options', // because we're keeping the new site's options
+			'postmeta',
+			'posts',
+			'term_relationships',
+			'term_taxonomy',
+			'termmeta',
+			'terms'
 		);
 
 		if ( $this->redirection ) {
 			array_merge(
 				$table_names,
 				array(
-					// '_redirection_404', // can be ignored because it's useless
-					// '_redirection_logs', // can be ignored because it's empty
-					'_redirection_groups',
-					'_redirection_items'
+					// 'redirection_404', // can be ignored because it's useless
+					// 'redirection_logs', // can be ignored because it's empty
+					'redirection_groups',
+					'redirection_items'
 				)
 			);
 		}
@@ -867,14 +895,23 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * Copy rows from Catalyst's tables into Reporter's tables
 	 *
 	 * This should only be run once IDs have been updated
+	 *
+	 * ## OPTIONS
+	 *
+	 * <id>
+	 * : The ID of the site from which to draw content
 	 */
-	private function merge_catalyst_tables() {
+	public function merge_catalyst_tables( $args ) {
 		global $wpdb;
 		$tables = array();
 
+		if ( ! isset( $this->tables_names ) || empty ( $this->table_names ) ) {
+			$this->table_names = $this->generate_table_names( $args );
+		}
+
 		// generate the table list of from -> to for moving content
 		foreach ( $this->table_names as $name ) {
-			$table[ $wpdb->prefix . $this->site_id . $name ] = $wpdb->prefix . $name ;
+			$tables[ $wpdb->prefix . $this->site_id . '_' . $name ] = $wpdb->prefix . $name ;
 		}
 
 		// this technique from http://sqlblog.com/blogs/merrill_aldrich/archive/2011/08/17/handy-trick-move-rows-in-one-statement.aspx
@@ -900,7 +937,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		}
 		foreach ( $this->table_names as $table ) {
 		$drop = $wpdb->query(
-			"DROP TABLE IF EXISTS " . $wpdb->prefix . $this->site_id . $table );
+			"DROP TABLE IF EXISTS " . $wpdb->prefix . $this->site_id . '_' . $table );
 		}
 		$this->log( $drop );
 	}
@@ -993,7 +1030,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 		// make sure that this is what we want it to do.
 		$this->site_id = $this->_test( $args );
 		$this->redirection = $this->detect_redirection_tables( $args );
-		$this->table_names = $this->generate_table_names();
+		$this->table_names = $this->generate_table_names( $args );
 		$this->perform_all_migrations( $this->site_id );
 	}
 }
