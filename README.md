@@ -89,7 +89,7 @@ This will export the db for integration on wpengine, as `export.sql`, with the s
 To import the db on wpengine:
 
 1. upload it via ftp to the `_wpeprivate` directory of the install
-2. ask support to import it, pretty please: "On the usenergynews install, can you drop all tables and import the SQL database dump stored in the install at usenergynews/_wpeprivate/wpengine.sql, please? I'd do it myself, but it's too large to import using consumer-facing tools."
+2. ask support to import it, pretty please: "On the usenergynews install, can you drop all tables and import the SQL database dump stored in the install at usenergynews/_wpeprivate/export.sql, please? I'd do it myself, but it's too large to import using consumer-facing tools."
 3. In https://my.wpengine.com/installs/usenergynews/advanced , in the wp-cli box, run `wp search-replace usenergynews.test usenergynews.wpengine.com`
 
 After importing:

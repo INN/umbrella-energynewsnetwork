@@ -6,10 +6,10 @@ from fabric.api import task
 """
 Base configuration
 """
-env.project_name = 'freshenergy'       # name for the project.
+env.project_name = 'usenergynews'       # name for the project.
 env.hosts = ['localhost', ]
 env.sftp_deploy = True
-env.domain = 'freshenergy.dev'
+env.domain = 'usenergynews.dev'
 
 
 """
@@ -26,10 +26,10 @@ def production():
     Work on production environment
     """
     env.settings    = 'production'
-    env.hosts       = [ os.environ[ 'FRESHENERGY_PRODUCTION_SFTP_HOST' ], ]   # ssh host for production.
-    env.user        = os.environ[ 'FRESHENERGY_PRODUCTION_SFTP_USER' ]        # ssh user for production.
-    env.password    = os.environ[ 'FRESHENERGY_PRODUCTION_SFTP_PASSWORD' ]    # ssh password for production.
-    env.domain      = 'freshenergy.wpengine.com'
+    env.hosts       = [ os.environ[ 'USENERGYNEWS_PRODUCTION_SFTP_HOST' ], ]   # ssh host for production.
+    env.user        = os.environ[ 'USENERGYNEWS_PRODUCTION_SFTP_USER' ]        # ssh user for production.
+    env.password    = os.environ[ 'USENERGYNEWS_PRODUCTION_SFTP_PASSWORD' ]    # ssh password for production.
+    env.domain      = 'usenergynews.wpengine.com'
     env.port        = '2222'
 
 
@@ -40,10 +40,10 @@ def staging():
     Work on staging environment
     """
     env.settings    = 'staging'
-    env.hosts       = [ os.environ[ 'FRESHENERGY_STAGING_SFTP_HOST' ], ]   # ssh host for production.
-    env.user        = os.environ[ 'FRESHENERGY_STAGING_SFTP_USER' ]        # ssh user for production.
-    env.password    = os.environ[ 'FRESHENERGY_STAGING_SFTP_PASSWORD' ]    # ssh password for production.
-    env.domain      = 'freshenergy.staging.wpengine.com'
+    env.hosts       = [ os.environ[ 'USENERGYNEWS_STAGING_SFTP_HOST' ], ]   # ssh host for production.
+    env.user        = os.environ[ 'USENERGYNEWS_STAGING_SFTP_USER' ]        # ssh user for production.
+    env.password    = os.environ[ 'USENERGYNEWS_STAGING_SFTP_PASSWORD' ]    # ssh password for production.
+    env.domain      = 'usenergynews.staging.wpengine.com'
     env.port        = '2222'
 
 try:
