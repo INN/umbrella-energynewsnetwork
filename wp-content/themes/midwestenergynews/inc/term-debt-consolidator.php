@@ -9,10 +9,13 @@
  * @param Array $taxonomies An array of taxonomies
  * @return Array
  */
-function mwen_migrator_tdc_enabled_taxonomies( $taxonomies ) {
+function mwen_tdc_enabled_taxonomies( $taxonomies ) {
 	$taxonomies[] = 'prominence';
-	$taxonomies[] = 'lr-tags';
 	$taxonomies[] = 'series';
+
+	if ( class_exists( 'SavedLinks' ) ) {
+		$taxonomies[] = 'lr-tags';
+	}
 
 	return $taxonomies;
 }
