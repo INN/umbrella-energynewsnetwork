@@ -85,7 +85,6 @@ add_action( 'widgets_init', 'mwen_add_widget_areas' );
  */
 function mwen_custom_homepage_layouts() {
 	$unregister = array(
-		'HomepageBlog',
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',

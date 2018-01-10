@@ -17,6 +17,7 @@ $includes = array(
 	'/inc/post-tags.php',
 	'/inc/header-footer.php',
 	'/inc/newsletter-shortcode.php',
+	'/inc/term-debt-consolidator.php',
 	'/homepages/homepage.php'
 );
 foreach ( $includes as $include ) {
