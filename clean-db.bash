@@ -60,6 +60,15 @@ munge() {
 	wp usen largo_reset_options
 }
 
+# set settings
+settings() {
+	wp search-replace fresh-energy.org usenergynews.wpengine.com
+	wp search-replace midwestenergynews.com usenergynews.wpengine.com
+	wp search-replace southeastenergynews.com usenergynews.wpengine.com
+	wp theme activate midwestenergynews
+	wp option update blogname "US Energy News"
+}
+
 # export
 export() {
 	wp db export --add-drop-table export.sql
@@ -82,6 +91,7 @@ main() {
 	destroy_terms
 	activate
 	munge
+	settings
 	prune_wp_users
 	export
 	reminders
