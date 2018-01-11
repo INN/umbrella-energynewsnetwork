@@ -223,6 +223,46 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	}
 
 	/**
+	 * Update post slugs
+	 */
+	public function update_old_slugs() {
+		$this->site_id = 58;
+		global $wpdb;
+
+		// select all posts with slugs and with slugs matching existing slugs in the posts table
+		$rows = $wpdb->get_results(
+			"
+				SELECT a.ID, a.post_date, a.post_name
+				FROM " . $wpdb->prefix . $this->site_id . "_posts a
+				JOIN " . $wpdb->prefix . "posts b
+				WHERE a.post_name <> ''
+				AND a.post_name = b.post_name
+			"
+		);
+		$this->log( $rows );
+		foreach ( $rows as $row ) {
+			switch( $this->site_id ) {
+				case 58:
+					$pattern = sprintf (
+						'southeastenergynews.com/%1$s/%2$s/%3$s/%4$s',
+						2018,
+						01,
+						11,
+						"cheese"
+					);
+					break;
+				case 64:
+					$pattern = '';
+					break;
+				default:
+					WP_CLI::error( 'The command update_old_slugs does not know the permalink structure for site ' . $this->site_id . ' and so cannot perform the search-and-replace portion of its mission. Please edit it to match the former site.' );
+			}
+			// update the post_name in this row
+			// update the link in all posts linking to this post, in the present table
+		}
+	}
+
+	/**
 	 */
 	private function update_catalyst_postmeta() {
 		global $wpdb;
