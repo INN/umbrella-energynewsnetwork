@@ -76,26 +76,6 @@ After reviewing the options and creating the new install, partake in the followi
 1. `wp core install`
 2. `wp db import mysql.sql`
 
-## Merging SEEN and MWEN
+## Migration notes
 
-With a fresh copy of the database from fresh-energy.org saved as `mysql.sql`, do the following:
-
-1. `wp db reset`
-2. `wp db import mysql.sql`
-3. `time ./clean-db.bash`
-
-This will export the db for integration on wpengine, as `export.sql`, with the site named "usenergynews.test".
-
-To import the db on wpengine:
-
-1. upload it via ftp to the `_wpeprivate` directory of the install
-2. ask support to import it, pretty please: "On the usenergynews install, can you drop all tables and import the SQL database dump stored in the install at usenergynews/_wpeprivate/export.sql, please? I'd do it myself, but it's too large to import using consumer-facing tools."
-3. In https://my.wpengine.com/installs/usenergynews/advanced , in the wp-cli box, run `wp search-replace usenergynews.test usenergynews.wpengine.com`
-
-After importing:
-
-1. Install and run the Term Debt Consolidator plugin: https://wordpress.org/plugins/term-debt-consolidator/
-2. Ask WPE to copy the assets from -> to:
-	- from the freshenergy install's `freshenergy/wp-content/uploads/sites/58/` to the usenergy install's `usenergynews/wp-content/uploads/`
-	- from the freshenergy install's `freshenergy/wp-content/uploads/sites/64/` to the usenergy install's `usenergynews/wp-content/uploads/`
-3. Change the site name and suchlike
+See [migration.md](./migration.md).
