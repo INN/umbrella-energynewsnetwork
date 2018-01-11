@@ -118,3 +118,4 @@ wp-content/debug.log
 # do version-control the theme we care about
 !/wp-content/themes/midwestenergynews
 !/wp-content/plugins/usen-migrator
+!/wp-content/plugins/usen-region-taxonomy

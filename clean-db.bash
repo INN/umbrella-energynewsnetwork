@@ -50,7 +50,7 @@ prune_wp_users() {
 
 # activate the plugin that contains the command
 activate() {
-	wp plugin activate usen-migrator redirection --quiet
+	wp plugin activate usen-migrator usen-region-taxonomy redirection --quiet
 }
 deactivate() {
 	wp plugin deactivate usen-migrator

@@ -882,7 +882,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			}
 		}
 
-		$taxonomy = 'category';
+		$taxonomy = 'region';
 
 		$return = wp_insert_term(
 			'Posts from site ID ' . $this->site_id,
