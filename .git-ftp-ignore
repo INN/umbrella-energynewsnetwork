@@ -8,8 +8,7 @@ phpunit.xml
 .gitignore
 .git-ftp-ignore
 .gitmodules
-contributing.md
-license.txt
-README.md
+*.txt
+*.md
 *.bash
 *.sql
