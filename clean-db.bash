@@ -52,6 +52,9 @@ prune_wp_users() {
 activate() {
 	wp plugin activate usen-migrator redirection --quiet
 }
+deactivate() {
+	wp plugin deactivate usen-migrator
+}
 
 # run the munging commands
 munge() {
@@ -93,6 +96,7 @@ main() {
 	munge
 	settings
 	prune_wp_users
+	deactivate
 	export
 	reminders
 }
