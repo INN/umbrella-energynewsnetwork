@@ -866,7 +866,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * <id>
 	 * : The ID of the site from which to draw content
 	 *
-	 * @return array( 'term_id' => INT, 'term_taxonomy_id' => INT, 'taxonomy' => string ) The return of wp_insert_term, for creating a term that is specific to the posts in this migration, plus the taxnomy
+	 * @return array( 'term_id' => INT, 'term_taxonomy_id' => INT, 'taxonomy' => string ) The return of wp_insert_term, for creating a term that is specific to the posts in this migration, plus the taxonomy
 	 * @uses $this->site_id the ID of the site that is being migrated.
 	 * @link https://codex.wordpress.org/Function_Reference/wp_insert_term
 	 */
@@ -894,7 +894,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				),
 			)
 		);
-		$return['taxnomy'] = $taxnomy;
+		$return['taxonomy'] = $taxonomy;
 		return $return;
 	}
 
@@ -914,10 +914,10 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				||
 				! array_key_exists( 'term_taxonomy_id', $term )
 				||
-				! array_key_exists( 'taxnomy', $term )
+				! array_key_exists( 'taxonomy', $term )
 			)
 		) {
-			WP_CLI::error( 'something is wrong with the $term argument on this call to add_term. It should have an integer term ID, integer term_taxnomy_id, and string taxonomy name:' );
+			WP_CLI::error( 'something is wrong with the $term argument on this call to add_term. It should have an integer term ID, integer term_taxonomy_id, and string taxonomy name:' );
 			WP_CLI::error( var_export( $term , true ) );
 		}
 
