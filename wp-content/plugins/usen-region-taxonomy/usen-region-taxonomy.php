@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: US Energy News Regions taxonomy
- * Plugin URI:  
+ * Plugin URI:  https://github.com/INN/umbrella-usenergynews/tree/master/wp-content/plugins/usen-region-taxonomy
  * Description: Creates the "region" taxonomy for US Energy News
  * Version:     0.1.0
  * Author:      innlabs
@@ -125,9 +125,9 @@ final class USEN_Regions_Taxonomy {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
 		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
-		// gotta hit both
 		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		#add_action( 'init', array( $this, 'add_rewrite_tag'), 10, 0 );
 	}
 
 	/**
@@ -138,7 +138,6 @@ final class USEN_Regions_Taxonomy {
 	public function init() {
 		// Load translated strings for plugin.
 		load_plugin_textdomain( 'usen-region-taxonomy', false, dirname( $this->basename ) . '/languages/' );
-
 	}
 
 	/**
@@ -167,12 +166,21 @@ final class USEN_Regions_Taxonomy {
 			'not_found' => __( 'No regions found.' , 'usen-region-taxonomy' ),
 		);
 		$args = array(
-			'heierarchical' => true,
-			'labels' => $labels,
+			'public' => true,
+			'pubicly_queryable' => true,
 			'show_ui' => true,
-			'show_admin_column' => true,
-			'query_var' => 'region',
-			'rewrite' => true,
+			'show_tagcloud' => false,
+			'show_admin_column' => false,
+			'description' => __( 'A taxonomy of places where US Energy News provides coverage of', 'usen-region-taxonomy' ),
+			'hierarchical' => false,
+			'labels' => $labels,
+			'query_var' => false,
+			'rewrite' => array(
+				'slug' => 'region',
+				'with_front' => true,
+				'hierarchical' => false,
+				'ep_mask' => EP_NONE | EP_PERMALINK | ,
+			),
 		);
 		register_taxonomy( 'region', array( 'post' ), $args );
 	}
@@ -192,15 +200,26 @@ final class USEN_Regions_Taxonomy {
 	 * @return string The post permalink
 	 */
 	public function region_permalink_filter( $post_link, $post, $leavename = false, $sample = false ) {
-		if ( false !== strpos( $post_link, '%region%' ) ) {
+		if ( 'post' == $post->post_type && false !== strpos( $post_link, '%region%' ) ) {
 			$region = get_the_terms( $post->ID, 'region' );
-			if ( ! empty( $region ) ) {
+			if ( ! empty( $region ) && ! is_wp_error( $region ) ) {
 				$post_link = str_replace( '%region%', array_pop( $region )->slug, $post_link );
 			} else {
 				$post_link = str_replace( '%region%', 'us', $post_link );
 			}
 		}
+		#error_log(var_export( $post->post_type . ' ' . $post_link, true));
 		return $post_link;
+	}
+
+	/**
+	 * Calls add_rewrite_tag
+	 */
+	public function add_rewrite_tag() {
+		// @todo incomplete, possibly not needed
+		add_rewrite_tag(
+			'%region%'
+		);
 	}
 
 	/**
