@@ -226,8 +226,6 @@ final class USEN_Regions_Taxonomy {
 				$post_link = str_replace( '%region%', 'us', $post_link );
 			}
 		}
-		if ( $post->post_type !== 'post' && $post->post_type !== 'roundup' ) {
-		}
 		return $post_link;
 	}
 
