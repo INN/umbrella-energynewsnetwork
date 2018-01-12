@@ -226,10 +226,9 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 * Update post slugs
 	 */
 	public function update_old_slugs() {
-		$this->site_id = 58;
 		global $wpdb;
 
-		// select all posts with slugs and with slugs matching existing slugs in the posts table
+		// select all posts with non-empty slugs and with slugs matching existing slugs in the posts table
 		$rows = $wpdb->get_results(
 			"
 				SELECT a.ID, a.post_date, a.post_name
@@ -239,27 +238,92 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 				AND a.post_name = b.post_name
 			"
 		);
-		$this->log( $rows );
+
+		$progress = \WP_CLI\Utils\make_progress_bar(
+			"Updating slugs of site " . $this->site_id . " where they conflict with the target site",
+			count( $rows )
+		);
+
 		foreach ( $rows as $row ) {
+			// reset
+			$new_pattern = null;
+			$old_pattern = null;
+			$exec = null;
+			$log = null;
+
+
+			$new_name = $row->post_name . '-2';
+
+			// cache this
+			$time = strtotime( $row->post_date ); // ugh, $row is stdClass::__set_state(array()), not array()
+
+			// generate the matching URL for this site, or fail.
 			switch( $this->site_id ) {
 				case 58:
-					$pattern = sprintf (
+					$new_pattern = sprintf (
 						'southeastenergynews.com/%1$s/%2$s/%3$s/%4$s',
-						2018,
-						01,
-						11,
-						"cheese"
+						date( 'y', $time ),
+						date( 'm', $time ),
+						date( 'd', $time ),
+						$new_name
+					);
+					$old_pattern = sprintf (
+						'southeastenergynews.com/%1$s/%2$s/%3$s/%4$s',
+						date( 'y', $time ),
+						date( 'm', $time ),
+						date( 'd', $time ),
+						$row->post_name
 					);
 					break;
 				case 64:
-					$pattern = '';
+					$new_pattern = sprintf (
+						'midwestenergynews.com/%1$s/%2$s/%3$s/%4$s',
+						date( 'y', $time ),
+						date( 'm', $time ),
+						date( 'd', $time ),
+						$new_name
+					);
+					$old_pattern = sprintf (
+						'midwestenergynews.com/%1$s/%2$s/%3$s/%4$s',
+						date( 'y', $time ),
+						date( 'm', $time ),
+						date( 'd', $time ),
+						$row->post_name
+					);
 					break;
 				default:
 					WP_CLI::error( 'The command update_old_slugs does not know the permalink structure for site ' . $this->site_id . ' and so cannot perform the search-and-replace portion of its mission. Please edit it to match the former site.' );
 			}
-			// update the post_name in this row
+
 			// update the link in all posts linking to this post, in the present table
-		}
+			$exec = shell_exec( sprintf(
+				'wp search-replace %1$s %2$s --quiet',
+				$old_pattern,
+				$new_pattern
+			) );
+			WP_CLI::log( $exec );
+
+
+			// update the post_name in this row
+			$log = $wpdb->update(
+				$wpdb->prefix . $this->site_id . '_posts',
+				array(
+					'post_name' => $new_name,
+				),
+				array(
+					'post_name' => $row->post_name,
+					'ID' => $row->ID,
+					'post_date' => $row->post_date,
+				)
+			);
+			if ( false === $log ) {
+				WP_CLI::log( "something went wrong with the row update for post $row->ID post_name $row->post_name" );
+			}
+
+
+			$progress->tick();
+		} // end foreach of posts with duplicating post_name/slug entries
+		$progress->finish();
 	}
 
 	/**
@@ -893,6 +957,7 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 			# $this->update_catalyst_redirection_groups();
 		}
 		$this->update_all_usermeta();
+		$this->update_old_slugs();
 	}
 
 	/**
