@@ -124,10 +124,31 @@ final class USEN_Regions_Taxonomy {
 	public function hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
+		add_action( 'init', array( $this, 'add_rewrite_tag'), 10, 0 );
+		add_action( 'init', array( $this, 'add_permastruct'), 10, 0 );
 		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
 		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
-		#add_action( 'init', array( $this, 'add_rewrite_tag'), 10, 0 );
+		add_filter( 'page_rewrite_rules', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
+		add_filter( 'do_parse_request', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
+	}
+
+	/**
+	 * Log the page rewrite rules
+	 */
+	public function rewrite_verbose_page_rules( $pass_through = null ) {
+		global $wp_rewrite;
+		$permastruct = $wp_rewrite->permalink_structure;
+
+		error_log(var_export( $permastruct, true));
+		$permastruct = trim( $permastruct, '/%' );
+
+		if ( 0 !== strpos( $permastruct, 'region%' ) ) {
+			return $pass_through;
+		}
+
+		$wp_rewrite->use_verbose_page_rules = true;
+		return $pass_through;
 	}
 
 	/**
@@ -174,12 +195,12 @@ final class USEN_Regions_Taxonomy {
 			'description' => __( 'A taxonomy of places where US Energy News provides coverage of', 'usen-region-taxonomy' ),
 			'hierarchical' => false,
 			'labels' => $labels,
-			'query_var' => false,
+			'query_var' => true,
 			'rewrite' => array(
 				'slug' => 'region',
 				'with_front' => true,
 				'hierarchical' => false,
-				'ep_mask' => EP_NONE | EP_PERMALINK | ,
+				'ep_mask' => EP_PERMALINK ,
 			),
 		);
 		register_taxonomy( 'region', array( 'post' ), $args );
@@ -208,18 +229,9 @@ final class USEN_Regions_Taxonomy {
 				$post_link = str_replace( '%region%', 'us', $post_link );
 			}
 		}
-		#error_log(var_export( $post->post_type . ' ' . $post_link, true));
+		if ( $post->post_type !== 'post' && $post->post_type !== 'roundup' ) {
+		}
 		return $post_link;
-	}
-
-	/**
-	 * Calls add_rewrite_tag
-	 */
-	public function add_rewrite_tag() {
-		// @todo incomplete, possibly not needed
-		add_rewrite_tag(
-			'%region%'
-		);
 	}
 
 	/**
