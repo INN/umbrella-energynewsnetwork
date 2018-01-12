@@ -124,13 +124,10 @@ final class USEN_Regions_Taxonomy {
 	public function hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
-		add_action( 'init', array( $this, 'add_rewrite_tag'), 10, 0 );
-		add_action( 'init', array( $this, 'add_permastruct'), 10, 0 );
-		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
-		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
-		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'page_rewrite_rules', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
 		add_filter( 'do_parse_request', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
+		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
 	}
 
 	/**
