@@ -124,6 +124,8 @@ final class USEN_Regions_Taxonomy {
 	public function hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
+		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
 	}
 
 	/**
@@ -171,6 +173,39 @@ final class USEN_Regions_Taxonomy {
 			'rewrite' => true,
 		);
 		register_taxonomy( 'region', array( 'post' ), $args );
+	}
+
+	/**
+	 * Act upon a %region% tag in the permalink structure
+	 *
+	 * @link https://wisdmlabs.com/blog/add-taxonomy-term-custom-post-permalinks-wordpress/
+	 * @param string $post_link The post URL
+	 * @param WP_Post $post The post object
+	 * @param bool $leavename Whether to keep the post name
+	 * @param bool $sample Whether this is a sample permalink
+	 */
+	public function region_permalink_filter( $post_link, $post, $leavename = false, $sample = false ) {
+		if ( false !== strpos( $post_link, '%region%' ) ) {
+			$region = get_the_terms( $post->ID, 'region' );
+			if ( ! empty( $region ) ) {
+				$post_link = str_replace( '%region%', array_pop( $region )->slug, $post_link );
+			} else {
+				$post_link = str_replace( '%region%', 'us', $post_link );
+			}
+		}
+		return $post_link;
+	}
+
+	/**
+	 * Add the %region% permalink tag to the list of available permalink structure tags
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/available_permalink_structure_tags/
+	 * @param Array $tags The list of available structure tags
+	 */
+	public function region_permalink_tag( $tags ) {
+		/* translators: %s: permalink structure tag */
+		$tags['region'] = __( '%s (Region slug.)' );
+		return $tags;
 	}
 }
 
