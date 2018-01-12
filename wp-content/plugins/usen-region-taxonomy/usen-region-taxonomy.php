@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: US Energy News Regions taxonomy
- * Plugin URI:  
+ * Plugin URI:  https://github.com/INN/umbrella-usenergynews/tree/master/wp-content/plugins/usen-region-taxonomy
  * Description: Creates the "region" taxonomy for US Energy News
  * Version:     0.1.0
  * Author:      innlabs
@@ -124,10 +124,38 @@ final class USEN_Regions_Taxonomy {
 	public function hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
-		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
-		// gotta hit both
-		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		add_filter( 'page_rewrite_rules', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
+		add_filter( 'do_parse_request', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
 		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
+	}
+
+	/**
+	 * Set the internal state of WP_Rewrite when looking at pages
+	 *
+	 * This solves https://github.com/INN/umbrella-usenergynews/issues/6
+	 *
+	 * Before this function, page permalinks were broken by this plugin.
+	 *
+	 * Solution thanks to Howdy_McGee on Freenode #wordpress
+	 *
+	 * @link https://wordpress.stackexchange.com/questions/56769/custom-taxonomy-in-permalink-of-post/162670#162670
+	 * @param Array $pass_through the active rewrite rules
+	 * @return Array the active rewrite rules, unmodified.
+	 */
+	public function rewrite_verbose_page_rules( $pass_through = null ) {
+		global $wp_rewrite;
+		$permastruct = $wp_rewrite->permalink_structure;
+
+		error_log(var_export( $permastruct, true));
+		$permastruct = trim( $permastruct, '/%' );
+
+		if ( 0 !== strpos( $permastruct, 'region%' ) ) {
+			return $pass_through;
+		}
+
+		$wp_rewrite->use_verbose_page_rules = true;
+		return $pass_through;
 	}
 
 	/**
@@ -138,7 +166,6 @@ final class USEN_Regions_Taxonomy {
 	public function init() {
 		// Load translated strings for plugin.
 		load_plugin_textdomain( 'usen-region-taxonomy', false, dirname( $this->basename ) . '/languages/' );
-
 	}
 
 	/**
@@ -167,12 +194,21 @@ final class USEN_Regions_Taxonomy {
 			'not_found' => __( 'No regions found.' , 'usen-region-taxonomy' ),
 		);
 		$args = array(
-			'heierarchical' => true,
-			'labels' => $labels,
+			'public' => true,
+			'pubicly_queryable' => true,
 			'show_ui' => true,
-			'show_admin_column' => true,
-			'query_var' => 'region',
-			'rewrite' => true,
+			'show_tagcloud' => false,
+			'show_admin_column' => false,
+			'description' => __( 'A taxonomy of places where US Energy News provides coverage of', 'usen-region-taxonomy' ),
+			'hierarchical' => false,
+			'labels' => $labels,
+			'query_var' => true,
+			'rewrite' => array(
+				'slug' => 'region',
+				'with_front' => true,
+				'hierarchical' => false,
+				'ep_mask' => EP_PERMALINK ,
+			),
 		);
 		register_taxonomy( 'region', array( 'post' ), $args );
 	}
@@ -192,9 +228,9 @@ final class USEN_Regions_Taxonomy {
 	 * @return string The post permalink
 	 */
 	public function region_permalink_filter( $post_link, $post, $leavename = false, $sample = false ) {
-		if ( false !== strpos( $post_link, '%region%' ) ) {
+		if ( 'post' == $post->post_type && false !== strpos( $post_link, '%region%' ) ) {
 			$region = get_the_terms( $post->ID, 'region' );
-			if ( ! empty( $region ) ) {
+			if ( ! empty( $region ) && ! is_wp_error( $region ) ) {
 				$post_link = str_replace( '%region%', array_pop( $region )->slug, $post_link );
 			} else {
 				$post_link = str_replace( '%region%', 'us', $post_link );
