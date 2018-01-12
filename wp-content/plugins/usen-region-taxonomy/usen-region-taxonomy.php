@@ -194,7 +194,6 @@ final class USEN_Regions_Taxonomy {
 	public function region_permalink_filter( $post_link, $post, $leavename = false, $sample = false ) {
 		if ( false !== strpos( $post_link, '%region%' ) ) {
 			$region = get_the_terms( $post->ID, 'region' );
-			error_log( var_export( $region, true ));
 			if ( ! empty( $region ) ) {
 				$post_link = str_replace( '%region%', array_pop( $region )->slug, $post_link );
 			} else {
