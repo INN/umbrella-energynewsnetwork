@@ -124,8 +124,10 @@ final class USEN_Regions_Taxonomy {
 	public function hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
-		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
+		// gotta hit both
+		add_filter( 'post_type_link', array( $this, 'region_permalink_filter'), 10, 4 );
+		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
 	}
 
 	/**
@@ -169,7 +171,7 @@ final class USEN_Regions_Taxonomy {
 			'labels' => $labels,
 			'show_ui' => true,
 			'show_admin_column' => true,
-			// 'query_var' => true
+			'query_var' => 'region',
 			'rewrite' => true,
 		);
 		register_taxonomy( 'region', array( 'post' ), $args );
@@ -178,15 +180,21 @@ final class USEN_Regions_Taxonomy {
 	/**
 	 * Act upon a %region% tag in the permalink structure
 	 *
+	 * This is a filter upon both post_link and post_type_link
+	 *
+	 * @filter post_link, post_type_link
+	 * @link https://shibashake.com/wordpress-theme/add-custom-taxonomy-tags-to-your-wordpress-permalinks
 	 * @link https://wisdmlabs.com/blog/add-taxonomy-term-custom-post-permalinks-wordpress/
 	 * @param string $post_link The post URL
 	 * @param WP_Post $post The post object
 	 * @param bool $leavename Whether to keep the post name
 	 * @param bool $sample Whether this is a sample permalink
+	 * @return string The post permalink
 	 */
 	public function region_permalink_filter( $post_link, $post, $leavename = false, $sample = false ) {
 		if ( false !== strpos( $post_link, '%region%' ) ) {
 			$region = get_the_terms( $post->ID, 'region' );
+			error_log( var_export( $region, true ));
 			if ( ! empty( $region ) ) {
 				$post_link = str_replace( '%region%', array_pop( $region )->slug, $post_link );
 			} else {
