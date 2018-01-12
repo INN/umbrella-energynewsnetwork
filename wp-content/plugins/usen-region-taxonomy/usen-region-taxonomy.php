@@ -131,7 +131,17 @@ final class USEN_Regions_Taxonomy {
 	}
 
 	/**
-	 * Log the page rewrite rules
+	 * Set the internal state of WP_Rewrite when looking at pages
+	 *
+	 * This solves https://github.com/INN/umbrella-usenergynews/issues/6
+	 *
+	 * Before this function, page permalinks were broken by this plugin.
+	 *
+	 * Solution thanks to Howdy_McGee on Freenode #wordpress
+	 *
+	 * @link https://wordpress.stackexchange.com/questions/56769/custom-taxonomy-in-permalink-of-post/162670#162670
+	 * @param Array $pass_through the active rewrite rules
+	 * @return Array the active rewrite rules, unmodified.
 	 */
 	public function rewrite_verbose_page_rules( $pass_through = null ) {
 		global $wp_rewrite;
