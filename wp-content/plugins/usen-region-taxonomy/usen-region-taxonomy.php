@@ -200,13 +200,13 @@ final class USEN_Regions_Taxonomy {
 			'show_tagcloud' => false,
 			'show_admin_column' => false,
 			'description' => __( 'A taxonomy of places where US Energy News provides coverage of', 'usen-region-taxonomy' ),
-			'hierarchical' => false,
+			'hierarchical' => true,
 			'labels' => $labels,
 			'query_var' => true,
 			'rewrite' => array(
 				'slug' => 'region',
 				'with_front' => true,
-				'hierarchical' => false,
+				'hierarchical' => true,
 				'ep_mask' => EP_PERMALINK ,
 			),
 		);
