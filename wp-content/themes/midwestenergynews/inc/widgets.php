@@ -8,7 +8,7 @@ function mwen_widgets() {
 
 	// this is meaningless if the USEN Regions taxonomy is not available
 	if ( class_exists( 'USEN_Regions_Taxonomy' ) && taxonomy_exists( 'region' ) ) {
-		$includes['usen_roundups_widget'] = '/inc/widgets/usen-roundups.php';
+		$register['usen_roundups_widget'] = '/inc/widgets/usen-roundups.php';
 	}
 
 	foreach ( $register as $key => $val ) {
