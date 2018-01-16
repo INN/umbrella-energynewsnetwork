@@ -37,6 +37,9 @@ class USEN_Roundups_Widget extends WP_Widget {
 			echo wp_kses_post( $args['before_title'] . $title . $args['after_title'] );
 		}
 
+		/*
+		 * Assemble the query
+		 */
 		$query1_args = array(
 			'post__not_in' => get_option( 'sticky_posts' ),
 			'excerpt'      => $instance['show_excerpt'],
@@ -44,11 +47,10 @@ class USEN_Roundups_Widget extends WP_Widget {
 			'post_status'  => 'publish',
 		);
 
-		// 1
 		if ( '' !== $instance['num_posts1'] ) {
 			$query1_args['posts_per_page'] = $instance['num_posts1'];
 		}
-		if ( isset( $instance['cat1'] ) ) {
+		if ( isset( $instance['cat1'] ) && 0 !== $instance['cat1'] ) {
 			$query1_args['tax_query'][] = array(
 				array(
 					'taxonomy' => 'category',
@@ -57,7 +59,7 @@ class USEN_Roundups_Widget extends WP_Widget {
 				),
 			);
 		}
-		if ( isset( $instance['region1'] ) ) {
+		if ( isset( $instance['region1'] ) && 0 !== $instance['region1'] ) {
 			$query1_args['tax_query'][] = array(
 				array(
 					'taxonomy' => 'region',
@@ -69,6 +71,10 @@ class USEN_Roundups_Widget extends WP_Widget {
 
 		$query_args = array( $query1_args );
 
+		/*
+		 * For each query in the list of queries, run the Loop and output the posts.
+		 * This loop is left over from when this widget was copied from the MWEN Link Roundups Widget.
+		 */
 		foreach ( $query_args as $qa ) {
 
 			// if the number of posts to display is 0, don't bother running the query or doing output.
@@ -79,6 +85,7 @@ class USEN_Roundups_Widget extends WP_Widget {
 			$output = '';
 
 			$my_query = new WP_Query( $qa );
+
 			if ( $my_query->have_posts() ) {
 				while ( $my_query->have_posts() ) {
 					$my_query->the_post();
@@ -98,7 +105,8 @@ class USEN_Roundups_Widget extends WP_Widget {
 			} // end this group's recent link
 		} // End foreach of groups
 
-		if ( '' !== $instance['linkurl'] ) {
+		// output the optional link.
+		if ( '' !== $instance['linkurl'] && '' !== $instance['linktext'] ) {
 			echo wp_kses_post( sprintf(
 				'<p class="morelink"><a href="%1$s">%2$s</a></p>',
 				esc_attr( $instance['linkurl'] ),
@@ -159,23 +167,23 @@ class USEN_Roundups_Widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'region1' ) ); ?>">
-				<?php
-					esc_html_e( $this->get_field_name( 'region1' ) );
-					wp_dropdown_categories( array(
-						'name'            => $this->get_field_name( 'region1' ),
-						'show_option_all' => __( 'None (all regions)', 'midwestenergynews' ),
-						'hide_empty'      => 0,
-						'hierarchical'    => 1,
-						'taxonomy'        => 'region',
-						'selected'        => $instance['region1'],
-					) );
-				?>
+			<?php
+				esc_html_e( 'Region 1: ', 'midwestenergynews' );
+				wp_dropdown_categories( array(
+					'name'            => $this->get_field_name( 'region1' ),
+					'show_option_all' => __( 'None (all regions)', 'midwestenergynews' ),
+					'hide_empty'      => 0,
+					'hierarchical'    => 1,
+					'taxonomy'        => 'region',
+					'selected'        => $instance['region1'],
+				) );
+			?>
 			</label>
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'cat1' ) ); ?>">
 			<?php
-				esc_htmli_e( 'Category 1: ', 'largo' );
+				esc_html_e( 'Category 1: ', 'midwestenergynews' );
 				wp_dropdown_categories( array(
 					'name'            => $this->get_field_name( 'cat1' ),
 					'show_option_all' => __( 'None (all categories)', 'largo' ),
@@ -187,8 +195,7 @@ class USEN_Roundups_Widget extends WP_Widget {
 			</label>
 		</p>
 
-		<h4><?php esc_html_e( 'More Link', 'argo-links' ); ?></h4>
-		<p><small><?php esc_html_e('If you would like to add a more link at the bottom of the widget, add the link text and url here.', 'argo-links'); ?></small></p>
+		<p><strong><?php esc_html_e( 'More Link:', 'argo-links' ); ?> </strong><?php esc_html_e('If you would like to add a more link at the bottom of the widget, add the link text and url here.', 'argo-links'); ?></p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id('linktext') ); ?>">
 			<?php
