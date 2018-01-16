@@ -77,7 +77,14 @@ function mwen_get_featured_posts_in_category( $category_name, $region, $number =
 			$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
 			largo_hero( $post_id );
 		?>
-		<h1 class="page-title"><?php echo $title . ': ' . ucfirst($region); ?></h1>
+		<h1 class="page-title"><?php 
+
+			if ($region != '') {
+				echo $title . ': ' . ucfirst($region); 
+			} else {
+				echo $title; 
+			}
+		?></h1>
 		<div class="archive-description"><?php echo $description; ?></div>
 		<?php do_action( 'largo_category_after_description_in_header' ); ?>
 		<?php get_template_part( 'partials/archive', 'category-related' ); ?>
