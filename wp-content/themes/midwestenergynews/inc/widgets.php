@@ -3,7 +3,6 @@
 function mwen_widgets() {
 	$register = array(
 		'mwen_mailchimp_signup_widget'	=> '/inc/widgets/mwen-mailchimp.php',
-		'mwen_roundups_widget'	=> '/inc/widgets/mwen-roundups.php',
 	);
 
 	// this is meaningless if the USEN Regions taxonomy is not available
