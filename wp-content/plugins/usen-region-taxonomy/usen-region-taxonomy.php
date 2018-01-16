@@ -210,7 +210,7 @@ final class USEN_Regions_Taxonomy {
 				'ep_mask' => EP_PERMALINK ,
 			),
 		);
-		register_taxonomy( 'region', array( 'post' ), $args );
+		register_taxonomy( 'region', array( 'post', 'roundup' ), $args );
 	}
 
 	/**
