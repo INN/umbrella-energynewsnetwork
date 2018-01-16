@@ -147,7 +147,6 @@ final class USEN_Regions_Taxonomy {
 		global $wp_rewrite;
 		$permastruct = $wp_rewrite->permalink_structure;
 
-		error_log(var_export( $permastruct, true));
 		$permastruct = trim( $permastruct, '/%' );
 
 		if ( 0 !== strpos( $permastruct, 'region%' ) ) {
@@ -210,7 +209,7 @@ final class USEN_Regions_Taxonomy {
 				'ep_mask' => EP_PERMALINK ,
 			),
 		);
-		register_taxonomy( 'region', array( 'post' ), $args );
+		register_taxonomy( 'region', array( 'post', 'roundup' ), $args );
 	}
 
 	/**
