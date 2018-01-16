@@ -60,7 +60,7 @@ function mwen_add_widget_areas() {
 		array(
 			'name' => 'Homepage Featured Ad Position',
 			'id' => 'homepage-featured-advert',
-			'description' => __('The Daily Digest List and Signup Widget".', 'midwestenergynews'),
+			'description' => __('The Daily Digest List and Signup Widget.', 'midwestenergynews'),
 			'before_widget' => '<div class="digest">',
 			'after_widget' => '</div>',
 			'before_title' => '<h3 class="widgettitle">',
