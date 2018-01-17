@@ -173,19 +173,15 @@ $queried_object = get_queried_object();
 					}
 				} // end loop
 			?>
-		</div>
+			<?php largo_content_nav( 'nav-below' ); ?>
+		</div><!-- #homepage-bottom -->
 
-		<!-- <nav id="mwen-hp-nav-below">
-			<div class="load-more">
-				<a class="btn btn-primary" href="#">More posts</a>
-			</div>
-		</nav> -->
 
-		</div>
 		<?php } else {
+			// if there are no posts or featured posts:
 			get_template_part( 'partials/content', 'not-found' );
 		}
 	?>
-</div>
+</div><!-- clearfix -->
 
 <?php get_footer();
