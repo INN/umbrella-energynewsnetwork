@@ -84,13 +84,13 @@ $queried_object = get_queried_object();
 
 				if ( isset( $title ) ) {
 					if ( is_tax( 'region', 'midwest' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/MidwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" />';
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/MidwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} else if ( is_tax( 'region', 'southeast' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SoutheastEnergyNews_Logo.png' . '" alt="' . $title  . '" />';
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SoutheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'southwest' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SouthwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" />';
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SouthwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'northeast' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/NortheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" />';
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/NortheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} 
 
 					/* echo '<h1 class="page-title">' . $title . '</h1>'; */
