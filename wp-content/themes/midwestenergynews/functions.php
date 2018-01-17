@@ -16,9 +16,10 @@ $includes = array(
 	'/inc/widgets.php',
 	'/inc/post-tags.php',
 	'/inc/header-footer.php',
+	'/inc/load-more-posts.php',
 	'/inc/newsletter-shortcode.php',
 	'/inc/term-debt-consolidator.php',
-	'/homepages/homepage.php'
+	'/homepages/homepage.php',
 );
 foreach ( $includes as $include ) {
 	require_once( get_stylesheet_directory() . $include );
