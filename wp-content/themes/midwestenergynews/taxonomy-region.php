@@ -114,8 +114,6 @@ $queried_object = get_queried_object();
 			?>
 		</header>
 
-		<?php dynamic_sidebar('homepage-featured-advert'); ?>
-
 		<div id="homepage-top" class="row-fluid">
 			<div class="span8">
 				<article class="hero">
