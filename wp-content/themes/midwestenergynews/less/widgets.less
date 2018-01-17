@@ -13,7 +13,7 @@
 /*
  * MWEN custom Link Roundups widget, called "Today's headlines"
  */
-.mwen-roundups-widget {
+.usen-roundups-widget {
   box-shadow: 0 0 0 1px @greyXL,0 0 0 3px @white,0 0 0 4px @greyXL;
   -webkit-box-shadow: 0 0 0 1px @greyXL,0 0 0 3px @white,0 0 0 4px @greyXL;
   -moz-box-shadow: 0 0 0 1px @greyXL,0 0 0 3px @white,0 0 0 4px @greyXL;
@@ -50,10 +50,13 @@
   }
 }
 // fix for on archive pages
+#sidebar .usen-roundups-widget,
 #sidebar .mwen-roundups-widget {
   padding: 65px 30px 0 30px;
 }
 // Fix on singular pages
+.post #sidebar .usen-roundups-widget,
+.page #sidebar .usen-roundups-widget,
 .page #sidebar .mwen-roundups-widget,
 .post #sidebar .mwen-roundups-widget {
   padding-left: 1em;
