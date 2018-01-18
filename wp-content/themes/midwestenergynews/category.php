@@ -17,9 +17,6 @@ $posts_term = of_get_option( 'posts_term_plural', 'Stories' );
 $queried_object = get_queried_object();
 $region = get_query_var( 'region', '' );
 
-// What posts were excluded from the global wp_query, the main query?
-error_log(var_export( $wp_query->query_vars['post__not_in'], true));
-
 ?>
 
 <div class="clearfix">
