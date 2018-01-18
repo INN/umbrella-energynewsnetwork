@@ -16,59 +16,9 @@ $rss_link = get_category_feed_link( get_queried_object_id() );
 $posts_term = of_get_option( 'posts_term_plural', 'Stories' );
 $queried_object = get_queried_object();
 
-/**
- * Get posts marked as "Featured in category" for a given category name.
- *
- * @param string $category_name the category to retrieve featured posts for.
- * @param integer $number total number of posts to return, backfilling with regular posts as necessary.
- * @since 0.5
- */
-function mwen_get_featured_posts_in_category( $category_name, $region, $number = 5 ) {
-	$args = array(
-		'category_name' => $category_name,
-		'numberposts' => $number,
-		'post_status' => 'publish',
-	);
+$region = get_query_var( 'region', '' );
 
-
-	$tax_query = array(
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'prominence',
-				'field' => 'slug',
-				'terms' => 'category-featured',
-			)
-		)
-	);
-
-	$region_query = array(
-		'tax_query' => array(array(
-				'taxonomy' => 'region',
-				'field' => 'slug',
-				'terms' => $region,
-			)
-		)
-	);
-
-	// Get the featured posts
-	$featured_posts = get_posts( array_merge( $args, $tax_query, $region_query ) );
-	//$featured_posts = get_posts( $args );
-
-	// Backfill with regular posts if necessary
-	if ( count( $featured_posts ) < (int) $number ) {
-		$needed = (int) $number - count( $featured_posts );
-		$regular_posts = get_posts( array_merge( $args, array(
-			'numberposts' => $needed,
-			'post__not_in' => array_map( function( $x ) { return $x->ID; }, $featured_posts )
-		)));
-		$featured_posts = array_merge( $featured_posts, $regular_posts );
-	}
-
-	return $featured_posts;
-}
 ?>
-
-<?php $region = get_query_var( 'region', '' ); ?>
 
 <div class="clearfix">
 	<header class="archive-background clearfix">
@@ -90,8 +40,14 @@ function mwen_get_featured_posts_in_category( $category_name, $region, $number =
 		<?php get_template_part( 'partials/archive', 'category-related' ); ?>
 	</header>
 
-	<?php if ( $paged < 2 && of_get_option( 'hide_category_featured' ) == '0' ) {
-		$featured_posts = mwen_get_featured_posts_in_category( $wp_query->query_vars['category_name'], $region );
+	<?php
+	if ( $paged < 2 && of_get_option( 'hide_category_featured' ) == '0' ) {
+		if ( ! empty( $region ) ) {
+			$featured_posts = mwen_get_featured_posts_in_region_and_category( $region, $wp_query->query_vars['category_name'] );
+		} else {
+			$featured_posts = largo_get_featured_posts_in_category( $wp_query->query_vars['category_name'] );
+		}
+
 		if ( count( $featured_posts ) > 0 ) {
 			$top_featured = $featured_posts[0];
 			$shown_ids[] = $top_featured->ID; ?>
@@ -119,8 +75,8 @@ function mwen_get_featured_posts_in_category( $category_name, $region, $number =
 					</div>
 				</div>
 		<?php }
-	}
-} ?>
+		}
+	} ?>
 </div>
 
 <div class="row-fluid clearfix">
