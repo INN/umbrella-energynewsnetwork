@@ -123,6 +123,7 @@ function mwen_get_featured_posts_in_region_and_category( $region_name, $category
 		$category_featured_posts = get_posts( array(
 			'numberposts' => (int) $number,
 			'post_status' => 'publish',
+			'post__not_in' => array_map( function( $x ) { return $x->ID; }, $featured_posts ),
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'category',
@@ -168,6 +169,7 @@ function mwen_get_featured_posts_in_region_and_category( $region_name, $category
 		$featured_posts = array_merge( $featured_posts, $regular_posts );
 	}
 
+	error_log(var_export( array_map( function( $x ) { return $x->ID; }, $featured_posts ), true));
 	return $featured_posts;
 }
 
@@ -193,8 +195,9 @@ function mwen_region_and_category_archive_posts( $query ) {
 
 	// get the IDs from the featured posts
 	$featured_post_ids = array();
-	foreach ( $featured_posts as $fpost )
+	foreach ( $featured_posts as $fpost ) {
 		$featured_post_ids[] = $fpost->ID;
+	}
 
 	$query->set( 'post__not_in', $featured_post_ids );
 }
@@ -233,15 +236,3 @@ function mwen_category_archive_posts( $query ) {
 }
 add_action( 'pre_get_posts', 'mwen_category_archive_posts', 15 );
 remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
-
-#add_action( 'pre_get_posts', 'testomundo', 10, 1 );
-function testomundo( $query ) {
-	if ( ! $query->is_main_query() || is_404() || is_home() ) {
-		return;
-	}
-
-	error_log(var_export( $query->is_tax('region'), true));
-	error_log(var_export( true == $query->get('region'), true));
-	error_log(var_export( true == ! $query->get('region'), true));
-	error_log(var_export( $query->is_tax('category'), true));
-}
