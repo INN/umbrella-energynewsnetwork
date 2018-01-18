@@ -41,11 +41,23 @@ class mwen_mailchimp_signup_widget extends WP_Widget {
 
 					<ul>
 						<li>
-							<input type="checkbox" value="1" name="group[6829][1]" id="mce-group[6829]-6829-1" checked>
-							<label for="mce-group[6829]-6829-1">Midwest <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
+							<input type="checkbox" value="1" name="group[6829][1]" id="mce-group[6829]-6829-0">
+							<label for="mce-group[6829]-6829-0">Midwest <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
 						</li>
 						<li>
-							<input type="checkbox" value="4" name="group[6829][4]" id="mce-group[6829]-6829-2" checked>
+							<input type="checkbox" value="2" name="group[6829][2]" id="mce-group[6829]-6829-1">
+							<label for="mce-group[6829]-6829-1">Southeast <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
+						</li>
+						<li>
+							<input type="checkbox" value="8" name="group[6829][8]" id="mce-group[6829]-6829-3">
+							<label for="mce-group[6829]-6829-3">Northeast <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
+						</li>
+						<li>
+							<input type="checkbox" value="16" name="group[6829][16]" id="mce-group[6829]-6829-4">
+							<label for="mce-group[6829]-6829-4">Southwest <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
+						</li>
+						<li>
+							<input type="checkbox" value="4" name="group[6829][4]" id="mce-group[6829]-6829-2">
 							<label for="mce-group[6829]-6829-2">National <?php if (!is_home() && !is_archive()) echo 'Headlines'; ?></label>
 						</li>
 					</ul>
