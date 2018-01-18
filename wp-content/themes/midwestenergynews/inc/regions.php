@@ -69,6 +69,7 @@ function mwen_region_archive_posts( $query ) {
 		|| ! $query->is_main_query()
 		|| is_admin()
 	) return;
+	error_log(var_export( 'r', true));
 
 	// get the featured posts
 	$featured_posts = mwen_get_featured_posts_in_region( $query->get( 'region' ) );
@@ -180,15 +181,15 @@ function mwen_get_featured_posts_in_region_and_category( $region_name, $category
 function mwen_region_and_category_archive_posts( $query ) {
 	// don't muck with admin, non-archives, non-region, non-category, etc
 	if (
-		! $query->is_tax( 'region' )
+		! ( true == $query->get( 'region' ) )
 		|| ! $query->is_tax( 'category' )
 		|| ! $query->is_main_query()
 		|| is_admin()
 	) return;
 
+	error_log(var_export( 'rac', true));
 	// get the featured posts
-	$featured_posts = mwen_get_featured_posts_in_region_and_category( $query->get( 'region' ), $query->get( 'category' ) );
-	error_log(var_export( $featured_posts, true));
+	$featured_posts = mwen_get_featured_posts_in_region_and_category( $query->get( 'region' ), $query->get( 'category_name' ) );
 
 	// get the IDs from the featured posts
 	$featured_post_ids = array();
@@ -212,11 +213,12 @@ add_action( 'pre_get_posts', 'mwen_region_and_category_archive_posts', 15 );
 function mwen_category_archive_posts( $query ) {
 	// don't muck with admin, non-archives, region, non-category, etc
 	if (
-		$query->is_tax( 'region' )
+		( true == $query->get( 'region' ) )
 		|| ! $query->is_tax( 'category' )
 		|| ! $query->is_main_query()
 		|| is_admin()
 	) return;
+	error_log(var_export( 'c', true));
 
 	// get the featured posts
 	$featured_posts = largo_get_featured_posts_in_category( $query->get( 'category' ) );
@@ -231,3 +233,15 @@ function mwen_category_archive_posts( $query ) {
 }
 add_action( 'pre_get_posts', 'mwen_category_archive_posts', 15 );
 remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
+
+#add_action( 'pre_get_posts', 'testomundo', 10, 1 );
+function testomundo( $query ) {
+	if ( ! $query->is_main_query() || is_404() || is_home() ) {
+		return;
+	}
+
+	error_log(var_export( $query->is_tax('region'), true));
+	error_log(var_export( true == $query->get('region'), true));
+	error_log(var_export( true == ! $query->get('region'), true));
+	error_log(var_export( $query->is_tax('category'), true));
+}
