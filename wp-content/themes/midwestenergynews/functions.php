@@ -19,6 +19,7 @@ $includes = array(
 	'/inc/load-more-posts.php',
 	'/inc/newsletter-shortcode.php',
 	'/inc/term-debt-consolidator.php',
+	'/inc/regions.php',
 	'/homepages/homepage.php',
 );
 foreach ( $includes as $include ) {

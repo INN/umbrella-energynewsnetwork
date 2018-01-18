@@ -8,6 +8,8 @@
  */
 get_header();
 $queried_object = get_queried_object();
+$bigStoryPost = mwen_get_featured_posts_in_region( $queried_object->slug, 1 );
+$bigStoryPost = $bigStoryPost[0];
 ?>
 
 <div class="clearfix">
@@ -20,58 +22,19 @@ $queried_object = get_queried_object();
 
 			/*
 			 * Display some different stuff in the header
-			 * depending on what type of archive page we're looking at
+			 * This is similar to largo's archive.php, but with everything
+			 * not related to regions cut out.
 			 */
+			$title = single_term_title( '', false );
+			$description = term_description();
 
-			if ( is_author() ) {
-				$rss_link = get_author_feed_link( get_the_author_meta( 'ID' ) );
-			} elseif ( is_tag() ) {
-				$title = single_tag_title( '', false );
-				$description = tag_description();
-				$rss_link =  get_tag_feed_link( get_queried_object_id() );
-			} elseif ( is_tax() ) {
-				$title = single_term_title( '', false );
-				$description = term_description();
-
-				// rss links for custom taxonomies are a little tricky
-				$term_id = intval( $queried_object->term_id );
-				$tax = $queried_object->taxonomy;
-				$rss_link = get_term_feed_link( $term_id, $tax );
-			} elseif ( is_date() ) {
-				$description = __( 'Select a different month:', 'largo' );
-				if ( is_month() ) {
-					$title = sprintf( __( 'Monthly Archives: <span>%s</span>', 'largo' ), get_the_date( 'F Y' ) );
-				} elseif ( is_year() ) {
-					$title = sprintf( __( 'Yearly Archives: <span>%s</span>', 'largo' ), get_the_date( 'Y' ) );
-				} else {
-					$title = _e( 'Blog Archives', 'largo' );
-				}
-			} elseif ( is_post_type_archive() )  {
-				$post_type = $wp_query->query_vars['post_type'];
-				/**
-				 * Make the title of the post_type archive filterable
-				 * @param string $title The title of the archive page
-				 * @since 0.5.4
-				 */
-				$title = apply_filters(
-					'largo_archive_' . $post_type . '_title',
-					__( post_type_archive_title( '', false ), 'largo' )
-				);
-				/**
-				 * Make the feed url of the post_type archive filterable
-				 * @param string $title The title of the archive page
-				 * @since 0.5.5
-				 */
-				$rss_link = apply_filters(
-					'largo_archive_' . $post_type . '_feed',
-					site_url('/feed/?post_type=' . urlencode($post_type))
-				);
-			}
+			// rss links for custom taxonomies are a little tricky
+			$term_id = intval( $queried_object->term_id );
+			$tax = $queried_object->taxonomy;
+			$rss_link = get_term_feed_link( $term_id, $tax );
 
 
-		?>
-
-		
+			?>
 
 		<header class="archive-background clearfix">
 			<?php
@@ -82,6 +45,7 @@ $queried_object = get_queried_object();
 				$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
 				largo_hero($post_id);
 
+				// instead of outputting the title text, output the relevant image
 				if ( isset( $title ) ) {
 					if ( is_tax( 'region', 'midwest' ) ) {
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/MidwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
@@ -91,37 +55,25 @@ $queried_object = get_queried_object();
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SouthwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'northeast' ) ) {
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/NortheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
-					} 
-
-					/* echo '<h1 class="page-title">' . $title . '</h1>'; */
+					} else {
+						echo '<h1 class="page-title">' . $title . '</h1>';
+					}
 				}
 
 				/* if ( isset( $description ) ) {
 					echo '<div class="archive-description">' . $description . '</div>';
 				}*/
-
-				if ( is_date() ) {
-			?>
-					<nav class="archive-dropdown">
-						<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value=""><?php _e('Select Month', 'largo'); ?></option>
-							<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
-						</select>
-					</nav>
-			<?php
-				} elseif ( is_author() ) {
-					the_widget( 'largo_author_widget', array( 'title' => '' ) );
-				}
 			?>
 		</header>
 
 		<div id="homepage-top" class="row-fluid">
 			<div class="span8">
 				<article class="hero">
-					<a href="<?php echo esc_attr(get_permalink()); ?>"><?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?></a>
+					<a href="<?php echo esc_attr( get_permalink( $bigStoryPost ) ); ?>"><?php echo get_the_post_thumbnail( $bigStoryPost->ID, 'full' ); ?></a>
 					<header>
-						<h2><a href="<?php echo get_permalink(); ?>" class="has-photo"><?php echo the_title(); ?></a></h2>
+						<h2><a href="<?php echo get_permalink( $bigStoryPost ); ?>" class="has-photo"><?php echo get_the_title( $bigStoryPost ); ?></a></h2>
 						<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
-						<p class="excerpt"><?php echo the_excerpt(); ?></p>
+						<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 					</header>
 				</article>
 			</div>
@@ -131,9 +83,10 @@ $queried_object = get_queried_object();
 		</div>
 
 		<div id="homepage-bottom">
-			<?php 
+			<?php
 				global $shown_ids;
 				
+				rewind_posts();
 				while ( have_posts() ) {
 					the_post();
 					$shown_ids[] = get_the_ID();
