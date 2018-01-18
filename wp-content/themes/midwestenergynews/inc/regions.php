@@ -69,7 +69,6 @@ function mwen_region_archive_posts( $query ) {
 		|| ! $query->is_main_query()
 		|| is_admin()
 	) return;
-	error_log(var_export( 'r', true));
 
 	// get the featured posts
 	$featured_posts = mwen_get_featured_posts_in_region( $query->get( 'region' ) );
@@ -80,8 +79,9 @@ function mwen_region_archive_posts( $query ) {
 		$featured_post_ids[] = $fpost->ID;
 
 	$query->set( 'post__not_in', $featured_post_ids );
+	remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 }
-add_action( 'pre_get_posts', 'mwen_region_archive_posts', 15 );
+add_action( 'pre_get_posts', 'mwen_region_archive_posts', 14 );
 
 /**
  * Get posts marked as featured for a given region name AND category, falling back to most-recent
@@ -169,7 +169,6 @@ function mwen_get_featured_posts_in_region_and_category( $region_name, $category
 		$featured_posts = array_merge( $featured_posts, $regular_posts );
 	}
 
-	error_log(var_export( array_map( function( $x ) { return $x->ID; }, $featured_posts ), true));
 	return $featured_posts;
 }
 
@@ -189,7 +188,6 @@ function mwen_region_and_category_archive_posts( $query ) {
 		|| is_admin()
 	) return;
 
-	error_log(var_export( 'rac', true));
 	// get the featured posts
 	$featured_posts = mwen_get_featured_posts_in_region_and_category( $query->get( 'region' ), $query->get( 'category_name' ) );
 
@@ -200,8 +198,9 @@ function mwen_region_and_category_archive_posts( $query ) {
 	}
 
 	$query->set( 'post__not_in', $featured_post_ids );
+	remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 }
-add_action( 'pre_get_posts', 'mwen_region_and_category_archive_posts', 15 );
+add_action( 'pre_get_posts', 'mwen_region_and_category_archive_posts', 14 );
 
 /**
  * Helper for getting posts in a category archive, excluding featured posts
@@ -221,7 +220,6 @@ function mwen_category_archive_posts( $query ) {
 		|| ! $query->is_main_query()
 		|| is_admin()
 	) return;
-	error_log(var_export( 'c', true));
 
 	// get the featured posts
 	$featured_posts = largo_get_featured_posts_in_category( $query->get( 'category' ) );
@@ -233,6 +231,6 @@ function mwen_category_archive_posts( $query ) {
 	}
 
 	$query->set( 'post__not_in', $featured_post_ids );
+	remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 }
-add_action( 'pre_get_posts', 'mwen_category_archive_posts', 15 );
-remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
+add_action( 'pre_get_posts', 'mwen_category_archive_posts', 14 );
