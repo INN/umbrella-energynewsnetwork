@@ -14,7 +14,12 @@
  */
 function mwen_largo_lmp_template_partial( $partial, $post_query ) {
 	$query_vars = $post_query->query_vars;
-	if ( isset( $query_vars['region'] ) && $query_vars['region'] != '' ) {
+	if (
+		isset( $query_vars['region'] )
+		&& $query_vars['region'] != ''
+		&& ! isset ( $query_vars['category'] )
+		&& ! isset ( $query_vars['category_name'] )
+	) {
 		$partial = 'region';
 	}
 	return $partial;
