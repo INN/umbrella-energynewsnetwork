@@ -1,9 +1,9 @@
 <?php
 /**
- * Manage migration tasks related to merging Catalyst Chicago with Chicago Reporter
- * Chicago Reporter, on the other hand, has no site ID, having been converted from a multisite to a singlesite first, using the procedure in https://github.com/INN/migration-scripts/blob/master/sql-utils/prepare_for_export.sql.md
+ * Manage migration tasks related to merging one multisite into a singlesite.
+ *
  * Usage:
- *     wp usen perform_all_migrations
+ *    wp help enn
  */
 
 /**
@@ -1204,14 +1204,14 @@ class USEN_Migrator_CLI extends WP_CLI_Command {
 	 */
 	public function largo_reset_options() {
 		if ( ! function_exists( 'of_get_default_values' ) || ! function_exists( 'optionsframework_init' ) ) {
-			WP_CLI::error( 'The command largo_partial_reset is depends upon the function of_get_default_values, optionsframework_options, and optionsframework_init  from the Largo theme. `wp usen largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
+			WP_CLI::error( 'The command largo_partial_reset is depends upon the function of_get_default_values, optionsframework_options, and optionsframework_init  from the Largo theme. `wp enn largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
 		}
 
 		if ( ! function_exists( 'optionsframework_options' ) ) {
 			optionsframework_init();
 
 			if ( ! function_exists( 'optionsframework_options' ) ) {
-				WP_CLI::error( 'The command largo_partial_reset is depends upon the function optionsframework_options from the Largo theme. `wp usen largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
+				WP_CLI::error( 'The command largo_partial_reset is depends upon the function optionsframework_options from the Largo theme. `wp enn largo_partial_reset` cannot find that function. Are you sure that the theme Largo is installed and active?' );
 			}
 		}
 

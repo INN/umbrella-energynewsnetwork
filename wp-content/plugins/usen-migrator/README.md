@@ -1,4 +1,4 @@
-# USEN Migrator #
+# ENN Migrator #
 **Contributors:**      innlabs  
 **Donate link:**       https://labs.inn.org/donate  
 **Tags:**  
@@ -8,7 +8,7 @@
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
-Registers a WP-CLI command for handling migration of US Energy News content
+Registers a WP-CLI command for handling migration of Energy News Network content
 
 ## Description ##
 
@@ -30,7 +30,7 @@ This plugin derives from https://github.com/INN/umbrella-chicagoreporter/blob/01
 ### Manual Installation ###
 
 1. Upload the entire `/usen-migrator` directory to the `/wp-content/plugins/` directory.
-2. Activate USEN Migrator through the 'Plugins' menu in WordPress.
+2. Activate ENN Migrator through the 'Plugins' menu in WordPress.
 
 ## Frequently Asked Questions ##
 
