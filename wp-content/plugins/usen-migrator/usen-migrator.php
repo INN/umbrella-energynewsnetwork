@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: USEN Migrator
- * Plugin URI:  https://github.com/INN/umbrella-usenergynews
- * Description: Run-once plugin for handling migration of US Energy News content
+ * Plugin Name: ENN Migrator
+ * Plugin URI:  https://github.com/INN/umbrella-usenergynews/tree/master/wp-content/plugins/usen-migrator
+ * Description: Run-once plugin for handling migration of Energy News Network content
  * Version:     0.1.0
  * Author:      innlabs
  * Author URI:  https://labs.inn.org
- * Donate link: https://labs.inn.org/donate
+ * Donate link: https://inn.org/donate
  * License:     GPLv2
  * Text Domain: usen-migrator
  * Domain Path: /languages
@@ -37,9 +37,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-
-// Include additional php files here.
-// require 'includes/something.php';
 
 /**
  * Main initiation class.
@@ -136,7 +133,7 @@ final class USEN_Migrator {
 		// ONLY activate this functionality if we're running WP CLI
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			require_once $this->path . '/includes/class-usen-migrator-cli.php';
-			WP_CLI::add_command( 'usen', 'USEN_Migrator_CLI' );
+			WP_CLI::add_command( 'enn', 'USEN_Migrator_CLI' );
 		}
 	}
 
