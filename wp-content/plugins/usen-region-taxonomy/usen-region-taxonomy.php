@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: US Energy News Regions taxonomy
+ * Plugin Name: Energy News Network Regions taxonomy
  * Plugin URI:  https://github.com/INN/umbrella-usenergynews/tree/master/wp-content/plugins/usen-region-taxonomy
- * Description: Creates the "region" taxonomy for US Energy News
+ * Description: Creates the "region" taxonomy for Energy News Network
  * Version:     0.1.0
  * Author:      innlabs
  * Author URI:  https://labs.inn.org
- * Donate link: https://labs.inn.org
+ * Donate link: https://inn.org/donate/
  * License:     GPLv2
  * Text Domain: usen-region-taxonomy
  * Domain Path: /languages
@@ -36,10 +36,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
-
-// Include additional php files here.
-// require 'includes/something.php';
 
 /**
  * Main initiation class.
@@ -198,7 +194,7 @@ final class USEN_Regions_Taxonomy {
 			'show_ui' => true,
 			'show_tagcloud' => false,
 			'show_admin_column' => false,
-			'description' => __( 'A taxonomy of places where US Energy News provides coverage of', 'usen-region-taxonomy' ),
+			'description' => __( 'A taxonomy of places where Energy News Network provides coverage of', 'usen-region-taxonomy' ),
 			'hierarchical' => true,
 			'labels' => $labels,
 			'query_var' => true,

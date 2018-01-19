@@ -1,23 +1,23 @@
-# US Energy News Regions taxonomy #
+# Energy News Network Regions taxonomy #
 **Contributors:**      innlabs  
-**Donate link:**       https://labs.inn.org  
+**Donate link:**       https://inn.org/donate/  
 **Tags:**  
 **Requires at least:** 4.4  
-**Tested up to:**      4.8.1 
+**Tested up to:**      4.9.1  
 **Stable tag:**        0.1.0  
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
 ## Description ##
 
-Creates the "region" taxonomy for US Energy News
+Creates the "region" taxonomy for Energy News Network.
 
 ## Installation ##
 
 ### Manual Installation ###
 
 1. Upload the entire `/usen-region-taxonomy` directory to the `/wp-content/plugins/` directory.
-2. Activate US Energy News Regions taxonomy through the 'Plugins' menu in WordPress.
+2. Activate Energy News Network Regions taxonomy through the 'Plugins' menu in WordPress.
 
 ## Frequently Asked Questions ##
 

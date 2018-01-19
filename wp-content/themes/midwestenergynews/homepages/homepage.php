@@ -14,9 +14,9 @@ class MWENHomepageLayout extends Homepage {
 		$suffix = (LARGO_DEBUG) ? '' : '.min';
 
 		$defaults = array(
-			'name' => __( 'US Energy Homepage', 'mwen' ),
+			'name' => __( 'Energy News Network Homepage', 'mwen' ),
 			'type' => 'mwen',
-			'description' => __( 'Homepage layout for US Energy News', 'mwen' ),
+			'description' => __( 'Homepage layout for Energy News Network', 'mwen' ),
 			'template' => get_stylesheet_directory() . '/homepages/templates/mwen_template.php',
 			'assets' => array(
 				array( 'mwen-homepage', get_stylesheet_directory_uri().'/homepages/assets/css/mwen_homepage' . $suffix . '.css' )
