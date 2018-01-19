@@ -246,3 +246,12 @@ function mwen_comments_roundups( $value ) {
     return $value;
 }
 add_filter( 'close_comments_for_post_types', 'mwen_comments_roundups' );
+
+//exclude Roundups from Regions loop
+add_action( 'pre_get_posts', 'exclude_roundups' );
+function exclude_roundups( $query ) {
+    if ( $query->is_tax('region') ) {
+        $query->set( 'post_type', array('post') );
+    }
+    return $query;
+}
