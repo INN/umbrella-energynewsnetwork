@@ -9,13 +9,14 @@
 get_header();
 $queried_object = get_queried_object();
 $bigStoryPost = mwen_get_featured_posts_in_region( $queried_object->slug, 1 );
+$have_featured = empty( $bigStoryPost );
 $bigStoryPost = $bigStoryPost[0];
 ?>
 
 <div class="clearfix">
 
 	<?php
-		if ( have_posts() || largo_have_featured_posts() ) {
+		if ( have_posts() || $have_featured ) ) {
 
 			// queue up the first post so we know what type of archive page we're dealing with
 			the_post();
