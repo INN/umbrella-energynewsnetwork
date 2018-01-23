@@ -9,7 +9,7 @@
 get_header();
 $queried_object = get_queried_object();
 $bigStoryPost = mwen_get_featured_posts_in_region( $queried_object->slug, 1 );
-$have_featured = empty( $bigStoryPost );
+$have_featured = ! empty( $bigStoryPost );
 $bigStoryPost = $bigStoryPost[0];
 ?>
 
