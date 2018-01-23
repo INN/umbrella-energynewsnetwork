@@ -78,9 +78,9 @@ $bigStoryPost = $bigStoryPost[0];
 					</header>
 				</article>
 			</div>
-			<div class="span4">
-				<?php dynamic_sidebar('sidebar-main'); ?>
-			</div>
+			<?php
+				get_sidebar();
+			?>
 		</div>
 
 		<div id="homepage-bottom">
