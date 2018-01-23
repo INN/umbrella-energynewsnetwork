@@ -16,7 +16,7 @@ $bigStoryPost = $bigStoryPost[0];
 <div class="clearfix">
 
 	<?php
-		if ( have_posts() || $have_featured ) ) {
+		if ( have_posts() || $have_featured ) {
 
 			// queue up the first post so we know what type of archive page we're dealing with
 			the_post();
