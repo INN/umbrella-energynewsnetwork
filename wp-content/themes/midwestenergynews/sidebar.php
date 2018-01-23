@@ -1,7 +1,11 @@
 <?php
 
-if ((is_single() || is_singular()) && !largo_is_sidebar_required())
+if (
+	( is_single() || is_singular() )
+	&& ! largo_is_sidebar_required()
+) {
 	return;
+}
 
 $span_class = (is_archive() || is_search())? 'span4':'span3';
 

@@ -234,3 +234,32 @@ function mwen_category_archive_posts( $query ) {
 	remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 }
 add_action( 'pre_get_posts', 'mwen_category_archive_posts', 14 );
+
+/**
+ * Add term sidebar options to the list of taxonomies that Largo uses those on
+ *
+ * @since Largo 0.5.5.4
+ * @filter largo_get_sidebar_taxonomies
+ * @param Array $array The array of taxonomies for which Largo displays the sidebar option in the term editor
+ * @return Array that selfsame array, now with region added
+ */
+function usen_largo_get_sidebar_taxonomies( $array ) {
+	$array[] = 'region';
+	return $array;
+}
+add_filter( 'largo_get_sidebar_taxonomies', 'usen_largo_get_sidebar_taxonomies' );
+
+/**
+ * Add the region taxonomy to the Largo custom taxonomies list
+ *
+ * This only affects the function largo_custom_taxonomy_terms and thereby inc/widgets/largo-post-series-links.php
+ *
+ * @since Largo 0.5.4
+ * @see largo_custom_taxonomy_terms
+ * @see usen_largo_get_sidebar_taxonomies
+ */
+function usen_custom_taxonomy_terms( $array ) {
+	$array[] = 'region';
+	return $array;
+}
+add_action( 'largo_custom_taxonomies', 'usen_custom_taxonomy_terms' );
