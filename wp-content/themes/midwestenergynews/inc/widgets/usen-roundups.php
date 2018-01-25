@@ -100,7 +100,7 @@ class USEN_Roundups_Widget extends WP_Widget {
 			} else {
 				echo wp_kses_post( sprintf(
 					'<p class="error"><strong>%1$s</strong></p>',
-					__( 'You don\'t have any recent links or the argo links plugin is not active.', 'midwestenergynews' )
+					__( 'No digests have yet been published for this region.', 'midwestenergynews' )
 				) );
 			} // end this group's recent link
 		} // End foreach of groups
