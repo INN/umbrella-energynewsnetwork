@@ -63,9 +63,16 @@
   padding-left: 1em;
   padding-right: 1em;
 
+  & + .usen-roundups-widget,
+  & + .mwen-roundups-widget {
+    margin-top: 2.5em;
+  }
+
   .widgettitle {
     background-color: @greyD;
-    margin-top: -25px;
+    margin-top: 0;
+    transform: translate( 0, ~"calc( -50% - 2px )" );
+    padding: 4px;
   }
 
   h4:last-child {
