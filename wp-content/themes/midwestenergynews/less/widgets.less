@@ -54,14 +54,23 @@
 #sidebar .usen-roundups-widget,
 #sidebar .mwen-roundups-widget {
   padding: 65px 30px 0 30px;
+  //margin: 28px 4px 18px 4px;
 }
+
 // Fix on singular pages
-.post #sidebar .usen-roundups-widget,
-.page #sidebar .usen-roundups-widget,
-.page #sidebar .mwen-roundups-widget,
-.post #sidebar .mwen-roundups-widget {
+.single #sidebar .usen-roundups-widget,
+.single #sidebar .mwen-roundups-widget {
   padding-left: 1em;
   padding-right: 1em;
+
+  .widgettitle {
+    background-color: @greyD;
+    margin-top: -25px;
+  }
+
+  h4:last-child {
+    padding-bottom: 0;
+  }
 }
 
 /*
