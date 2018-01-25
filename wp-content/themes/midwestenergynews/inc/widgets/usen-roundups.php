@@ -89,13 +89,13 @@ class USEN_Roundups_Widget extends WP_Widget {
 			if ( $my_query->have_posts() ) {
 				while ( $my_query->have_posts() ) {
 					$my_query->the_post();
-					$custom = get_post_custom( $post->ID );
-?>
-					<div class="post-lead clearfix">
+					global $post;
+					?>
+					<div <?php post_class( 'post-lead clearfix' ); ?> data-id="<?php echo esc_attr( $post->ID ); ?>">
 						<?php largo_maybe_top_term(); ?>
 						<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 					</div> <!-- /.post-lead -->
-<?php
+					<?php
 				}
 			} else {
 				echo wp_kses_post( sprintf(
