@@ -37,23 +37,29 @@ class mwen_roundups_widget extends WP_Widget {
 			if ( $instance['cat2'] != '' ) $query2_args['cat'] = $instance['cat2'];
 
 			$query_args = array($query1_args,$query2_args);
+			// Largo has a global $shown_ids; we're not using it here. This doesn't access that global.
+			$shown_ids = array();
 
-			foreach($query_args as $args) {
+			foreach( $query_args as $args ) {
 
-				$output = '';
+				// ignore shown ids
+				$my_query = new WP_Query( array_merge( $args, array( 'post__not_in' => $shown_ids ) ) );
 
-				$my_query = new WP_Query( $args );
 				if ( $my_query->have_posts() ) {
 					while ( $my_query->have_posts() ) {
 						$my_query->the_post();
-						$custom = get_post_custom($post->ID);
-	?>
-						<div class="post-lead clearfix">
+						global $post;
+						?>
+						<div <?php post_class( 'post-lead clearfix' ); ?> data-id="<?php echo esc_attr( $post->ID ); ?>">
 							<h5 class="top-tag"><a href="<?php echo get_category_link($args['cat']); ?>"><?php echo get_cat_name($args['cat']); ?></a></h5>
 							<h4><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
-						</div> <!-- /.post-lead -->
-	<?php
+						</div>
+						<?php
+						// add the shown ID to the query args
+						$shown_ids[] = $post->ID;
 					}
+					wp_reset_postdata();
+
 				} else {
 					_e('<p class="error"><strong>You don\'t have any recent links or the argo links plugin is not active.</strong></p>', 'argo-links');
 				} // end this category's recent link
