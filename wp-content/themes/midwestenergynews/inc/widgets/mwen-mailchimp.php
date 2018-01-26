@@ -2,7 +2,7 @@
 
 class mwen_mailchimp_signup_widget extends WP_Widget {
 
-	function mwen_mailchimp_signup_widget() {
+	function __construct() {
 		$widget_opts = array(
 			'classname' => 'mailchimp-signup-widget',
 			'description'=> __('Display a simple mailchimp signup form.', 'largo')
