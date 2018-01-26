@@ -51,7 +51,6 @@ class mwen_roundups_widget extends WP_Widget {
 						global $post;
 						?>
 						<div <?php post_class( 'post-lead clearfix' ); ?> data-id="<?php echo esc_attr( $post->ID ); ?>">
-							<h5 class="top-tag"><a href="<?php echo get_category_link($args['cat']); ?>"><?php echo get_cat_name($args['cat']); ?></a></h5>
 							<h4><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
 						</div>
 						<?php
