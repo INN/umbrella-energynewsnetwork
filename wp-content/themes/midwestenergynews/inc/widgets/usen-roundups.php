@@ -92,8 +92,13 @@ class USEN_Roundups_Widget extends WP_Widget {
 					global $post;
 					?>
 					<div <?php post_class( 'post-lead clearfix' ); ?> data-id="<?php echo esc_attr( $post->ID ); ?>">
-						<?php largo_maybe_top_term(); ?>
 						<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+						<?php
+							$excerpt = get_the_excerpt();
+							if ( ! empty ( $excerpt ) ) {
+								echo apply_filters( 'the_excerpt', $excerpt );
+							}
+						?>
 					</div> <!-- /.post-lead -->
 					<?php
 				}
