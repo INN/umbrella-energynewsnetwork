@@ -94,10 +94,14 @@ class USEN_Roundups_Widget extends WP_Widget {
 					<div <?php post_class( 'post-lead clearfix' ); ?> data-id="<?php echo esc_attr( $post->ID ); ?>">
 						<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 						<?php
+							/*
 							$excerpt = get_the_excerpt();
 							if ( ! empty ( $excerpt ) ) {
+								echo '<div class="excerpt">';
 								echo apply_filters( 'the_excerpt', $excerpt );
+								echo '</div>';
 							}
+							*/
 						?>
 					</div> <!-- /.post-lead -->
 					<?php
