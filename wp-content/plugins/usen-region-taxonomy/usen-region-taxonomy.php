@@ -141,11 +141,6 @@ final class USEN_Regions_Taxonomy {
 	 * @return Array the active rewrite rules, unmodified.
 	 */
 	public function rewrite_verbose_page_rules( $pass_through = null ) {
-		// this is the anti-complement to $this->add_rewrite_rule
-		if ( is_admin() ) {
-			return $pass_through;
-		}
-
 		global $wp_rewrite;
 		$permastruct = $wp_rewrite->permalink_structure;
 
