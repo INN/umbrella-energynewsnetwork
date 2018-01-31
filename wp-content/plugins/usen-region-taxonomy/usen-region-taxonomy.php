@@ -124,6 +124,7 @@ final class USEN_Regions_Taxonomy {
 		add_filter( 'do_parse_request', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
 		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
+		add_filter( 'url_to_postid', array( $this, 'url_to_posts_rewrite_rule' ), 10, 1 );
 	}
 
 	/**
@@ -140,6 +141,11 @@ final class USEN_Regions_Taxonomy {
 	 * @return Array the active rewrite rules, unmodified.
 	 */
 	public function rewrite_verbose_page_rules( $pass_through = null ) {
+		// this is the anti-complement to $this->add_rewrite_rule
+		if ( is_admin() ) {
+			return $pass_through;
+		}
+
 		global $wp_rewrite;
 		$permastruct = $wp_rewrite->permalink_structure;
 
@@ -209,7 +215,7 @@ final class USEN_Regions_Taxonomy {
 	}
 
 	/**
-	 * Act upon a %region% tag in the permalink structure
+	 * Act upon a %region% tag in the permalink structure to add the post's region to the post permalink when generating that link
 	 *
 	 * This is a filter upon both post_link and post_type_link
 	 *
@@ -244,6 +250,35 @@ final class USEN_Regions_Taxonomy {
 		/* translators: %s: permalink structure tag */
 		$tags['region'] = __( '%s (Region slug.)' );
 		return $tags;
+	}
+
+	/**
+	 * Modify some rewrite rules to match how we're actually using the %region% permalink
+	 *
+	 * @link 
+	 * @uses WP_Rewrite->add_rewrite_rule
+	 */
+	public function add_rewrite_rule() {
+		// this is the anti-complement to $this->rewrite_verbose_page_rules
+		if ( ! is_admin() ) {
+			return;
+		}
+		add_rewrite_rule(
+			'(.+?)/([^/]+)/?$',
+			'index.php?region=$matches[1]&name=$matches[2]',
+			'bottom'
+		);
+	}
+
+	/**
+	 * Create a rewirte rule specifically to match region posts
+	 *
+	 * @param String $url The post URL
+	 * @uses WP_Rewrite->add_rewrite_rule
+	 */
+	public function url_to_posts_rewrite_rule( $url ) {
+		error_log(var_export( $url, true));
+		return $url;
 	}
 }
 
