@@ -124,6 +124,8 @@ final class USEN_Regions_Taxonomy {
 		add_filter( 'do_parse_request', array( $this, 'rewrite_verbose_page_rules' ), 10, 1 );
 		add_filter( 'post_link', array( $this, 'region_permalink_filter'), 10, 4 );
 		add_filter( 'available_permalink_structure_tags', array( $this, 'region_permalink_tag'), 10, 1 );
+		add_action( 'init', array( $this, 'url_to_postid_rewrite_rule'), 10 );
+		add_filter( 'url_to_postid', array( $this, 'url_to_postid_hack' ), 10, 1 );
 	}
 
 	/**
@@ -209,7 +211,7 @@ final class USEN_Regions_Taxonomy {
 	}
 
 	/**
-	 * Act upon a %region% tag in the permalink structure
+	 * Act upon a %region% tag in the permalink structure to add the post's region to the post permalink when generating that link
 	 *
 	 * This is a filter upon both post_link and post_type_link
 	 *
@@ -244,6 +246,148 @@ final class USEN_Regions_Taxonomy {
 		/* translators: %s: permalink structure tag */
 		$tags['region'] = __( '%s (Region slug.)' );
 		return $tags;
+	}
+
+	/**
+	 * Create a rewrite rule that will only ever be triggered by the output of url_to_postid_hack filter
+	 *
+	 * @link https://github.com/INN/umbrella-energynewsnetwork/issues/38
+	 * @link https://codex.wordpress.org/Rewrite_API/add_rewrite_rule
+	 * @uses WP_Rewrite->add_rewrite_rule
+	 * @see $this->url_to_postid_hack
+	 * @see url_to_postid
+	 */
+	public function url_to_postid_rewrite_rule() {
+		add_rewrite_rule(
+			'regionpost/(.+?)/([^/]+)/?$',
+			'index.php?region=$matches[1]&name=$matches[2]',
+			'top'
+		);
+	}
+
+	/**
+	 * Mangle the URL fed to url_to_postid if it's a url for a post within a region
+	 *
+	 * This copies a chunk of url_to_postid so that we're sure that the $url the
+	 * surgery is performed upon is the same as in url_to_postid.
+	 *
+	 * Then, once we're sure, we check to see if the first part of $url matches
+	 * the slug of a region taxonomy term. If it does, we then reassemble the URL
+	 * in the format that url_to_postid expects, but with `/regionpost` prepended to $url
+	 * so that the _only_ valid regular expression in the rewrite rules will be
+	 * the one that we defined in $this->url_to_postid_rewrite_rules.
+	 *
+	 * This is because of https://github.com/INN/umbrella-energynewsnetwork/issues/38,
+	 * where the Chalkbeat MORI plugin's call for url_to_postid was breaking when
+	 * the permalink structure was causing a mismatch in url_to_postid.
+	 *
+	 * If you're gonna put a custom taxonomy term in the URL, you want to do something
+	 * like this.
+	 *
+	 * :sigh:
+	 *
+	 * @param String $url A URL.
+	 * @return String A URL, possibly modified to include a leading /regionpost/
+	 * @see $this->url_to_postid_rewrite_rule
+	 * @see url_to_postid
+	 * @link https://github.com/INN/umbrella-energynewsnetwork/issues/38
+	 * @uses WP_Rewrite->add_rewrite_rule
+	 * @filter url_to_postid
+	 */
+	public function url_to_postid_hack( $url ) {
+		global $wp_rewrite;
+		$orig = $url;
+
+		/*
+		 * Copied from url_to_postid, but modified to only return the $orig URL that was passed to url_to_postid the function
+		 */
+		$url_host      = str_replace( 'www.', '', parse_url( $url, PHP_URL_HOST ) );
+		$home_url_host = str_replace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
+
+		// Bail early if the URL does not belong to this site.
+		if ( $url_host && $url_host !== $home_url_host ) {
+			return 0;
+		}
+
+		// First, check to see if there is a 'p=N' or 'page_id=N' to match against
+		if ( preg_match('#[?&](p|page_id|attachment_id)=(\d+)#', $url, $values) )	{
+			$id = absint($values[2]);
+			if ( $id )
+				return $orig;
+		}
+
+		// Get rid of the #anchor
+		$url_split = explode('#', $url);
+		$url = $url_split[0];
+
+		// Get rid of URL ?query=string
+		$url_split = explode('?', $url);
+		$url = $url_split[0];
+
+		// Set the correct URL scheme.
+		$scheme = parse_url( home_url(), PHP_URL_SCHEME );
+		$url = set_url_scheme( $url, $scheme );
+
+		// Add 'www.' if it is absent and should be there
+		if ( false !== strpos(home_url(), '://www.') && false === strpos($url, '://www.') )
+			$url = str_replace('://', '://www.', $url);
+
+		// Strip 'www.' if it is present and shouldn't be
+		if ( false === strpos(home_url(), '://www.') )
+			$url = str_replace('://www.', '://', $url);
+
+		if ( trim( $url, '/' ) === home_url() && 'page' == get_option( 'show_on_front' ) ) {
+			$page_on_front = get_option( 'page_on_front' );
+
+			if ( $page_on_front && get_post( $page_on_front ) instanceof WP_Post ) {
+				return $orig;
+			}
+		}
+
+		// Check to see if we are using rewrite rules
+		$rewrite = $wp_rewrite->wp_rewrite_rules();
+
+		// Not using rewrite rules, and 'p=N' and 'page_id=N' methods failed, so we're out of options
+		if ( empty($rewrite) ) {
+			return 0;
+		}
+
+		// Strip 'index.php/' if we're not using path info permalinks
+		if ( !$wp_rewrite->using_index_permalinks() )
+			$url = str_replace( $wp_rewrite->index . '/', '', $url );
+
+		if ( false !== strpos( trailingslashit( $url ), home_url( '/' ) ) ) {
+			// Chop off http://domain.com/[path]
+			$url = str_replace(home_url(), '', $url);
+		} else {
+			// Chop off /path/to/blog
+			$home_path = parse_url( home_url( '/' ) );
+			$home_path = isset( $home_path['path'] ) ? $home_path['path'] : '' ;
+			$url = preg_replace( sprintf( '#^%s#', preg_quote( $home_path ) ), '', trailingslashit( $url ) );
+		}
+
+		// Trim leading and lagging slashes
+		$url = trim($url, '/');
+
+		/*
+		 * end copy
+		 */
+
+		// Get a list of region slugs
+		$terms = get_terms( array(
+			'taxonomy' => 'region',
+			//'hide_empty' => false, // removed to speed up the query
+			'fields' => 'id=>slug', // see https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
+		) );
+
+		foreach ( $terms as $id => $slug ) {
+			if ( 0 === strpos( $url, $slug ) ) {
+				return home_url() . '/regionpost/' . $url;
+			}
+		}
+
+		// Nope, it wasn't a region post.
+		return $orig;
 	}
 }
 
