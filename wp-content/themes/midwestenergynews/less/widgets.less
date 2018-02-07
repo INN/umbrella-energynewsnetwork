@@ -50,6 +50,11 @@
     margin-top: -1em;
   }
 
+  // if widget has no title
+  .post-lead:first-child {
+    margin-top: 16px; // match left/right padding on .usen-roundups-widget
+  }
+
   @media (max-width: 768px) {
     margin-top: 20px 0;
     text-align: center;
@@ -68,11 +73,6 @@
   padding-left: 1em;
   padding-right: 1em;
 
-  & + .usen-roundups-widget,
-  & + .mwen-roundups-widget {
-    margin-top: 2.5em;
-  }
-
   .widgettitle {
     background-color: @greyD;
     margin-top: 0;
@@ -81,6 +81,12 @@
   }
   :last-child {
     padding-bottom: 0;
+  }
+}
+.single #sidebar .widget {
+  & + .usen-roundups-widget,
+  & + .mwen-roundups-widget {
+    margin-top: 2.5em;
   }
 }
 
