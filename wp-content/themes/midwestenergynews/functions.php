@@ -239,6 +239,11 @@ function mwen_theme_options($options) {
 }
 add_filter('largo_options', 'mwen_theme_options');
 
+/**
+ * close comments for posts of the roundup type
+ *
+ * @filter close_comments_for_post_types
+ */
 function mwen_comments_roundups( $value ) {
     if ( ! in_array( 'roundup', $value ) ) {
         array_push( $value, 'roundup' );
@@ -247,11 +252,37 @@ function mwen_comments_roundups( $value ) {
 }
 add_filter( 'close_comments_for_post_types', 'mwen_comments_roundups' );
 
-//exclude Roundups from Regions loop
-add_action( 'pre_get_posts', 'exclude_roundups' );
-function exclude_roundups( $query ) {
-    if ( $query->is_tax('region') ) {
-        $query->set( 'post_type', array('post') );
-    }
-    return $query;
+/**
+ * exclude Roundups from Regions loop
+ *
+ * This should _only_ run on the regions page, and not anywhere else
+ *
+ * @param query WP_Query the query that may be about to be run
+ * @return WP_Query the query
+ * @since Largo 0.5.5.4
+ * @since WordPress 4.9.2
+ */
+function lmp_exclude_roundups( $query ) {
+
+	/*
+	 * make it happen when loading the page
+	 */
+	if ( ! is_admin() && $query->is_tax('region') && $query->is_main_query() ) {
+		error_log(var_export( '1', true));
+		$query->set( 'post_type', array('post') );
+	}
+
+	/*
+	 * make it happen for Load More Posts
+	 *
+	 * Note that is_admin may be true while running LMP
+	 * and is_admin is true when updating a post or updating a term meta
+	 * so we cannot simply allow or disallow based on is_admin
+	 */
+	if ( isset( $_POST ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
+		error_log(var_export( '2', true));
+		$query->set( 'post_type', array('post') );
+	}
+	return $query;
 }
+add_action( 'pre_get_posts', 'lmp_exclude_roundups' );
