@@ -10,7 +10,7 @@ if (
 $span_class = (is_archive() || is_search())? 'span4':'span3';
 
 do_action('largo_before_sidebar'); ?>
-<aside id="sidebar" class="<?php echo $span_class; ?>">
+<aside id="sidebar" class="<?php echo $span_class; ?> nocontent">
 	<?php do_action('largo_before_sidebar_content'); ?>
 	<div class="widget-area" role="complementary">
 		<?php
