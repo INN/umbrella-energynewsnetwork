@@ -102,7 +102,7 @@ final class USEN_Regions_Taxonomy {
 	 *
 	 * @since  0.1.0
 	 */
-	protected function __comenu_namenstruct() {
+	protected function __construct() {
 		$this->basename = plugin_basename( __FILE__ );
 		$this->url      = plugin_dir_url( __FILE__ );
 		$this->path     = plugin_dir_path( __FILE__ );
