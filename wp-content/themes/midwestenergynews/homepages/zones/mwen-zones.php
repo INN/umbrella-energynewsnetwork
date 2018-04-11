@@ -24,16 +24,30 @@ function zone_homepage_top() {
 			<a href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>"><?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?></a>
 			<header>
 				<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>" class="has-photo"><?php echo $bigStoryPost->post_title; ?></a></h2>
-				<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
-				<p class="excerpt"><?php echo $bigStoryPost->post_excerpt; ?></p>
+				<?php
+					largo_byline( true, false, $bigStoryPost->ID );
+					if ( ! empty( $bigStoryPost->post_excerpt ) ) {
+						printf(
+							'<p class="excerpt">%1$s</p>',
+							wp_kses_post( $bigStoryPost->post_excerpt )
+						);
+					}
+				?>
 			</header>
 		</article>
 	<?php } else { ?>
 		<article>
 			<h5 class="top-tag">Featured</h5>
 			<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
-			<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
-			<p class="excerpt"><?php echo $bigStoryPost->post_excerpt; ?></p>
+			<?php
+				largo_byline( true, false, $bigStoryPost->ID );
+				if ( ! empty( $bigStoryPost->post_excerpt ) ) {
+					printf(
+						'<p class="excerpt">%1$s</p>',
+						wp_kses_post( $bigStoryPost->post_excerpt )
+					);
+				}
+			?>
 		</article>
 
 	<?php }
