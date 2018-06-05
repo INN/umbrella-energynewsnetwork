@@ -53,7 +53,9 @@ $bigStoryPost = $bigStoryPost[0];
 					} else if ( is_tax( 'region', 'southeast' ) ) {
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SoutheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'southwest' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SouthwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/WesternEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
+					} if ( is_tax( 'region', 'western' ) ) {
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/WesternEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'northeast' ) ) {
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/NortheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} else {
