@@ -26,7 +26,7 @@ $bigStoryPost = $bigStoryPost[0];
 			 * This is similar to largo's archive.php, but with everything
 			 * not related to regions cut out.
 			 */
-			$title = single_term_title( '', false );
+			$title = wp_kses_post( single_term_title( '', false ) );
 			$description = term_description();
 
 			// rss links for custom taxonomies are a little tricky
