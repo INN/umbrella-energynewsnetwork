@@ -47,18 +47,24 @@ $bigStoryPost = $bigStoryPost[0];
 				largo_hero($post_id);
 
 				// instead of outputting the title text, output the relevant image
-				if ( isset( $title ) ) {
+				if ( ! empty( $title ) ) {
 					if ( is_tax( 'region', 'midwest' ) ) {
+						// Midwest
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/MidwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} else if ( is_tax( 'region', 'southeast' ) ) {
+						// Southeast
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SoutheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'southwest' ) ) {
-						echo '<img src="' . get_stylesheet_directory_uri() . '/images/WesternEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
-					} if ( is_tax( 'region', 'western' ) ) {
+						// Southwest
+						echo '<img src="' . get_stylesheet_directory_uri() . '/images/SouthwestEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
+					} if ( is_tax( 'region', 'west' ) ) {
+						// though the slug is "west", the name is "Western Energy News."
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/WesternEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} if ( is_tax( 'region', 'northeast' ) ) {
+						// Northeast
 						echo '<img src="' . get_stylesheet_directory_uri() . '/images/NortheastEnergyNews_Logo.svg' . '" alt="' . $title  . '" class="region-header" />';
 					} else {
+						// all other cases
 						echo '<h1 class="page-title">' . $title . '</h1>';
 					}
 				}
