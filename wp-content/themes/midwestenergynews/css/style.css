@@ -2132,6 +2132,10 @@ aside.align-left.type-pull-quote {
   margin-left: 0;
   margin-right: 0;
 }
+.page.page-template-single-subscription-landing-page .header_img,
+.single.page-template-single-subscription-landing-page .header_img {
+  background-color: white;
+}
 .page.page-template-single-subscription-landing-page .entry-content,
 .single.page-template-single-subscription-landing-page .entry-content {
   padding-top: 18px;

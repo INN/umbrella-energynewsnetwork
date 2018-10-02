@@ -65,14 +65,7 @@
 	<div id="page" class="hfeed clearfix">
 
 		<?php
-			get_template_part( 'partials/nav', 'sticky' ); 
-
-			get_template_part( 'partials/largo-header' );
-
-			get_template_part( 'partials/nav', 'main' );
-			if ( SHOW_SECONDARY_NAV === TRUE ) {
-				get_template_part( 'partials/nav', 'secondary' );
-			}
+			largo_header();
 		?>
 
 		<div id="main" class="row-fluid clearfix">
