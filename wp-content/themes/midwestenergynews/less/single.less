@@ -609,8 +609,18 @@ aside.align-left.type-pull-quote {
  * Styles to reset the full-width page's layout.
  */
 .page, .single {
-  .page-template-full-page .entry-content {
-    max-width: auto;
+  &.page-template-full-page .entry-content,
+  &.page-template-single-subscription-landing-page .entry-content {
+    max-width: unset;
     margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  .page, .single {
+    &.page-template-full-page .entry-content,
+    &.page-template-single-subscription-landing-page .entry-content {
+      padding-right: 0;
+    }
   }
 }

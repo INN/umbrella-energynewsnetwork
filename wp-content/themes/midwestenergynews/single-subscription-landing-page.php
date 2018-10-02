@@ -56,13 +56,6 @@
 	<?php
 		wp_head();
 	?>
-	<style type="text/css">
-		.page-template-single-subscription-landing-page .entry-content {
-			max-width: unset;
-			margin-left: 0;
-			margin-right: 0;
-		}
-	</style>
 </head>
 
 <body <?php body_class(); ?>>

@@ -47,10 +47,19 @@ function mwen_stylesheet() {
 	wp_dequeue_style( 'largo-child-styles' );
 
 	$suffix = (LARGO_DEBUG)? '' : '.min';
-	wp_enqueue_style( 'mwen', get_stylesheet_directory_uri().'/css/style' . $suffix . '.css' );
+	wp_enqueue_style(
+		'mwen',
+		get_stylesheet_directory_uri().'/css/style' . $suffix . '.css',
+		array(),
+		filemtime( get_stylesheet_directory() . '/css/style.css' )
+	);
 
 	if (is_home()) {
-		wp_enqueue_script( 'mwen-homepage', get_stylesheet_directory_uri().'/homepages/assets/js/loadmore.js', array( 'jquery' ) );
+		wp_enqueue_script(
+			'mwen-homepage',
+			get_stylesheet_directory_uri().'/homepages/assets/js/loadmore.js',
+			array( 'jquery' )
+		);
 		wp_dequeue_script('load-more-posts');
 	}
 }
