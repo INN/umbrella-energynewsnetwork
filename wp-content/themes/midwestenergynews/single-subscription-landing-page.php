@@ -70,14 +70,13 @@
 	</div><!-- #page -->
 
 	<div class="footer-bg clearfix nocontent">
-		<footer id="site-footer" class="footer-credit-padding-inn-logo-missing">
-			<div id="boilerplate">
+		<footer id="site-footer">
+			<div id="boilerplate" class="footer-credit-padding-inn-logo-missing">
 				<div class="row-fluid clearfix">
 					<div class="span6">
 						<div class="footer-bottom clearfix">
-
-							<!-- If you enjoy this theme and use it on a production site we would appreciate it if you would leave the credit in place. Thanks :) -->
-							<p class="footer-credit"><?php largo_copyright_message(); ?></p>
+							<p class="footer-credit">The Energy News Network is an editorially independent project of &nbsp;<img src="https://energynews.us/wp-content/uploads/2018/05/FE-logo.png" width="125"><br>
+							&copy; Copyright 2018</p>
 							<?php do_action('largo_after_footer_copyright'); ?>
 						</div>
 					</div>
