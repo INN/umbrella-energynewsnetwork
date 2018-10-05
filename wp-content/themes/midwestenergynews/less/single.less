@@ -604,3 +604,64 @@ aside.align-left.type-pull-quote {
   line-height: 24px;
   min-width: 16px;
 }
+
+/**
+ * Styles to reset the full-width page's layout.
+ */
+.page, .single {
+  &.page-template-full-page,
+  &.page-template-single-subscription-landing-page {
+    background: white;
+    #page {
+      background: white;
+    }
+
+    .entry-content {
+      max-width: unset;
+      margin-left: 0;
+      margin-right: 0;
+      background: white;
+    }
+
+    header {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+}
+.page, .single {
+  &.page-template-single-subscription-landing-page {
+    .entry-content {
+      padding-top: 18px;
+    }
+  }
+}
+#nav-replacement {
+  background: @stickyNavbarBackgroundColor;
+
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+    max-width: 1440px;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    height: 57px;
+    line-height: 57px;
+
+    color: white;
+    font-weight: 700;
+    font-family: @sans;
+    text-transform: uppercase;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  .page, .single {
+    &.page-template-full-page .entry-content,
+    &.page-template-single-subscription-landing-page .entry-content {
+      padding-right: 0;
+    }
+  }
+}
