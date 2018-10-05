@@ -76,7 +76,7 @@
 					<div class="span6">
 						<div class="footer-bottom clearfix">
 							<p class="footer-credit">The Energy News Network is an editorially independent project of &nbsp;<img src="https://energynews.us/wp-content/uploads/2018/05/FE-logo.png" width="125"><br>
-							&copy; Copyright 2018</p>
+							&copy; Copyright <?php echo date( 'Y' ); ?></p>
 							<?php do_action('largo_after_footer_copyright'); ?>
 						</div>
 					</div>
