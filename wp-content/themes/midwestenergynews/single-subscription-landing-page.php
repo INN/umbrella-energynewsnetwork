@@ -27,16 +27,6 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<?php
-	/**
-	 * The template for displaying the header
-	 *
-	 * Contains the HEAD content and opening of the id=page and id=main DIV elements.
-	 *
-	 * @package Largo
-	 * @since 0.1
-	 */
-	?>
 	<title>
 		<?php
 			global $page, $paged;
@@ -62,12 +52,12 @@
 
 	<div id="top"></div>
 
+	<div id="nav-replacement">
+		<div class="container">
+			Energy News Network
+		</div>
+	</div>
 	<div id="page" class="hfeed clearfix">
-
-		<?php
-			largo_header();
-		?>
-
 		<div id="main" class="row-fluid clearfix">
 			<div id="content" class="span12" role="main">
 				<?php
