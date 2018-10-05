@@ -2145,12 +2145,14 @@ aside.align-left.type-pull-quote {
   margin-right: 0;
   background: white;
 }
-.page.page-template-single-subscription-landing-page .header_wordmark,
-.single.page-template-single-subscription-landing-page .header_wordmark {
-  max-width: 550px;
-  margin: 18px;
-  background: white;
-  display: block;
+.page.page-template-full-page header,
+.single.page-template-full-page header,
+.page.page-template-single-subscription-landing-page header,
+.single.page-template-single-subscription-landing-page header {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 .page.page-template-single-subscription-landing-page .entry-content,
 .single.page-template-single-subscription-landing-page .entry-content {
