@@ -2154,6 +2154,10 @@ aside.align-left.type-pull-quote {
   padding-left: 18px;
   padding-right: 18px;
 }
+.page.page-template-single-subscription-landing-page #page,
+.single.page-template-single-subscription-landing-page #page {
+  max-width: calc(1440px * 0.74468085);
+}
 .page.page-template-single-subscription-landing-page .entry-content,
 .single.page-template-single-subscription-landing-page .entry-content {
   padding-top: 18px;
