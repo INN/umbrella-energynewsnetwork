@@ -2,15 +2,18 @@
 
 /**
  * Rewrite byline for vertical / horizontal stuff
+ *
+ * Note that this completely ignores the Largo_Byline class.
+ *
  */
-function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
-	if (!empty($post)) {
-		if (is_object($post))
+function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
+	if (!empty($post_id)) {
+		if (is_object($post_id)) {
 			$post_id = $post->ID;
-		else if (is_numeric($post))
-			$post_id = $post;
-	} else
+		}
+	} else {
 		$post_id = get_the_ID();
+	}
 
 	$values = get_post_custom( $post_id );
 
@@ -21,7 +24,13 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 			if ( $org = $author->organization )
 				$byline_text .= ' (' . $org . ')';
 
-			$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+			$out[] = sprintf(
+				'%4$s <a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a>',
+				get_author_posts_url( $author->ID, $author->user_nicename ),
+				esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ),
+				esc_html( $byline_text ),
+				coauthors_get_avatar( $author )
+			);
 
 		}
 
@@ -36,7 +45,7 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 		}
 
 	} else {
-		$authors = largo_author_link( false, $post_id );
+		$authors = get_avatar( get_the_author_meta( 'ID' ) ) . largo_author_link( false, $post_id );
 	}
 
 	if ( is_single() ) {
@@ -47,7 +56,11 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 
 	$byline_tease = $teaser;
 
-	$output = '<span class="by-author"><span class="by">'. $byline_tease . '</span><span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+	$output = sprintf(
+		'<span class="by-author"><span class="by">%1$s</span><span class="author vcard" itemprop="author">%2$s</span></span>',
+		$byline_tease,
+		$authors
+	);
 	if ( is_single() && ! $exclude_date ) {
 		$output .= '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 	}

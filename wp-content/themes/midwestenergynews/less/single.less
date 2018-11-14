@@ -55,6 +55,7 @@
     }
   }
   .entry-title {
+    // https://fvsch.com/css-locks/
     font-size: calc( 10px + 4vw );
     @media( max-width: 360px ) {
       font-size: 24px;
@@ -248,6 +249,20 @@ h5.byline {
     display: block;
     clear: both;
     margin-bottom: 1.5em;
+  }
+  .byline .avatar {
+    // undo Largo's byline avatar rounding and sizing
+    display: block;
+    clear: both;
+    border-radius: 0;
+    max-width: 100%;
+    max-height: unset;
+
+    // make sure it matches display of avatar in author bio widget
+    padding: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    margin-top: 10px;
   }
 }
 
