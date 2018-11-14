@@ -24,12 +24,17 @@ function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 			if ( $org = $author->organization )
 				$byline_text .= ' (' . $org . ')';
 
+			if ( is_single() ) {
+				$avatar = coauthors_get_avatar( $author );
+			} else {
+				$avatar = '';
+			}
 			$out[] = sprintf(
 				'%4$s <a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a>',
 				get_author_posts_url( $author->ID, $author->user_nicename ),
 				esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ),
 				esc_html( $byline_text ),
-				coauthors_get_avatar( $author )
+				$avatar
 			);
 
 		}
@@ -45,7 +50,8 @@ function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 		}
 
 	} else {
-		$authors = get_avatar( get_the_author_meta( 'ID' ) ) . ' ' . largo_author_link( false, $post_id );
+		$avatar = ( is_single() ) ? get_avatar( get_the_author_meta( 'ID' ) ) : '';
+		$authors = $avatar . ' ' . largo_author_link( false, $post_id );
 	}
 
 	if ( is_single() ) {
