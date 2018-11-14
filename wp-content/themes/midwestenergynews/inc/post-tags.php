@@ -70,33 +70,46 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
  * @see partials/content-single-classic.php
  */
 function mwen_post_social_links( $echo = true ) {
-		$utilities = of_get_option( 'article_utilities' );
-		$output = '<div id="mwen_post_social_links" class="post-social clearfix"><div class="left">';
-		
-		if ( $utilities['facebook'] === '1' ) {
-			$output .= sprintf( '<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>');
-		}
-		
-		if ( $utilities['twitter'] === '1' ) {
-			$output .= sprintf( '<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>');
-		}
-		
-		if ($utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="custom-share-button icon-mail"></span>';
-		}
+	$utilities = of_get_option( 'article_utilities' );
+	$output = '<div id="mwen_post_social_links" class="post-social clearfix"><div class="left">';
 
-		if ( $utilities['print'] === '1' ) {
-			$output .= '<span><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="custom-share-button icon-print"></i></a></span>';
-		}
-
-		
-		$output .= '</div><div class="right">';
-		
-		
-		$output .= '</div></div>';
-		if ( $echo ) {
-			echo $output;
-		} else {
-			return $output;
-		}
+	if ( isset( $utilities['facebook'] ) && $utilities['facebook'] === '1' ) {
+		$output .= sprintf( '<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>');
 	}
+
+	if ( isset( $utilities['twitter'] ) && $utilities['twitter'] === '1' ) {
+		$output .= sprintf( '<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>');
+	}
+
+	if ( isset( $utilites['email'] ) && $utilities['email'] === '1' ) {
+		$output .= '<span data-service="email" class="custom-share-button icon-mail"></span>';
+	}
+
+	if ( isset( $utilities['print'] ) && $utilities['print'] === '1' ) {
+		$output .= '<span><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="custom-share-button icon-print"></i></a></span>';
+	}
+
+	$output .= '</div><div class="right">';
+
+	$output .= '</div></div>';
+	if ( $echo ) {
+		echo $output;
+	} else {
+		return $output;
+	}
+}
+
+/**
+ * Add largo_top_term in the post header
+ */
+function mwen_top_term() {
+	$post_type = get_post_type();
+	if ( $post_type === 'roundup' ) {
+		$categories = get_the_terms( $post->ID, 'category' );
+		echo '<h5 class="top-tag"><a href="' . get_category_link( $categories[0]->term_id ) . '">' . $categories[0]->name . '</a></h5>';
+	} else {
+		echo '<h5 class="top-tag">';
+		largo_maybe_top_term(); // The defaults are sane
+		echo '</h5>';
+	}
+}

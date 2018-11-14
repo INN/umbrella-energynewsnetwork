@@ -157,21 +157,6 @@ function mwen_remove_feature_img($content) {
 }
 add_filter('the_content','mwen_remove_feature_img',1);
 
-/**
- * Add largo_top_term in the post header
- */
-function mwen_top_term() {
-	$post_type = get_post_type();
-	if ( $post_type === 'roundup' ) {
-		$categories = get_the_terms( $post->ID, 'category' );
-		echo '<h5 class="top-tag"><a href="' . get_category_link( $categories[0]->term_id ) . '">' . $categories[0]->name . '</a></h5>';
-	} else {
-		echo '<h5 class="top-tag">';
-		largo_top_term(); // The defaults are sane
-		echo '</h5>';
-	}
-}
-add_action('largo_before_hero', 'mwen_top_term');
 
 /**
  * Add a "Sponsored: " prefix to Saved Links that have the "sponsored" class
