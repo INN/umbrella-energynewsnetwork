@@ -250,19 +250,22 @@ h5.byline {
     clear: both;
     margin-bottom: 1.5em;
   }
-  .byline .avatar {
-    // undo Largo's byline avatar rounding and sizing
-    display: block;
-    clear: both;
-    border-radius: 0;
-    max-width: 100%;
-    max-height: unset;
+  @media (min-width: 768px) {
+    // so that it presents small and round on phones
+    .byline .avatar {
+      // undo Largo's byline avatar rounding and sizing
+      display: block;
+      clear: both;
+      border-radius: 0;
+      max-width: 100%;
+      max-height: unset;
 
-    // make sure it matches display of avatar in author bio widget
-    padding: 4px;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-    margin-top: 10px;
+      // make sure it matches display of avatar in author bio widget
+      padding: 4px;
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
   }
 }
 
