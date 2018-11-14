@@ -54,6 +54,15 @@
       margin: 25px 0;
     }
   }
+  .entry-title {
+    font-size: calc( 10px + 4vw );
+    @media( max-width: 360px ) {
+      font-size: 24px;
+    }
+    @media( min-width: 979px ) {
+      font-size: 50px;
+    }
+  }
   .hero {
     margin-bottom: 1.25em;
     background-color: #efefef;
@@ -65,11 +74,9 @@
     }
   }
   .entry-title {
-    font-size: 64px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin-bottom: 0.5em;
-    line-height: 1.1;
   }
   #sidebar {
     margin-top: 1em;
@@ -480,10 +487,6 @@ aside.align-left.type-pull-quote {
     #page {
       background-color: @white;
     }
-    .entry-title {
-      font-size: 54px;
-      line-height: 1.2;
-    }
     #sidebar,
     .share-text,
     .by {
@@ -492,7 +495,7 @@ aside.align-left.type-pull-quote {
     #main #content {
       box-shadow: 0 0 0 0;
     }
-    .author:after {
+    .byline .author:after {
       content: " | ";
     }
     .mwen-article .align-left {
@@ -572,9 +575,6 @@ aside.align-left.type-pull-quote {
       padding-right: 18px;
       padding-left: 18px;
       background-color: @white;
-    }
-    .entry-title {
-      font-size: 42px;
     }
     .article header {
       margin: 38px 0 14px;
