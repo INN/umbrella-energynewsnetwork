@@ -45,7 +45,7 @@ function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 		}
 
 	} else {
-		$authors = get_avatar( get_the_author_meta( 'ID' ) ) . largo_author_link( false, $post_id );
+		$authors = get_avatar( get_the_author_meta( 'ID' ) ) . ' ' . largo_author_link( false, $post_id );
 	}
 
 	if ( is_single() ) {
