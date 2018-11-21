@@ -235,28 +235,6 @@ textarea {
  * Font Definitions
  * Mixins
  */
-/* ==========================================================================
-Colors
-========================================================================== */
-/* ==========================================================================
-Fonts -- be sure to see _typography.less
-========================================================================== */
-/* @headline
- * Kepler Standard Display
- * For bold headlines
------------------------------ */
-/* @serif
- * Kepler Standard
- * For body and other general aplications
------------------------------ */
-/* @sans
- * Proxima Nova
- * For labels, bylines, photo credits, etc
- * NOTE: Be sure to see override in _typography.less
------------------------------ */
-/**
- * Largo navbar color changes
- */
 /*
  * Animations
  */
@@ -2655,6 +2633,10 @@ body.category-national .archive-description {
     margin-top: 20px 0;
     text-align: center;
   }
+}
+.mwen-roundups-widget p.morelink,
+.usen-roundups-widget p.morelink {
+  margin-bottom: 24px;
 }
 #sidebar .usen-roundups-widget,
 #sidebar .mwen-roundups-widget {
