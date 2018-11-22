@@ -22,10 +22,9 @@ Homepage Styles
     padding-left: 32px;
   }
   h2 {
-	font-size: 72px;
-	margin-bottom: 8px;
-	line-height: 1.1;
-	a {
+    margin-bottom: 8px;
+    line-height: 1.1;
+    a {
       color: @black;
       line-height: 1.08;
       .color-animation;
@@ -38,14 +37,11 @@ Homepage Styles
   }
   .hero {
     header {
-	  max-width: 90%;
-	  margin: -8em auto 0;
-	  background-color: rgba(255,255,255,0.7);
+      max-width: 90%;
+      margin: -8em auto 0;
+      background-color: rgba(255,255,255,0.7);
       padding: 24px;
       position: relative;
-    }
-    h2 {
-      font-size: 48px;
     }
   }
   a.url.fn.n {
@@ -116,8 +112,8 @@ h5.top-tag,
   .hg-row {
     margin: 0 0 24px;
     @media (max-width: 767px) {
-	  margin: 0px;
-	}
+      margin: 0px;
+    }
     border-top: 1px solid @greyXL;
     &:first-child {
       border: none;
@@ -141,8 +137,9 @@ h5.top-tag,
 }
 
 
-/* Responsive
------------------------------ */
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
 @media (max-width: 850px) {
 
   #homepage-top .span8,
@@ -156,29 +153,26 @@ h5.top-tag,
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
-    h2 {
-	  font-size: 48px;
-    }
     article {
-	 margin-top: 24px;
+      margin-top: 24px;
     }
     .hero {
-	  margin-bottom: 0;
+      margin-bottom: 0;
       h2 {
-	    font-size: 40px;
+        font-size: 40px;
       }
       p {
-	    margin-bottom: 0.25em;
+        margin-bottom: 0.25em;
       }
     }
     .span4 {
-	  margin: 0 auto;
+      margin: 0 auto;
       float: none;
       clear: both;
       padding: 0;
     }
     .span8 {
-	  margin-bottom: 2em;
+      margin-bottom: 2em;
     }
   }
 
@@ -210,8 +204,8 @@ h5.top-tag,
 
 @media (max-width: 480px) {
   #homepage-top {
-	article {
+    article {
       margin-top: 0;
-	}
-  }	
+    }
+  }
 }

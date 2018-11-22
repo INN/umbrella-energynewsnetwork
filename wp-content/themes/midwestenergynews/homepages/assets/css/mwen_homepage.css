@@ -28,7 +28,6 @@ Homepage Styles
   padding-left: 32px;
 }
 #homepage-top h2 {
-  font-size: 72px;
   margin-bottom: 8px;
   line-height: 1.1;
 }
@@ -50,9 +49,6 @@ Homepage Styles
   background-color: rgba(255, 255, 255, 0.7);
   padding: 24px;
   position: relative;
-}
-#homepage-top .hero h2 {
-  font-size: 48px;
 }
 #homepage-top a.url.fn.n {
   color: #282828;
@@ -183,8 +179,9 @@ h5.top-tag,
   border-bottom: 0.1vw solid #282828;
   box-shadow: inset 0 -0.25vw 0 #282828;
 }
-/* Responsive
------------------------------ */
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
 @media (max-width: 850px) {
   #homepage-top .span8,
   #homepage-top .span4,
@@ -196,9 +193,6 @@ h5.top-tag,
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
-  }
-  #homepage-top h2 {
-    font-size: 48px;
   }
   #homepage-top article {
     margin-top: 24px;
