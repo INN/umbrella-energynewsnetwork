@@ -19,7 +19,9 @@ function zone_homepage_top() {
 
 	if ( has_post_thumbnail( $bigStoryPost->ID ) ) { ?>
 		<article class="hero">
-			<a href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>"><?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?></a>
+			<a class="hero-image" href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
+				<?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?>
+			</a>
 			<header>
 				<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>" class="has-photo"><?php echo $bigStoryPost->post_title; ?></a></h2>
 				<?php
