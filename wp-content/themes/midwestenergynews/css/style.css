@@ -2926,9 +2926,9 @@ body .widget.saved-links ul li + li {
     margin-right: auto;
   }
 }
-/* ==========================================================================
-Homepage Styles
-========================================================================== */
+/*
+ * Homepage Styles
+ */
 /* Largo defualt spacing fixes
 ----------------------------- */
 #content.MWENHomepageLayout {
@@ -3118,6 +3118,64 @@ h5.top-tag,
     width: 100%;
     display: block;
   }
+  #homepage-bottom {
+    margin-bottom: 12px;
+    padding-top: 12px;
+  }
+  #homepage-bottom .span4,
+  #homepage-bottom .span6 {
+    margin: 12px 0;
+    border-right: 0;
+    border-bottom: 1px solid #cbcbcb;
+    padding-bottom: 12px;
+  }
+  #homepage-bottom .hg-row {
+    border-top: 0px;
+  }
+  #homepage-bottom article .headline {
+    max-width: 100%;
+    margin-top: 0;
+  }
+  #homepage-bottom h2,
+  #homepage-bottom h2.has-photo {
+    font-size: 42px;
+    margin-bottom: 0.35em;
+    margin-top: 0;
+  }
+}
+/**
+ * Homepage top styles
+ */
+@supports (display: flex) {
+  #homepage-top .hero {
+    background: #fafafa;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+  }
+  #homepage-top .hero .hero-image,
+  #homepage-top .hero header {
+    flex-basis: 300px;
+    flex-grow: 1;
+  }
+  #homepage-top .hero header {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: unset;
+  }
+  #homepage-top .hero h2 {
+    font-size: 32px;
+  }
+  #homepage-top .hero .excerpt {
+    margin: 1em;
+  }
+}
+@media (max-width: 850px) {
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
@@ -3142,30 +3200,6 @@ h5.top-tag,
   }
   #homepage-top .span8 {
     margin-bottom: 2em;
-  }
-  #homepage-bottom {
-    margin-bottom: 12px;
-    padding-top: 12px;
-  }
-  #homepage-bottom .span4,
-  #homepage-bottom .span6 {
-    margin: 12px 0;
-    border-right: 0;
-    border-bottom: 1px solid #cbcbcb;
-    padding-bottom: 12px;
-  }
-  #homepage-bottom .hg-row {
-    border-top: 0px;
-  }
-  #homepage-bottom article .headline {
-    max-width: 100%;
-    margin-top: 0;
-  }
-  #homepage-bottom h2,
-  #homepage-bottom h2.has-photo {
-    font-size: 42px;
-    margin-bottom: 0.35em;
-    margin-top: 0;
   }
 }
 @media (max-width: 480px) {

@@ -26,14 +26,16 @@ function zone_homepage_top() {
 				<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>" class="has-photo"><?php echo $bigStoryPost->post_title; ?></a></h2>
 				<?php
 					largo_byline( true, false, $bigStoryPost->ID );
-					if ( ! empty( $bigStoryPost->post_excerpt ) ) {
-						printf(
-							'<p class="excerpt">%1$s</p>',
-							wp_kses_post( $bigStoryPost->post_excerpt )
-						);
-					}
 				?>
 			</header>
+			<?php
+				if ( ! empty( $bigStoryPost->post_excerpt ) ) {
+					printf(
+						'<p class="excerpt">%1$s</p>',
+						wp_kses_post( $bigStoryPost->post_excerpt )
+					);
+				}
+			?>
 		</article>
 	<?php } else { ?>
 		<article>

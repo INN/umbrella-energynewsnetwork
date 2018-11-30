@@ -1,6 +1,6 @@
-/* ==========================================================================
-Homepage Styles
-========================================================================== */
+/*
+ * Homepage Styles
+ */
 
 @import (reference) "../less/_variables.less";
 @import (reference) "../less/_utilities.less";
@@ -39,7 +39,7 @@ Homepage Styles
     header {
       max-width: 90%;
       margin: -8em auto 0;
-      background-color: rgba(255,255,255,0.7);
+      background-color:rgba(255,255,255,0.7);
       padding: 24px;
       position: relative;
     }
@@ -150,31 +150,6 @@ h5.top-tag,
     display: block;
   }
 
-  #homepage-top {
-    margin-top: 0;
-    margin-bottom: 0;
-    article {
-      margin-top: 24px;
-    }
-    .hero {
-      margin-bottom: 0;
-      h2 {
-        font-size: 40px;
-      }
-      p {
-        margin-bottom: 0.25em;
-      }
-    }
-    .span4 {
-      margin: 0 auto;
-      float: none;
-      clear: both;
-      padding: 0;
-    }
-    .span8 {
-      margin-bottom: 2em;
-    }
-  }
 
   #homepage-bottom {
     margin-bottom: 12px;
@@ -202,6 +177,64 @@ h5.top-tag,
   }
 }
 
+/**
+ * Homepage top styles
+ */
+@supports (display: flex) {
+  #homepage-top .hero {
+    background: rgb( 250, 250, 250 );
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    .hero-image, header {
+      flex-basis: 300px;
+      flex-grow: 1;
+    }
+    header {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: unset;
+    }
+    h2 {
+      font-size: 32px;
+    }
+    .excerpt {
+      margin: 1em;
+    }
+  }
+}
+@media (max-width: 850px) {
+  #homepage-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    article {
+      margin-top: 24px;
+    }
+    .hero {
+      margin-bottom: 0;
+      h2 {
+        font-size: 40px;
+      }
+      p {
+        margin-bottom: 0.25em;
+      }
+    }
+    .span4 {
+      margin: 0 auto;
+      float: none;
+      clear: both;
+      padding: 0;
+    }
+    .span8 {
+      margin-bottom: 2em;
+    }
+  }
+}
 @media (max-width: 480px) {
   #homepage-top {
     article {
