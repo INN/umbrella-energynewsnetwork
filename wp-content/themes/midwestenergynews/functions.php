@@ -262,7 +262,6 @@ function lmp_exclude_roundups( $query ) {
 	 * make it happen when loading the page
 	 */
 	if ( ! is_admin() && $query->is_tax('region') && $query->is_main_query() ) {
-		error_log(var_export( '1', true));
 		$query->set( 'post_type', array('post') );
 	}
 
@@ -274,7 +273,6 @@ function lmp_exclude_roundups( $query ) {
 	 * so we cannot simply allow or disallow based on is_admin
 	 */
 	if ( isset( $_POST ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
-		error_log(var_export( '2', true));
 		$query->set( 'post_type', array('post') );
 	}
 	return $query;
