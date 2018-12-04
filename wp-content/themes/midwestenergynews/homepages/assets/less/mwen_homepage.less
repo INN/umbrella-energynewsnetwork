@@ -129,7 +129,6 @@ h5.top-tag,
     line-height: 1.1;
     font-size: 44px;
     &.has-photo {
-      font-size: 32px;
       line-height: 1.2;
       .has-photo-links;
     }
@@ -239,6 +238,58 @@ h5.top-tag,
   #homepage-top {
     article {
       margin-top: 0;
+    }
+  }
+}
+
+/**
+ * Homepage featured styles
+ */
+#homepage-top .featured h2,
+#homepage-bottom h2 {
+  font-size: 26px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 26px + ( 32px - 26px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 26px + ( 32 - 26 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 32px;
+  }
+}
+@supports (display: flex) {
+  #featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+
+    .featured {
+      flex-basis: 350px;
+      flex-grow: 1;
+      min-width: 350px;
+    }
+  }
+  #homepage-top .featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    margin-bottom: 1em;
+
+    img {
+      flex-grow: 1;
+      margin: 0;
+      max-width: 33%;
+      flex-basis: 30%;
+    }
+    header {
+      flex-grow: 2;
+      padding: 0 1em;
     }
   }
 }

@@ -1,6 +1,7 @@
 <div id="homepage-top" class="row-fluid">
 	<div class="span8">
 		<?php echo $homepage_top; ?>
+		<?php echo $homepage_featured; ?>
 	</div>
 	<div class="span4">
 		<?php dynamic_sidebar('sidebar-main'); ?>

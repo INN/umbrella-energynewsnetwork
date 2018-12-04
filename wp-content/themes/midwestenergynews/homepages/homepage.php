@@ -47,6 +47,10 @@ class MWENHomepageLayout extends Homepage {
 	function homepage_bottom() {
 		return zone_homepage_bottom();
 	}
+
+	function homepage_featured() {
+		return zone_homepage_featured();
+	}
 }
 
 
@@ -150,8 +154,9 @@ function mwen_print_homepage_posts($query) {
 						echo '<h2 class="has-photo"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
 					} else {
 						echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-						largo_excerpt( $post->ID, 2 );
 					}
+
+					largo_excerpt( $post->ID, 2 );
 
 					echo '<span class="hg-authors-byline">' . largo_byline() . '</span>';
 				?>

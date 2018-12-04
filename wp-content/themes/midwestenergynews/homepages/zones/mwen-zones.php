@@ -60,6 +60,35 @@ function zone_homepage_top() {
 }
 
 /**
+ * The featured template
+ */
+function zone_homepage_featured() {
+	global $shown_ids;
+	$stories = largo_home_featured_stories( 2 );
+	error_log(var_export( $stories, true));
+
+	ob_start();
+
+	echo '<div id="featured">';
+
+	foreach ( $stories as $story ) {
+		setup_postdata( $story );
+		?>
+			<article class="featured">
+				<?php echo get_the_post_thumbnail( $story->ID, 'medium' ); ?>
+				<header>
+					<h2><a href="<?php echo get_permalink( $story->ID ); ?>" class="has-photo"><?php echo $story->post_title; ?></a></h2>
+				</header>
+			</article>
+		<?php
+	}
+	wp_reset_postdata();
+
+	echo '</div>';
+	return ob_get_clean();
+}
+
+/**
  * Then the bottom grid
  */
 function zone_homepage_bottom() {
@@ -134,5 +163,5 @@ class LoadMorePostsHelper {
 		</script>
 <?php
 	}
-
 }
+
