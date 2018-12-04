@@ -65,7 +65,6 @@ function zone_homepage_top() {
 function zone_homepage_featured() {
 	global $shown_ids;
 	$stories = largo_home_featured_stories( 2 );
-	error_log(var_export( $stories, true));
 
 	ob_start();
 
