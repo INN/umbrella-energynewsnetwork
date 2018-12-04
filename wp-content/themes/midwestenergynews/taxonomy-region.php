@@ -91,8 +91,8 @@ wp_enqueue_style(
 					<header>
 						<h2><a href="<?php echo get_permalink( $bigStoryPost ); ?>" class="has-photo"><?php echo get_the_title( $bigStoryPost ); ?></a></h2>
 						<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
-						<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 					</header>
+					<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 				</article>
 			</div>
 			<?php
