@@ -2568,6 +2568,10 @@ body.category-national .archive-description {
   padding: 65px 30px 0 30px;
   margin: 4px 4px 18px 4px;
 }
+.widget + .mwen-roundups-widget,
+.widget + .usen-roundups-widget {
+  margin-top: 32px;
+}
 .mwen-roundups-widget a,
 .usen-roundups-widget a {
   color: #282828;
@@ -2590,7 +2594,7 @@ body.category-national .archive-description {
 .usen-roundups-widget h3.widgettitle {
   color: #3F9ABA;
   font-family: "kepler-std-display", "Georgia", serif;
-  font-size: 28px;
+  font-size: 24px;
 }
 .mwen-roundups-widget h4,
 .usen-roundups-widget h4 {
@@ -2620,7 +2624,7 @@ body.category-national .archive-description {
 }
 .mwen-roundups-widget h4 + .excerpt,
 .usen-roundups-widget h4 + .excerpt {
-  margin-top: -1em;
+  margin-top: 82px;
 }
 .mwen-roundups-widget .post-lead:first-child,
 .usen-roundups-widget .post-lead:first-child {
@@ -2650,7 +2654,7 @@ body.category-national .archive-description {
 .single #sidebar .mwen-roundups-widget .widgettitle {
   background-color: #494A52;
   margin-top: 0;
-  transform: translate(0, calc( -50% - 2px ));
+  transform: translate(0, calc(-50% - 2px));
   padding: 4px;
 }
 .single #sidebar .usen-roundups-widget :last-child,

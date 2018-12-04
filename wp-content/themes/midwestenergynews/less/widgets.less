@@ -20,6 +20,10 @@
   -moz-box-shadow: 0 0 0 1px @greyXL,0 0 0 3px @white,0 0 0 4px @greyXL;
   padding: 65px 30px 0 30px;
   margin: 4px 4px 18px 4px;
+  .widget + & { // .widget followed by this class
+    margin-top: 32px;
+  }
+
   a {
     color:@black;
   }
@@ -37,7 +41,7 @@
     &.widgettitle {
       color: @blue;
       font-family: @headline;
-      font-size: 28px;
+      font-size: 24px;
     }
   }
   h4 {
@@ -47,7 +51,7 @@
   }
 
   h4 + .excerpt {
-    margin-top: -1em;
+    margin-top: 82px;
   }
 
   // if widget has no title
@@ -80,7 +84,7 @@
   .widgettitle {
     background-color: @greyD;
     margin-top: 0;
-    transform: translate( 0, ~"calc( -50% - 2px )" );
+    transform: translate( 0, calc( -50% - 2px ) );
     padding: 4px;
   }
   :last-child {
