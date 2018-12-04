@@ -27,16 +27,6 @@ foreach ( $includes as $include ) {
 }
 
 /**
- * Include fonts from Typekit
- */
-function mwen_typekit() { ?>
-	<script src="//use.typekit.net/ljj5rel.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<?php }
-add_action( 'wp_head', 'mwen_typekit' );
-
-
-/**
  * Include compiled style.css and homepage custom LMP
  *
  * @since 0.1
@@ -62,6 +52,12 @@ function mwen_stylesheet() {
 		);
 		wp_dequeue_script('load-more-posts');
 	}
+
+	// Typekit Energy News kit
+	wp_enqueue_style(
+		'typekit',
+		'https://use.typekit.net/xre8nwm.css'
+	);
 }
 add_action( 'wp_enqueue_scripts', 'mwen_stylesheet', 20 );
 
