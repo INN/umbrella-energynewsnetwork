@@ -40,7 +40,7 @@
       max-width: 90%;
       margin: -8em auto 0;
       background-color:rgba(255,255,255,0.7);
-      padding: 24px;
+      padding: 24px 24px 0;
       position: relative;
     }
   }
@@ -127,7 +127,6 @@ h5.top-tag,
   h2 {
     .headline-links;
     line-height: 1.1;
-    font-size: 44px;
     &.has-photo {
       line-height: 1.2;
       .has-photo-links;
@@ -140,7 +139,6 @@ h5.top-tag,
  * These change the layout around, but don't generally affect presentations
  */
 @media (max-width: 850px) {
-
   #homepage-top .span8,
   #homepage-top .span4,
   #homepage-bottom div.span4,
@@ -186,9 +184,10 @@ h5.top-tag,
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     align-content: stretch;
     .hero-image, header {
+      max-width: 100%;
       flex-basis: 300px;
       flex-grow: 1;
     }
@@ -198,9 +197,6 @@ h5.top-tag,
       flex-direction: column;
       justify-content: center;
       background-color: unset;
-    }
-    h2 {
-      font-size: 32px;
     }
     .excerpt {
       margin: 1em;
@@ -245,6 +241,7 @@ h5.top-tag,
 /**
  * Homepage featured styles
  */
+#homepage-top .hero h2,
 #homepage-top .featured h2,
 #homepage-bottom h2 {
   font-size: 26px;

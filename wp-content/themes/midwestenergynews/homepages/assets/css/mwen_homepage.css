@@ -8,7 +8,6 @@
   padding: 0;
 }
 #homepage-top .by-author {
-  margin-bottom: 1em;
   margin-right: 3px;
   display: block;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
@@ -47,7 +46,7 @@
   max-width: 90%;
   margin: -8em auto 0;
   background-color: rgba(255, 255, 255, 0.7);
-  padding: 24px;
+  padding: 24px 24px 0;
   position: relative;
 }
 #homepage-top a.url.fn.n {
@@ -72,7 +71,6 @@ h5.top-tag,
   margin-bottom: 2.5em;
 }
 #homepage-bottom .by-author {
-  margin-bottom: 1em;
   margin-right: 3px;
   display: block;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
@@ -139,7 +137,6 @@ h5.top-tag,
 }
 #homepage-bottom h2 {
   line-height: 1.1;
-  font-size: 44px;
 }
 #homepage-bottom h2 a,
 #homepage-bottom h2 a:link,
@@ -224,11 +221,12 @@ h5.top-tag,
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     align-content: stretch;
   }
   #homepage-top .hero .hero-image,
   #homepage-top .hero header {
+    max-width: 100%;
     flex-basis: 300px;
     flex-grow: 1;
   }
@@ -238,9 +236,6 @@ h5.top-tag,
     flex-direction: column;
     justify-content: center;
     background-color: unset;
-  }
-  #homepage-top .hero h2 {
-    font-size: 32px;
   }
   #homepage-top .hero .excerpt {
     margin: 1em;
@@ -281,17 +276,20 @@ h5.top-tag,
 /**
  * Homepage featured styles
  */
+#homepage-top .hero h2,
 #homepage-top .featured h2,
 #homepage-bottom h2 {
   font-size: 26px;
 }
 @media (min-width: 600px) and (max-width: 1300px) {
+  #homepage-top .hero h2,
   #homepage-top .featured h2,
   #homepage-bottom h2 {
     font-size: calc(26px + (32 - 26) * ((100vw - 600px)/(1300 - 600)));
   }
 }
 @media (min-width: 1300px) {
+  #homepage-top .hero h2,
   #homepage-top .featured h2,
   #homepage-bottom h2 {
     font-size: 32px;
