@@ -268,11 +268,6 @@ h5.top-tag,
     margin-bottom: 2em;
   }
 }
-@media (max-width: 480px) {
-  #homepage-top article {
-    margin-top: 0;
-  }
-}
 /**
  * Homepage featured styles
  */
