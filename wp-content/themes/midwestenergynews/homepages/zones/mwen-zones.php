@@ -71,6 +71,7 @@ function zone_homepage_featured() {
 	echo '<div id="featured">';
 
 	foreach ( $stories as $story ) {
+		$shown_ids[] = $story->ID;
 		setup_postdata( $story );
 		?>
 			<article class="featured">
