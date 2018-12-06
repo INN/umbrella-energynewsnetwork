@@ -115,7 +115,7 @@ wp_enqueue_style(
 					if ( $count === 1 || $count === 4 ) {
 						echo '<div class="hg-row">';
 					}
-					$image_size =  (( $count >= 4 ) ? 'large' : 'medium' );
+					$image_size = 'rect_thumb';
 				?>
 
 				<div class="<?php echo $span; ?>">

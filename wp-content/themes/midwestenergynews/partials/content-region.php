@@ -32,7 +32,7 @@ if ( ! isset( $mwen_lmp_counter ) || 6 === $mwen_lmp_counter  ) {
 }
 
 $span = ( $mwen_lmp_counter <= 3 ) ? 'span4' : 'span6';
-$image_size = ( ( $mwen_lmp_counter >= 4 ) ? 'large' : 'medium' );
+$image_size = 'rect_thumb';
 
 // because each cluster of span4 or span6 should be its own row
 if ( $mwen_lmp_counter === 1 || $mwen_lmp_counter === 4 ) {
