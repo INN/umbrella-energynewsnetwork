@@ -75,7 +75,7 @@ function zone_homepage_featured() {
 		setup_postdata( $story );
 		?>
 			<article class="featured">
-				<?php echo get_the_post_thumbnail( $story->ID, 'medium' ); ?>
+				<?php echo get_the_post_thumbnail( $story->ID, 'rect_thumb_half' ); ?>
 				<header>
 					<h2><a href="<?php echo get_permalink( $story->ID ); ?>" class="has-photo"><?php echo $story->post_title; ?></a></h2>
 				</header>

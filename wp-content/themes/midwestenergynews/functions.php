@@ -274,3 +274,13 @@ function lmp_exclude_roundups( $query ) {
 	return $query;
 }
 add_action( 'pre_get_posts', 'lmp_exclude_roundups' );
+
+/**
+ * Add new image size
+ *
+ * @todo Remove this when https://github.com/INN/largo/pull/1584 has been merged
+ */
+function mwen_image_sizes() {
+	add_image_size( 'rect_thumb_half', 400, 300, true ); // smaller version of rect_thumb
+}
+add_action( 'after_setup_theme', 'mwen_image_sizes' );
