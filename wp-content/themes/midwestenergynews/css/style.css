@@ -1424,7 +1424,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   font-weight: 700;
   color: #282828;
 }
@@ -1581,7 +1581,7 @@ footer ul li a,
 }
 .page #sidebar h5 a,
 .single #sidebar h5 a {
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   font-weight: 400;
 }
 .page #sidebar.span3,
@@ -1943,7 +1943,7 @@ blockquote,
 .type-pull-quote {
   background-color: inherit;
   border-left: none;
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   font-weight: 700;
 }
 blockquote:after,
@@ -1964,7 +1964,7 @@ blockquote p,
   line-height: 1.2;
   text-align: center;
   color: #313237;
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   font-style: normal;
 }
 aside.align-left.pull-quote,
@@ -2294,7 +2294,7 @@ body.category-national .archive-description {
 }
 .archive h1.page-title,
 .search h1.page-title {
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   color: #282828;
   font-size: 54px;
 }
@@ -2593,7 +2593,7 @@ body.category-national .archive-description {
 .mwen-roundups-widget h3.widgettitle,
 .usen-roundups-widget h3.widgettitle {
   color: #3F9ABA;
-  font-family: "kepler-std-display", "Georgia", serif;
+  font-family: "pt-serif", "Georgia", serif;
   font-size: 24px;
 }
 .mwen-roundups-widget h4,
