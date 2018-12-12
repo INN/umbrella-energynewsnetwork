@@ -275,28 +275,38 @@ h5.top-tag,
 }
 @media (min-width: 600px) and (max-width: 1300px) {
   #homepage-top .hero h2 {
-    font-size: calc(26px + (32 - 26) * ((100vw - 600px)/(1300 - 600)));
+    font-size: calc(26px + (34 - 26) * ((100vw - 600px)/(1300 - 600)));
   }
 }
 @media (min-width: 1300px) {
   #homepage-top .hero h2 {
-    font-size: 32px;
+    font-size: 34px;
   }
 }
-#homepage-top .featured h2,
+#homepage-top .featured h2 {
+  font-size: 20px;
+}
+@media (min-width: 600px) and (max-width: 1300px) {
+  #homepage-top .featured h2 {
+    font-size: calc(20px + (26 - 20) * ((100vw - 600px)/(1300 - 600)));
+  }
+}
+@media (min-width: 1300px) {
+  #homepage-top .featured h2 {
+    font-size: 26px;
+  }
+}
 #homepage-bottom h2 {
   font-size: 20px;
 }
 @media (min-width: 600px) and (max-width: 1300px) {
-  #homepage-top .featured h2,
   #homepage-bottom h2 {
-    font-size: calc(20px + (28 - 20) * ((100vw - 600px)/(1300 - 600)));
+    font-size: calc(20px + (30 - 20) * ((100vw - 600px)/(1300 - 600)));
   }
 }
 @media (min-width: 1300px) {
-  #homepage-top .featured h2,
   #homepage-bottom h2 {
-    font-size: 28px;
+    font-size: 30px;
   }
 }
 @supports (display: flex) {

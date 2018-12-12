@@ -234,26 +234,39 @@ h5.top-tag,
  * Homepage font sizes
  */
 #homepage-top .hero h2 {
+  // 26-34px
   font-size: 26px;
   @media (min-width: 600px) and (max-width: 1300px) {
     // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
-    // font-size: calc( 26px + ( 32px - 26px ) * ((100vw - 600px)/(1300px - 600px)) );
-    font-size: calc( 26px + ( 32 - 26 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+    // font-size: calc( 26px + ( 34px - 26px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 26px + ( 34 - 26 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
   }
   @media (min-width: 1300px) {
-    font-size: 32px;
+    font-size: 34px;
   }
 }
-#homepage-top .featured h2,
-#homepage-bottom h2 {
+#homepage-top .featured h2 {
+  // 20-26px
   font-size: 20px;
   @media (min-width: 600px) and (max-width: 1300px) {
     // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
-    // font-size: calc( 20px + ( 28px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
-    font-size: calc( 20px + ( 28 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+    // font-size: calc( 20px + ( 26px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 20px + ( 26 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
   }
   @media (min-width: 1300px) {
-    font-size: 28px;
+    font-size: 26px;
+  }
+}
+#homepage-bottom h2 {
+  // 22-30px
+  font-size: 20px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 20px + ( 30px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 20px + ( 30 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 30px;
   }
 }
 @supports (display: flex) {
