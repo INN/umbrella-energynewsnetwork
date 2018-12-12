@@ -42,6 +42,9 @@
   color: #3F9ABA;
   text-decoration: none;
 }
+#homepage-top .hero {
+  text-align: left;
+}
 #homepage-top .hero header {
   max-width: 90%;
   margin: -8em auto 0;
@@ -232,7 +235,7 @@ h5.top-tag,
     background-color: unset;
   }
   #homepage-top .hero .excerpt {
-    margin: 1em;
+    margin: 1em 0;
   }
 }
 @media (max-width: 850px) {
