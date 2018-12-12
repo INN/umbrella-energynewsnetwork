@@ -91,7 +91,6 @@ wp_enqueue_style(
 					<header>
 						<?php largo_maybe_top_term( array( 'post' => $bigStoryPost->ID ) ); ?>
 						<h2><a href="<?php echo get_permalink( $bigStoryPost ); ?>" class="has-photo"><?php echo get_the_title( $bigStoryPost ); ?></a></h2>
-						<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
 						<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 					</header>
 				</article>
@@ -132,8 +131,6 @@ wp_enqueue_style(
 									echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
 								}
 								largo_excerpt( $post->ID, 2 );
-
-								echo '<span class="hg-authors-byline">' . largo_byline() . '</span>';
 							?>
 						</div>
 					</article>

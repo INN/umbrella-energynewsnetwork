@@ -155,8 +155,6 @@ function mwen_print_homepage_posts($query) {
 					}
 
 					largo_excerpt( $post->ID, 2 );
-
-					echo '<span class="hg-authors-byline">' . largo_byline() . '</span>';
 				?>
 			</div>
 		</article>
@@ -240,9 +238,6 @@ function zone_homepage_top() {
 			<header>
 				<?php largo_maybe_top_term( array( 'post' => $bigStoryPost->ID ) ); ?>
 				<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>" class="has-photo"><?php echo $bigStoryPost->post_title; ?></a></h2>
-				<?php
-					largo_byline( true, false, $bigStoryPost->ID );
-				?>
 				<?php
 					if ( ! empty( $bigStoryPost->post_excerpt ) ) {
 						printf(
