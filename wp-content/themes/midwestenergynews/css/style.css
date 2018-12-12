@@ -2761,6 +2761,10 @@ body.category-national .archive-description {
   background-color: #fd7130;
   border-color: #fd7130;
 }
+.widget_text p:last-child,
+.mailchimp-signup-widget p:last-child {
+  margin-bottom: 0;
+}
 .mailchimp-signup-widget .widgettitle {
   display: none;
 }
