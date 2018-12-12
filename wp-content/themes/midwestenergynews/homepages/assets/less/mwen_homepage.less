@@ -165,12 +165,6 @@ h5.top-tag,
       max-width: 100%;
       margin-top: 0;
     }
-    h2,
-    h2.has-photo {
-      font-size: 42px;
-      margin-bottom: 0.35em;
-      margin-top: 0;
-    }
   }
 }
 
@@ -212,9 +206,6 @@ h5.top-tag,
     }
     .hero {
       margin-bottom: 0;
-      h2 {
-        font-size: 40px;
-      }
       p {
         margin-bottom: 0.25em;
       }
@@ -239,11 +230,9 @@ h5.top-tag,
 }
 
 /**
- * Homepage featured styles
+ * Homepage font sizes
  */
-#homepage-top .hero h2,
-#homepage-top .featured h2,
-#homepage-bottom h2 {
+#homepage-top .hero h2 {
   font-size: 26px;
   @media (min-width: 600px) and (max-width: 1300px) {
     // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
@@ -252,6 +241,18 @@ h5.top-tag,
   }
   @media (min-width: 1300px) {
     font-size: 32px;
+  }
+}
+#homepage-top .featured h2,
+#homepage-bottom h2 {
+  font-size: 20px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 20px + ( 28px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 20px + ( 28 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 28px;
   }
 }
 @supports (display: flex) {
