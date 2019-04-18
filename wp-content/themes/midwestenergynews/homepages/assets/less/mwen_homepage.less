@@ -68,59 +68,27 @@ h5.top-tag,
 
 #homepage-bottom {
   border-top: 1px solid @greyXL;
-  display: inline-block;
+  padding-top: 2.5em;
+  margin-top: 2.5em;
   margin-bottom: 2.5em;
+
   .horizontal-byline;
 
-  .hg-row {
-    overflow: hidden;
-    padding-left: 2.12765957%;
+  article {
+    margin: 0;
+    padding: 0;
+
   }
 
-  .span4,
-  .span6 {
-    margin-top: 2.5em;
-    border-right: 1px solid @greyXL;
-    margin-bottom: -999999px;
-    padding-bottom: 999999px;
-    padding-right: 2.12765957%;
-
-    &:last-child { border-right: none; }
-
-    article {
-      margin: 0;
-      padding: 0;
-    }
-
-    img {
-      border: 1px solid @greyXL;
-      max-width: 100%;
-      width: 100%;
-      float: none;
-      margin: 0 0 20px;
-    }
+  img {
+    max-width: 25%;
+    width: 100%;
+    float: left;
+    margin: 0 20px 20px 0;
   }
 
   h5.top-tag {
     font-size: 16px;
-  }
-  .span6:last-child article {
-    border-bottom: 0px;
-  }
-  .hg-row {
-    margin: 0 0 24px;
-    @media (max-width: 767px) {
-      margin: 0px;
-    }
-    border-top: 1px solid @greyXL;
-    &:first-child {
-      border: none;
-    }
-    display: inherit;
-  }
-  .row:first-child {
-    border-top: none;
-    margin-top: 0;
   }
   h2 {
     .headline-links;

@@ -67,7 +67,8 @@ h5.top-tag,
 ----------------------------- */
 #homepage-bottom {
   border-top: 1px solid #cbcbcb;
-  display: inline-block;
+  padding-top: 2.5em;
+  margin-top: 2.5em;
   margin-bottom: 2.5em;
 }
 #homepage-bottom .by-author {
@@ -83,57 +84,18 @@ h5.top-tag,
 #homepage-bottom .by-author a {
   color: #282828;
 }
-#homepage-bottom .hg-row {
-  overflow: hidden;
-  padding-left: 2.12765957%;
-}
-#homepage-bottom .span4,
-#homepage-bottom .span6 {
-  margin-top: 2.5em;
-  border-right: 1px solid #cbcbcb;
-  margin-bottom: -999999px;
-  padding-bottom: 999999px;
-  padding-right: 2.12765957%;
-}
-#homepage-bottom .span4:last-child,
-#homepage-bottom .span6:last-child {
-  border-right: none;
-}
-#homepage-bottom .span4 article,
-#homepage-bottom .span6 article {
+#homepage-bottom article {
   margin: 0;
   padding: 0;
 }
-#homepage-bottom .span4 img,
-#homepage-bottom .span6 img {
-  border: 1px solid #cbcbcb;
-  max-width: 100%;
+#homepage-bottom img {
+  max-width: 25%;
   width: 100%;
-  float: none;
-  margin: 0 0 20px;
+  float: left;
+  margin: 0 20px 20px 0;
 }
 #homepage-bottom h5.top-tag {
   font-size: 16px;
-}
-#homepage-bottom .span6:last-child article {
-  border-bottom: 0px;
-}
-#homepage-bottom .hg-row {
-  margin: 0 0 24px;
-  border-top: 1px solid #cbcbcb;
-  display: inherit;
-}
-@media (max-width: 767px) {
-  #homepage-bottom .hg-row {
-    margin: 0px;
-  }
-}
-#homepage-bottom .hg-row:first-child {
-  border: none;
-}
-#homepage-bottom .row:first-child {
-  border-top: none;
-  margin-top: 0;
 }
 #homepage-bottom h2 {
   line-height: 1.1;

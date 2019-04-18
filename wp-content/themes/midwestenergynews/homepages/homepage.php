@@ -103,7 +103,7 @@ function mwen_custom_homepage_layouts() {
 add_action( 'init', 'mwen_custom_homepage_layouts', 10 );
 
 /**
- * Prints the tile/grid markup for the homepage
+ * Prints the post layout for the homepage or the series page
  *
  * The grid setup is this:
  *
@@ -134,36 +134,23 @@ function mwen_print_homepage_posts($query) {
 		$shown_ids[] = get_the_ID();
 		$count++;
 
-		$span = ( $count <= 3 ) ? 'span4' : 'span6';
-
-		if ( $count === 1 || $count === 4 ) {
-			echo '<div class="hg-row">';
-		}
 		$image_size = 'rect_thumb'
 	?>
 
-	<div class="<?php echo $span; ?>">
-		<article class="hg-cell">
-			<div class="hg-cell-inner">
-				<?php
-					largo_maybe_top_term( array( 'post' => $post->ID ) );
-					if ( has_post_thumbnail() ) {
-						echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
-						echo '<h2 class="has-photo"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-					} else {
-						echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-					}
+		<article <?php post_class( 'clearfix', $post ); ?> >
+			<?php
+				if ( has_post_thumbnail() ) {
+					echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
+				}
+				largo_maybe_top_term( array( 'post' => $post->ID ) );
+				echo '<h2 class=""><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
 
-					largo_excerpt( $post->ID, 2 );
-				?>
-			</div>
+				largo_excerpt( $post->ID, 2 );
+			?>
 		</article>
-	</div>
 	<?php
-		if ( $count === 3 || $count === 5 ) {
-			echo '</div>'; //end of row;
-		}
 	} // end loop
+
 	$ret = ob_get_clean();
 	return $ret;
 }
