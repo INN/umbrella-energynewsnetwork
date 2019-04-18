@@ -1,9 +1,9 @@
-/* ==========================================================================
-Homepage Styles
-========================================================================== */
+/*
+ * Homepage Styles
+ */
 
-@import "../less/_variables.less";
-@import "../less/_utilities.less";
+@import (reference) "../less/_variables.less";
+@import (reference) "../less/_utilities.less";
 
 /* Largo defualt spacing fixes
 ----------------------------- */
@@ -15,17 +15,13 @@ Homepage Styles
 
 #homepage-top {
   .horizontal-byline;
-  .widget_text {
-    padding-top: 0;
-  }
   .span4 {
     padding-left: 32px;
   }
   h2 {
-	font-size: 72px;
-	margin-bottom: 8px;
-	line-height: 1.1;
-	a {
+    margin-bottom: 8px;
+    line-height: 1.1;
+    a {
       color: @black;
       line-height: 1.08;
       .color-animation;
@@ -37,15 +33,13 @@ Homepage Styles
     }
   }
   .hero {
+    text-align: left;
     header {
-	  max-width: 90%;
-	  margin: -8em auto 0;
-	  background-color: rgba(255,255,255,0.7);
-      padding: 24px;
+      max-width: 90%;
+      margin: -8em auto 0;
+      background-color:rgba(255,255,255,0.7);
+      padding: 24px 24px 0;
       position: relative;
-    }
-    h2 {
-      font-size: 48px;
     }
   }
   a.url.fn.n {
@@ -116,8 +110,8 @@ h5.top-tag,
   .hg-row {
     margin: 0 0 24px;
     @media (max-width: 767px) {
-	  margin: 0px;
-	}
+      margin: 0px;
+    }
     border-top: 1px solid @greyXL;
     &:first-child {
       border: none;
@@ -131,9 +125,7 @@ h5.top-tag,
   h2 {
     .headline-links;
     line-height: 1.1;
-    font-size: 44px;
     &.has-photo {
-      font-size: 32px;
       line-height: 1.2;
       .has-photo-links;
     }
@@ -141,10 +133,10 @@ h5.top-tag,
 }
 
 
-/* Responsive
------------------------------ */
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
 @media (max-width: 850px) {
-
   #homepage-top .span8,
   #homepage-top .span4,
   #homepage-bottom div.span4,
@@ -153,34 +145,6 @@ h5.top-tag,
     display: block;
   }
 
-  #homepage-top {
-    margin-top: 0;
-    margin-bottom: 0;
-    h2 {
-	  font-size: 48px;
-    }
-    article {
-	 margin-top: 24px;
-    }
-    .hero {
-	  margin-bottom: 0;
-      h2 {
-	    font-size: 40px;
-      }
-      p {
-	    margin-bottom: 0.25em;
-      }
-    }
-    .span4 {
-	  margin: 0 auto;
-      float: none;
-      clear: both;
-      padding: 0;
-    }
-    .span8 {
-	  margin-bottom: 2em;
-    }
-  }
 
   #homepage-bottom {
     margin-bottom: 12px;
@@ -199,19 +163,142 @@ h5.top-tag,
       max-width: 100%;
       margin-top: 0;
     }
-    h2,
-    h2.has-photo {
-      font-size: 42px;
-      margin-bottom: 0.35em;
+  }
+}
+
+/**
+ * Homepage top styles
+ */
+@supports (display: flex) {
+  #homepage-top .hero {
+    background: rgb( 250, 250, 250 );
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+    .hero-image, header {
+      max-width: 100%;
+      flex-basis: 300px;
+      flex-grow: 1;
+    }
+    header {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: unset;
+    }
+    .excerpt {
+      margin: 1em 0;
+    }
+  }
+}
+@media (max-width: 850px) {
+  #homepage-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    article {
+      margin-top: 24px;
+    }
+    .hero {
+      margin-bottom: 0;
+      p {
+        margin-bottom: 0.25em;
+      }
+    }
+    .span4 {
+      margin: 0 auto;
+      float: none;
+      clear: both;
+      padding: 0;
+    }
+    .span8 {
+      margin-bottom: 2em;
+    }
+  }
+}
+@media (max-width: 480px) {
+  #homepage-top {
+    article {
       margin-top: 0;
     }
   }
 }
 
-@media (max-width: 480px) {
-  #homepage-top {
-	article {
-      margin-top: 0;
-	}
-  }	
+/**
+ * Homepage font sizes
+ */
+#homepage-top .hero h2 {
+  // 26-34px
+  font-size: 26px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 26px + ( 34px - 26px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 26px + ( 34 - 26 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 34px;
+  }
+}
+#homepage-top .featured h2 {
+  // 20-26px
+  font-size: 20px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 20px + ( 26px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 20px + ( 26 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 26px;
+  }
+}
+#homepage-bottom h2 {
+  // 22-30px
+  font-size: 20px;
+  @media (min-width: 600px) and (max-width: 1300px) {
+    // formula for this lock comes from https://css-tricks.com/snippets/css/fluid-typography/
+    // font-size: calc( 20px + ( 30px - 20px ) * ((100vw - 600px)/(1300px - 600px)) );
+    font-size: calc( 20px + ( 30 - 20 ) * ((100vw - 600px)/(1300 - 600)) ); // note that you can't divide by pixels
+  }
+  @media (min-width: 1300px) {
+    font-size: 30px;
+  }
+}
+@supports (display: flex) {
+  #featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+
+    .featured {
+      flex-basis: 350px;
+      flex-grow: 1;
+      min-width: 350px;
+    }
+  }
+  #homepage-top .featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    margin-bottom: 1em;
+
+    img {
+      flex-grow: 1;
+      margin: 0;
+      max-width: 33%;
+      flex-basis: 30%;
+    }
+    header {
+      flex-grow: 2;
+      padding: 0 1em;
+    }
+  }
 }

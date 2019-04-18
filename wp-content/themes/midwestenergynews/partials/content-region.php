@@ -32,7 +32,7 @@ if ( ! isset( $mwen_lmp_counter ) || 6 === $mwen_lmp_counter  ) {
 }
 
 $span = ( $mwen_lmp_counter <= 3 ) ? 'span4' : 'span6';
-$image_size = ( ( $mwen_lmp_counter >= 4 ) ? 'large' : 'medium' );
+$image_size = 'rect_thumb';
 
 // because each cluster of span4 or span6 should be its own row
 if ( $mwen_lmp_counter === 1 || $mwen_lmp_counter === 4 ) {
@@ -43,6 +43,7 @@ if ( $mwen_lmp_counter === 1 || $mwen_lmp_counter === 4 ) {
 <div id="post-<?php the_ID(); ?>" <?php post_class( $span ); ?>>
 	<article class="hg-cell">
 		<div class="hg-cell-inner">
+			<h5 class="top-tag"><?php largo_top_term();?></h5>
 			<?php
 				if ( has_post_thumbnail() ) {
 					echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';

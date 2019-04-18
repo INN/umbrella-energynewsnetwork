@@ -1,3 +1,13 @@
+
+## Deploy notes
+
+https://wpengine.com/git/
+
+```
+git remote add wpe-prod git@git.wpengine.com:production/usenergynews.git
+git remote add wpe-staging git@git.wpengine.com:staging/usenergynews.git
+```
+
 ## Setup instructions
 
 ### VVV instructions
