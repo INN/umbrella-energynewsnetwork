@@ -20,9 +20,6 @@
 #homepage-top .by-author a {
   color: #282828;
 }
-#homepage-top .span4 {
-  padding-left: 32px;
-}
 #homepage-top h2 {
   margin-bottom: 8px;
   line-height: 1.1;
@@ -40,13 +37,11 @@
   text-decoration: none;
 }
 #homepage-top .hero {
+  background-color: transparent;
   text-align: left;
 }
 #homepage-top .hero header {
-  max-width: 90%;
-  margin: -8em auto 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 24px 24px 0;
+  padding: 0 24px 0;
   position: relative;
 }
 #homepage-top a.url.fn.n {
@@ -62,6 +57,18 @@ h5.top-tag,
 .row-fluid > [class*='span']:last-child > * > .widget,
 .row-fluid > [class*='span']:last-child > .widget {
   padding-right: 24px;
+}
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
+@media (max-width: 850px) {
+  #homepage-top .span8,
+  #homepage-top .span4,
+  #homepage-bottom div.span4,
+  #homepage-bottom div.span6 {
+    width: 100%;
+    display: block;
+  }
 }
 /* homepage bottom
 ----------------------------- */
@@ -137,42 +144,11 @@ h5.top-tag,
   border-bottom: 0.1vw solid #282828;
   box-shadow: inset 0 -0.25vw 0 #282828;
 }
-/* Responsive classes for mobile layout
- * These change the layout around, but don't generally affect presentations
- */
-@media (max-width: 850px) {
-  #homepage-top .span8,
-  #homepage-top .span4,
-  #homepage-bottom div.span4,
-  #homepage-bottom div.span6 {
-    width: 100%;
-    display: block;
-  }
-  #homepage-bottom {
-    margin-bottom: 12px;
-    padding-top: 12px;
-  }
-  #homepage-bottom .span4,
-  #homepage-bottom .span6 {
-    margin: 12px 0;
-    border-right: 0;
-    border-bottom: 1px solid #cbcbcb;
-    padding-bottom: 12px;
-  }
-  #homepage-bottom .hg-row {
-    border-top: 0px;
-  }
-  #homepage-bottom article .headline {
-    max-width: 100%;
-    margin-top: 0;
-  }
-}
 /**
  * Homepage top styles
  */
 @supports (display: flex) {
   #homepage-top .hero {
-    background: #fafafa;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -186,8 +162,10 @@ h5.top-tag,
     flex-basis: 300px;
     flex-grow: 1;
   }
+  #homepage-top .hero .hero-image {
+    margin-bottom: 24px;
+  }
   #homepage-top .hero header {
-    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -201,9 +179,6 @@ h5.top-tag,
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
-  }
-  #homepage-top article {
-    margin-top: 24px;
   }
   #homepage-top .hero {
     margin-bottom: 0;

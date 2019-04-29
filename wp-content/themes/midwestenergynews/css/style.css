@@ -721,8 +721,8 @@ html.nav-open body {
   }
 }
 @media (min-width: 769px) {
-  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
-  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+  .nav li.dropdown:hover ul.dropdown-menu,
+  .nav li.dropdown.open ul.dropdown-menu {
     display: block;
   }
 }
@@ -736,18 +736,6 @@ html.nav-open body {
   .open > .dropdown-menu {
     display: none;
   }
-}
-.dropup .caret,
-.navbar-fixed-bottom .dropdown .caret {
-  border-top: 0;
-  border-bottom: 4px solid #282828;
-  content: "\2191";
-}
-.dropup .dropdown-menu,
-.navbar-fixed-bottom .dropdown .dropdown-menu {
-  top: auto;
-  bottom: 100%;
-  margin-bottom: 1px;
 }
 #topics-bar {
   padding: 3px 0;
