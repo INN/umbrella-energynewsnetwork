@@ -17,11 +17,12 @@ function mwen_largo_lmp_template_partial( $partial, $post_query ) {
 	if (
 		isset( $query_vars['region'] )
 		&& $query_vars['region'] != ''
-		&& ! isset ( $query_vars['category'] )
-		&& ! isset ( $query_vars['category_name'] )
-		&& ! isset ( $query_vars['category_name'] )
-		&& ! isset ( $query_vars['tag'] )
+		&& ( ! isset ( $query_vars['category'] ) || empty ( $query_vars['category'] ) )
+		&& ( ! isset ( $query_vars['category_name'] ) || empty ( $query_vars['category_name'] ) )
+		&& ( ! isset ( $query_vars['cat'] ) || empty ( $query_vars['cat'] ) )
+		&& ( ! isset ( $query_vars['tag'] ) || empty ( $query_vars['tag'] ) )
 	) {
+		error_log(var_export( 'aaa?', true));
 		$partial = 'region';
 	}
 	return $partial;

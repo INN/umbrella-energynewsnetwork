@@ -94,55 +94,22 @@ wp_enqueue_style(
 						<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 					</header>
 				</article>
+				<div id="homepage-bottom">
+					<?php
+						rewind_posts();
+						global $wp_query;
+						echo mwen_print_homepage_posts( $wp_query );
+						largo_content_nav( 'nav-below' ); 
+					?>
+					<?php ?>
+				</div><!-- #homepage-bottom -->
 			</div>
+
 			<?php
 				get_sidebar();
 			?>
 		</div>
 
-		<div id="homepage-bottom">
-			<?php
-				global $shown_ids;
-				
-				rewind_posts();
-				while ( have_posts() ) {
-					the_post();
-					$shown_ids[] = get_the_ID();
-					$count++;
-
-					$span = ( $count <= 3 ) ? 'span4' : 'span6';
-
-					if ( $count === 1 || $count === 4 ) {
-						echo '<div class="hg-row">';
-					}
-					$image_size = 'rect_thumb';
-				?>
-
-				<div class="<?php echo $span; ?>">
-					<article class="hg-cell">
-						<div class="hg-cell-inner">
-							<?php
-								largo_maybe_top_term( array( 'post' => $post->ID ) );
-
-								if ( has_post_thumbnail() ) {
-									echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
-									echo '<h2 class="has-photo"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-								} else {
-									echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-								}
-								largo_excerpt( $post->ID, 2 );
-							?>
-						</div>
-					</article>
-				</div>
-				<?php
-					if ( $count === 3 || $count === 5 ) {
-						echo '</div>'; //end of row;
-					}
-				} // end loop
-			?>
-			<?php largo_content_nav( 'nav-below' ); ?>
-		</div><!-- #homepage-bottom -->
 
 
 		<?php } else {

@@ -104,25 +104,6 @@ add_action( 'init', 'mwen_custom_homepage_layouts', 10 );
 
 /**
  * Prints the post layout for the homepage or the series page
- *
- * The grid setup is this:
- *
- * div.row
- *     div.span6
- *     div.span6
- * div.row
- *     div.span4
- *     div.span4
- *     div.span4
- *
- * Inside each div is the following markup:
- *
- * article.hg-cell
- *     div.hg-cell-inner
- *         optional thumbnail
- *         headline
- *         byline
- *
  */
 function mwen_print_homepage_posts($query) {
 	global $shown_ids;
@@ -135,20 +116,20 @@ function mwen_print_homepage_posts($query) {
 		$count++;
 
 		$image_size = 'rect_thumb'
-	?>
+		?>
 
-		<article <?php post_class( 'clearfix', $post ); ?> >
-			<?php
-				if ( has_post_thumbnail() ) {
-					echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
-				}
-				largo_maybe_top_term( array( 'post' => $post->ID ) );
-				echo '<h2 class=""><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+			<article <?php post_class( 'clearfix', $post ); ?> >
+				<?php
+					if ( has_post_thumbnail() ) {
+						echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
+					}
+					largo_maybe_top_term( array( 'post' => $post->ID ) );
+					echo '<h2 class=""><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
 
-				largo_excerpt( $post->ID, 2 );
-			?>
-		</article>
-	<?php
+					largo_excerpt( $post->ID, 2 );
+				?>
+			</article>
+		<?php
 	} // end loop
 
 	$ret = ob_get_clean();
