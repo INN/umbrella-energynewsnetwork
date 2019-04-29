@@ -15,9 +15,6 @@
 
 #homepage-top {
   .horizontal-byline;
-  .span4 {
-    padding-left: 32px;
-  }
   h2 {
     margin-bottom: 8px;
     line-height: 1.1;
@@ -33,12 +30,10 @@
     }
   }
   .hero {
+    background-color: transparent;
     text-align: left;
     header {
-      max-width: 90%;
-      margin: -8em auto 0;
-      background-color:rgba(255,255,255,0.7);
-      padding: 24px 24px 0;
+      padding: 0 24px 0;
       position: relative;
     }
   }
@@ -62,65 +57,45 @@ h5.top-tag,
   padding-right: 24px;
 }
 
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
+@media (max-width: 850px) {
+  #homepage-top .span8,
+  #homepage-top .span4,
+  #homepage-bottom div.span4,
+  #homepage-bottom div.span6 {
+    width: 100%;
+    display: block;
+  }
+}
 
 /* homepage bottom
 ----------------------------- */
 
 #homepage-bottom {
   border-top: 1px solid @greyXL;
-  display: inline-block;
+  padding-top: 2.5em;
+  margin-top: 2.5em;
   margin-bottom: 2.5em;
+
   .horizontal-byline;
 
-  .hg-row {
-    overflow: hidden;
-    padding-left: 2.12765957%;
+  article {
+    margin: 0;
+    padding: 0;
+
   }
 
-  .span4,
-  .span6 {
-    margin-top: 2.5em;
-    border-right: 1px solid @greyXL;
-    margin-bottom: -999999px;
-    padding-bottom: 999999px;
-    padding-right: 2.12765957%;
-
-    &:last-child { border-right: none; }
-
-    article {
-      margin: 0;
-      padding: 0;
-    }
-
-    img {
-      border: 1px solid @greyXL;
-      max-width: 100%;
-      width: 100%;
-      float: none;
-      margin: 0 0 20px;
-    }
+  img {
+    max-width: 25%;
+    width: 100%;
+    float: left;
+    margin: 0 20px 20px 0;
   }
 
   h5.top-tag {
     font-size: 16px;
-  }
-  .span6:last-child article {
-    border-bottom: 0px;
-  }
-  .hg-row {
-    margin: 0 0 24px;
-    @media (max-width: 767px) {
-      margin: 0px;
-    }
-    border-top: 1px solid @greyXL;
-    &:first-child {
-      border: none;
-    }
-    display: inherit;
-  }
-  .row:first-child {
-    border-top: none;
-    margin-top: 0;
   }
   h2 {
     .headline-links;
@@ -133,45 +108,11 @@ h5.top-tag,
 }
 
 
-/* Responsive classes for mobile layout
- * These change the layout around, but don't generally affect presentations
- */
-@media (max-width: 850px) {
-  #homepage-top .span8,
-  #homepage-top .span4,
-  #homepage-bottom div.span4,
-  #homepage-bottom div.span6 {
-    width: 100%;
-    display: block;
-  }
-
-
-  #homepage-bottom {
-    margin-bottom: 12px;
-    padding-top: 12px;
-    .span4 ,
-    .span6 {
-      margin: 12px 0;
-      border-right: 0;
-      border-bottom: 1px solid @greyXL;
-      padding-bottom: 12px;
-    }
-    .hg-row {
-      border-top: 0px;
-    }
-    article .headline {
-      max-width: 100%;
-      margin-top: 0;
-    }
-  }
-}
-
 /**
  * Homepage top styles
  */
 @supports (display: flex) {
   #homepage-top .hero {
-    background: rgb( 250, 250, 250 );
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -183,8 +124,10 @@ h5.top-tag,
       flex-basis: 300px;
       flex-grow: 1;
     }
+    .hero-image {
+      margin-bottom: 24px;
+    }
     header {
-      margin: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -199,9 +142,7 @@ h5.top-tag,
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
-    article {
-      margin-top: 24px;
-    }
+
     .hero {
       margin-bottom: 0;
       p {
