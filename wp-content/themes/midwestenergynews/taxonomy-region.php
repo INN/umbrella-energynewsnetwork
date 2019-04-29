@@ -98,7 +98,9 @@ wp_enqueue_style(
 					<?php
 						rewind_posts();
 						global $wp_query;
+
 						echo mwen_print_homepage_posts( $wp_query );
+
 						largo_content_nav( 'nav-below' ); 
 					?>
 					<?php ?>
