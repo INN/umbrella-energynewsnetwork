@@ -259,7 +259,7 @@ textarea {
 .archive-links a,
 .archive-links a:link,
 .archive-links a:visited {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .archive-links a:hover {
   text-decoration: underline;
@@ -272,12 +272,12 @@ textarea {
 .fancy-links a:visited {
   text-decoration: none;
   vertical-align: baseline;
-  border-bottom: 0.2vw solid #b4d7e6;
-  box-shadow: inset 0 -0.4vw 0 #b4d7e6;
+  border-bottom: 0.2vw solid hsl(198, 50%, 80%);
+  box-shadow: inset 0 -0.4vw 0 hsl(198, 50%, 80%);
   color: inherit;
 }
 .fancy-links a:hover {
-  background: #b4d7e6;
+  background: hsl(198, 50%, 80%);
   text-decoration: none;
   color: inherit;
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -292,17 +292,17 @@ textarea {
 .headline-links a:visited {
   border-bottom: none;
   box-shadow: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 .headline-links a:hover {
   background: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: none;
-  border-bottom: 0.2vw solid #282828;
-  box-shadow: inset 0 -0.4vw 0 #282828;
+  border-bottom: 0.2vw solid hsl(0, 0%, 16%);
+  box-shadow: inset 0 -0.4vw 0 hsl(0, 0%, 16%);
 }
 /*
  * Smaller Homepage Headlines Beneath Photos
@@ -312,17 +312,17 @@ textarea {
 .has-photo-links a:visited {
   border-bottom: none;
   box-shadow: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 .has-photo-links a:hover {
   background: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: none;
-  border-bottom: 0.1vw solid #282828;
-  box-shadow: inset 0 -0.25vw 0 #282828;
+  border-bottom: 0.1vw solid hsl(0, 0%, 16%);
+  box-shadow: inset 0 -0.25vw 0 hsl(0, 0%, 16%);
 }
 /*
  * Button Styler function
@@ -336,9 +336,9 @@ textarea {
  * Double Rule Border
  */
 .double-rule-border {
-  box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -webkit-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -moz-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
+  box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
+  -webkit-box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
+  -moz-box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
 }
 /* Largo nav styles */
 html.nav-open,
@@ -436,7 +436,7 @@ html.nav-open body {
 .navbar li.home-icon a:hover,
 .navbar li.home-link a:hover {
   background-color: transparent;
-  color: #75b9d0;
+  color: hsl(196, 49%, 64%);
 }
 .navbar .home-icon:hover img,
 .navbar li.home-link:hover i {
@@ -755,8 +755,8 @@ html.nav-open body {
   font-weight: bold;
 }
 #main-nav.navbar {
-  border-top: 1px solid #cbcbcb;
-  border-bottom: 1px solid #cbcbcb;
+  border-top: 1px solid hsl(0, 0%, 79%);
+  border-bottom: 1px solid hsl(0, 0%, 79%);
 }
 .sticky-nav-container {
   margin: 0 auto;
@@ -770,7 +770,7 @@ html.nav-open body {
   z-index: 99998;
   visibility: hidden;
   opacity: 0;
-  background-color: #494A52;
+  background-color: hsl(233, 6%, 30%);
   border-bottom: 1px solid #ddd;
   -webkit-transition: opacity 0.3s;
   -moz-transition: opacity 0.3s;
@@ -899,7 +899,7 @@ body.admin-bar .sticky-nav-holder {
   position: relative;
 }
 .navbar.sticky-navbar .nav-right .form-search .toggle {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
   display: inline-block;
   text-align: center;
   cursor: pointer;
@@ -1046,7 +1046,7 @@ body.admin-bar .sticky-nav-holder {
   margin-bottom: 0;
 }
 .footer-bg {
-  background-color: #494A52;
+  background-color: hsl(233, 6%, 30%);
   padding: 0 0 18px;
   margin-bottom: 0;
 }
@@ -1247,29 +1247,29 @@ footer #boilerplate a:hover {
 }
 .btn-primary {
   color: #fff;
-  background: #3F9ABA;
+  background: hsl(196, 49%, 49%);
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
 }
 .btn-primary:hover {
-  background: #086a86;
+  background: hsl(193, 89%, 28%);
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 h5.top-tag {
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #54555F;
+  color: hsl(235, 6%, 35%);
 }
 h5.top-tag a {
-  color: #54555F;
+  color: hsl(235, 6%, 35%);
 }
 #nav-below.pager .load-more a {
   color: #fff;
-  background: #3F9ABA;
+  background: hsl(196, 49%, 49%);
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
 }
 #nav-below.pager .load-more a:hover {
-  background: #086a86;
+  background: hsl(193, 89%, 28%);
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -1340,7 +1340,7 @@ h5.top-tag a {
   max-width: 100%;
 }
 .sticky-nav-holder {
-  border-bottom: 1px solid #494A52;
+  border-bottom: 1px solid hsl(233, 6%, 30%);
 }
 .site-name {
   text-transform: uppercase;
@@ -1355,7 +1355,7 @@ h5.top-tag a {
   background-color: transparent;
 }
 .sticky-navbar.navbar li > a:hover {
-  background-color: #3d3e45;
+  background-color: hsl(233, 6%, 25%);
 }
 @media (max-width: 768px) {
   .sticky-navbar.navbar .nav-shelf li a {
@@ -1380,14 +1380,14 @@ h5.top-tag a {
  */
 @media (max-width: 768px) {
   .navbar.sticky-navbar li a .caret:before {
-    border-top-color: #494A52;
+    border-top-color: hsl(233, 6%, 30%);
   }
   .navbar.sticky-navbar li a:hover .caret:before {
     border-top-color: #f2f2f2;
   }
 }
 .navbar.sticky-navbar li.dropdown .dropdown-menu li a {
-  color: #494A52;
+  color: hsl(233, 6%, 30%);
 }
 .navbar-inner #header-search {
   margin-top: 6px;
@@ -1404,7 +1404,7 @@ h5.top-tag a {
 body {
   font-family: "kepler-std", "Georgia", serif;
   font-weight: 300;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 h1,
 h2,
@@ -1414,14 +1414,14 @@ h5,
 h6 {
   font-family: "pt-serif", "Georgia", serif;
   font-weight: 700;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 p {
   font-size: 20px;
   line-height: 1.42;
 }
 a {
-  color: #086a86;
+  color: hsl(193, 89%, 28%);
 }
 .navbar {
   font-weight: 700;
@@ -1469,11 +1469,11 @@ footer ul li a,
   body.single {
     background: #ffffff;
     /* Old browsers */
-    background: -moz-linear-gradient(left, #ffffff 0%, #ffffff 45%, #494A52 50%, #494A52 100%);
+    background: -moz-linear-gradient(left, #ffffff 0%, #ffffff 45%, hsl(233, 6%, 30%) 50%, hsl(233, 6%, 30%) 100%);
     /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #ffffff 0%, #ffffff 45%, #494A52 50%, #494A52 100%);
+    background: -webkit-linear-gradient(left, #ffffff 0%, #ffffff 45%, hsl(233, 6%, 30%) 50%, hsl(233, 6%, 30%) 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #ffffff 0%, #ffffff 45%, #494A52 50%, #494A52 100%);
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 45%, hsl(233, 6%, 30%) 50%, hsl(233, 6%, 30%) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='@greyD', GradientType=1);
     /* IE6-9 */
@@ -1492,16 +1492,16 @@ footer ul li a,
 .page #page,
 .single #page {
   padding: 0;
-  background-color: #494A52;
+  background-color: hsl(233, 6%, 30%);
 }
 .page #content,
 .single #content {
   position: relative;
   z-index: 1;
   background-color: #fff;
-  -webkit-box-shadow: 3px 0 3px 0 #494A52;
-  -moz-box-shadow: 3px 0 3px 0 #494A52;
-  box-shadow: 3px 0 2px 3px #494A52;
+  -webkit-box-shadow: 3px 0 3px 0 hsl(233, 6%, 30%);
+  -moz-box-shadow: 3px 0 3px 0 hsl(233, 6%, 30%);
+  box-shadow: 3px 0 2px 3px hsl(233, 6%, 30%);
 }
 .page article header,
 .single article header {
@@ -1551,12 +1551,12 @@ footer ul li a,
 .page #sidebar,
 .single #sidebar {
   margin-top: 1em;
-  background-color: #494A52;
+  background-color: hsl(233, 6%, 30%);
   color: #fff;
 }
 .page #sidebar a,
 .single #sidebar a {
-  color: #e4e4e4;
+  color: hsl(0, 0%, 89%);
 }
 .page #sidebar .widget-area,
 .single #sidebar .widget-area {
@@ -1565,7 +1565,7 @@ footer ul li a,
 .page #sidebar .widgettitle,
 .single #sidebar .widgettitle {
   font-size: 18px;
-  color: #fff;
+  color: hsl(0, 0%, 79%);
 }
 .page #sidebar h5 a,
 .single #sidebar h5 a {
@@ -1582,6 +1582,10 @@ footer ul li a,
 .page #sidebar .widget,
 .single #sidebar .widget {
   padding: 0;
+}
+.page #sidebar .widget.saved-links p,
+.single #sidebar .widget.saved-links p {
+  color: hsl(0, 0%, 79%);
 }
 .page .widget,
 .single .widget {
@@ -1603,7 +1607,7 @@ footer ul li a,
 }
 .page .largo-recent-posts ul li + li,
 .single .largo-recent-posts ul li + li {
-  border-top: 1px solid #7E7E7E;
+  border-top: 1px solid hsl(0, 0%, 49%);
 }
 .page,
 .single {
@@ -1666,12 +1670,12 @@ footer ul li a,
 .single .entry-content div[itemprop="articleBody"] a:visited {
   text-decoration: none;
   vertical-align: baseline;
-  border-bottom: 0.2vw solid #b4d7e6;
-  box-shadow: inset 0 -0.4vw 0 #b4d7e6;
+  border-bottom: 0.2vw solid hsl(198, 50%, 80%);
+  box-shadow: inset 0 -0.4vw 0 hsl(198, 50%, 80%);
   color: inherit;
 }
 .single .entry-content div[itemprop="articleBody"] a:hover {
-  background: #b4d7e6;
+  background: hsl(198, 50%, 80%);
   text-decoration: none;
   color: inherit;
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -1700,23 +1704,23 @@ footer ul li a,
  * Update page link styles
  */
 .page .entry-content a {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: underline;
 }
 .page .entry-content a:hover {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
 }
 /*
  * byline
  */
 h5.byline {
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #7E7E7E;
+  color: hsl(0, 0%, 49%);
 }
 h5.byline a,
 h5.byline .author {
   font-weight: 400;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .single .by,
 .page .by {
@@ -1757,7 +1761,7 @@ article header h5.top-tag {
 .share-text {
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
   font-weight: 700;
-  color: #cbcbcb;
+  color: hsl(0, 0%, 79%);
   font-size: 14.64px;
 }
 .span3 .post-social {
@@ -1790,7 +1794,7 @@ article header h5.top-tag {
   border-radius: 50%;
   font-size: 0.9em;
   line-height: 0.9em;
-  background-color: #cbcbcb;
+  background-color: hsl(0, 0%, 79%);
   overflow: visible;
   display: inline-block;
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -1815,13 +1819,13 @@ article header h5.top-tag {
 }
 .span3 .post-social .icon-mail:hover,
 .span3 .post-social .icon-print:hover {
-  background-color: #7E7E7E;
+  background-color: hsl(0, 0%, 49%);
 }
 /* Related Posts (left sidebar and article bottom)
 ----------------------------- */
 .widget.largo-related-posts .widgettitle {
   text-align: left;
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
 }
 .widget.largo-related-posts ul h4 {
@@ -1830,7 +1834,7 @@ article header h5.top-tag {
   margin-right: 2em;
 }
 .widget.largo-related-posts ul h4 a {
-  color: #54555F;
+  color: hsl(235, 6%, 35%);
 }
 .story-row .span3 .widget.largo-related-posts {
   margin-top: 5em;
@@ -1873,17 +1877,17 @@ div.article-bottom .widget.largo-related-posts h4 a:link,
 div.article-bottom .widget.largo-related-posts h4 a:visited {
   border-bottom: none;
   box-shadow: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 div.article-bottom .widget.largo-related-posts h4 a:hover {
   background: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: none;
-  border-bottom: 0.2vw solid #282828;
-  box-shadow: inset 0 -0.4vw 0 #282828;
+  border-bottom: 0.2vw solid hsl(0, 0%, 16%);
+  box-shadow: inset 0 -0.4vw 0 hsl(0, 0%, 16%);
 }
 div.article-bottom .widget.largo-related-posts p {
   font-size: 18px;
@@ -1894,7 +1898,7 @@ div.article-bottom .widget.largo-related-posts .wp-post-image {
 }
 div.article-bottom .widget.largo-tag-list h5 {
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
   display: block;
   text-align: center;
 }
@@ -1910,19 +1914,15 @@ div.article-bottom .widget.largo-tag-list ul li {
   white-space: nowrap;
 }
 div.article-bottom .widget.largo-tag-list ul li::after {
-  color: #cbcbcb;
+  color: hsl(0, 0%, 79%);
 }
 #comments a,
 #comments a:link,
 #comments a:visited {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 #comments a:hover {
   text-decoration: underline;
-}
-body.single .widget.saved-links div.post-lead + div.post-lead,
-body.page .widget.saved-links div.post-lead + div.post-lead {
-  border-top: 1px solid #7E7E7E;
 }
 /* Custom Block quotes
 ----------------------------- */
@@ -1942,7 +1942,7 @@ blockquote:after,
   margin: 2vw auto 1vw;
   max-width: 700px;
   height: 0.5vw;
-  background: #282828;
+  background: hsl(0, 0%, 16%);
   display: block;
 }
 blockquote p,
@@ -1951,7 +1951,7 @@ blockquote p,
   font-size: 2.5vw;
   line-height: 1.2;
   text-align: center;
-  color: #313237;
+  color: hsl(233, 6%, 20%);
   font-family: "pt-serif", "Georgia", serif;
   font-style: normal;
 }
@@ -1969,7 +1969,7 @@ aside.align-left.type-pull-quote {
 .sticky-footer-holder h4,
 .sticky-footer-holder a:hover,
 .sticky-footer-holder .icon-mail:hover {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
 }
 /*
  * MEDIA QUERY: Tablet, Mobile
@@ -2099,8 +2099,8 @@ aside.align-left.type-pull-quote {
     padding-right: 0;
   }
   .mwen-article a {
-    border-bottom: 2px solid #b4d7e6;
-    box-shadow: inset 0 -4px 0 #b4d7e6;
+    border-bottom: 2px solid hsl(198, 50%, 80%);
+    box-shadow: inset 0 -4px 0 hsl(198, 50%, 80%);
   }
   .story-row .span3,
   .story-row .span9 {
@@ -2159,7 +2159,7 @@ aside.align-left.type-pull-quote {
   padding-top: 18px;
 }
 #nav-replacement {
-  background: #494A52;
+  background: hsl(233, 6%, 30%);
 }
 #nav-replacement .container {
   padding-left: 18px;
@@ -2204,11 +2204,11 @@ body.category-national .archive-description {
 .related-topics {
   float: left;
   width: 100%;
-  border-bottom: 1px solid #cbcbcb;
+  border-bottom: 1px solid hsl(0, 0%, 79%);
   padding-bottom: 24px;
 }
 .related-topics a {
-  color: #086a86;
+  color: hsl(193, 89%, 28%);
 }
 .related-topics h5 {
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
@@ -2244,7 +2244,7 @@ body.category-national .archive-description {
   margin-right: 3px;
   display: block;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .archive .by-author div.by,
 .search .by-author div.by {
@@ -2253,7 +2253,7 @@ body.category-national .archive-description {
 }
 .archive .by-author a,
 .search .by-author a {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .archive header.archive-background,
 .search header.archive-background {
@@ -2283,7 +2283,7 @@ body.category-national .archive-description {
 .archive h1.page-title,
 .search h1.page-title {
   font-family: "pt-serif", "Georgia", serif;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   font-size: 54px;
 }
 @media (max-width: 768px) {
@@ -2302,7 +2302,7 @@ body.category-national .archive-description {
 .search h2.entry-title a:link,
 .archive h2.entry-title a:visited,
 .search h2.entry-title a:visited {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .archive h2.entry-title a:hover,
 .search h2.entry-title a:hover {
@@ -2310,12 +2310,12 @@ body.category-national .archive-description {
 }
 .archive .entry-content p a,
 .search .entry-content p a {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: underline;
 }
 .archive .entry-content p a:hover,
 .search .entry-content p a:hover {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
 }
 .archive .primary-featured-post,
 .search .primary-featured-post {
@@ -2357,7 +2357,7 @@ body.category-national .archive-description {
 @media (min-width: 769px) {
   .archive .secondary-featured-post article,
   .search .secondary-featured-post article {
-    border-left: 1px solid #cbcbcb;
+    border-left: 1px solid hsl(0, 0%, 79%);
     padding: 0 0 0 2.12765957%;
     /* Make equal height columns */
     margin-bottom: -999999px;
@@ -2454,7 +2454,7 @@ body.category-national .archive-description {
 }
 .archive .stories article,
 .search .stories article {
-  border-bottom: 1px solid #cbcbcb;
+  border-bottom: 1px solid hsl(0, 0%, 79%);
   margin-bottom: 36px;
 }
 @media (min-width: 769px) {
@@ -2529,11 +2529,11 @@ body.category-national .archive-description {
 .gcs_container .sl-table-ol a,
 .gcs_container .c_ a .gsc-results .gsc-cursor-box .gsc-cursor-current-page,
 .gcs_container .gsc-results .gsc-cursor-box .gsc-cursor-page {
-  color: #086a86;
+  color: hsl(193, 89%, 28%);
 }
 .gcs_container .gs-webResult div.gs-visibleUrl,
 .gcs_container .gs-imageResult div.gs-visibleUrl {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 /**
  * Styles for specific widgets in general or in specific contexts.
@@ -2543,16 +2543,15 @@ body.category-national .archive-description {
  */
 .widget {
   margin-bottom: 2em;
-  margin-top: 2em;
 }
 /*
  * MWEN custom Link Roundups widget, called "Today's headlines"
  */
 .mwen-roundups-widget,
 .usen-roundups-widget {
-  box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -webkit-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -moz-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
+  box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
+  -webkit-box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
+  -moz-box-shadow: 0 0 0 1px hsl(0, 0%, 79%), 0 0 0 3px #fff, 0 0 0 4px hsl(0, 0%, 79%);
   padding: 65px 30px 0 30px;
   margin: 4px 4px 18px 4px;
 }
@@ -2562,7 +2561,7 @@ body.category-national .archive-description {
 }
 .mwen-roundups-widget a,
 .usen-roundups-widget a {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .mwen-roundups-widget .roundup-date,
 .usen-roundups-widget .roundup-date {
@@ -2580,7 +2579,7 @@ body.category-national .archive-description {
 }
 .mwen-roundups-widget h3.widgettitle,
 .usen-roundups-widget h3.widgettitle {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
   font-family: "pt-serif", "Georgia", serif;
   font-size: 24px;
 }
@@ -2597,7 +2596,7 @@ body.category-national .archive-description {
 .usen-roundups-widget h4 a:visited {
   border-bottom: none;
   box-shadow: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -2605,10 +2604,10 @@ body.category-national .archive-description {
 .mwen-roundups-widget h4 a:hover,
 .usen-roundups-widget h4 a:hover {
   background: none;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   text-decoration: none;
-  border-bottom: 0.1vw solid #282828;
-  box-shadow: inset 0 -0.25vw 0 #282828;
+  border-bottom: 0.1vw solid hsl(0, 0%, 16%);
+  box-shadow: inset 0 -0.25vw 0 hsl(0, 0%, 16%);
 }
 .mwen-roundups-widget h4 + .excerpt,
 .usen-roundups-widget h4 + .excerpt {
@@ -2640,7 +2639,7 @@ body.category-national .archive-description {
 }
 .single #sidebar .usen-roundups-widget .widgettitle,
 .single #sidebar .mwen-roundups-widget .widgettitle {
-  background-color: #494A52;
+  background-color: hsl(233, 6%, 30%);
   margin-top: 0;
   transform: translate(0, calc(-50% - 2px));
   padding: 4px;
@@ -2671,7 +2670,7 @@ body.category-national .archive-description {
 }
 .widget_text h3.pitch span,
 .mailchimp-signup-widget h3.pitch span {
-  color: #3F9ABA;
+  color: hsl(196, 49%, 49%);
 }
 @media (max-width: 768px) {
   .widget_text h3.pitch,
@@ -2699,16 +2698,16 @@ body.category-national .archive-description {
 }
 .widget_text input[type=submit],
 .mailchimp-signup-widget input[type=submit] {
-  background-color: #3F9ABA;
+  background-color: hsl(196, 49%, 49%);
   color: #fff;
-  border: 1px solid #3F9ABA;
+  border: 1px solid hsl(196, 49%, 49%);
   padding: 8px 10px;
   width: 100px;
   display: block;
 }
 .widget_text input[type=submit]:hover,
 .mailchimp-signup-widget input[type=submit]:hover {
-  background: #086a86;
+  background: hsl(193, 89%, 28%);
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -2737,7 +2736,7 @@ body.category-national .archive-description {
 }
 .widget_text.rev,
 .mailchimp-signup-widget.rev {
-  background-color: #3F9ABA;
+  background-color: hsl(196, 49%, 49%);
   border: none;
 }
 .widget_text.rev h3.pitch span,
@@ -2746,8 +2745,8 @@ body.category-national .archive-description {
 }
 .widget_text.rev input[type=submit],
 .mailchimp-signup-widget.rev input[type=submit] {
-  background-color: #fd7130;
-  border-color: #fd7130;
+  background-color: hsl(19, 98%, 59%);
+  border-color: hsl(19, 98%, 59%);
 }
 .widget_text p:last-child,
 .mailchimp-signup-widget p:last-child {
@@ -2764,7 +2763,7 @@ body.category-national .archive-description {
 .home .widget_text,
 .archive .mailchimp-signup-widget,
 .home .mailchimp-signup-widget {
-  border: 1px solid #cbcbcb;
+  border: 1px solid hsl(0, 0%, 79%);
   box-sizing: content-box;
   padding: 18px 34px;
 }
@@ -2818,7 +2817,7 @@ body.category-national .archive-description {
 .page .entry-content .mailchimp-signup-widget,
 .single .entry-content .mailchimp-signup-widget {
   overflow: hidden;
-  border: 1px solid #cbcbcb;
+  border: 1px solid hsl(0, 0%, 79%);
   padding-left: 5%;
   padding-right: 5%;
 }
@@ -2859,7 +2858,7 @@ body.category-national .archive-description {
 }
 .page .entry-content .mailchimp-signup-widget.rev,
 .single .entry-content .mailchimp-signup-widget.rev {
-  border-color: #3F9ABA;
+  border-color: hsl(196, 49%, 49%);
 }
 @media (max-width: 420px) {
   .page .entry-content .mailchimp-signup-widget input[type=submit],
@@ -2877,35 +2876,50 @@ body.category-national .archive-description {
 /**
  * Recent Saved Links widget
  */
-body .widget.saved-links p {
-  font-size: 14px;
-}
 body .widget.saved-links div.post-lead {
-  padding-top: 2em;
-  padding-bottom: 2em;
+  margin-bottom: 1em;
   width: 100%;
 }
 body .widget.saved-links div.post-lead img {
   max-width: 100px;
   height: auto;
 }
-body .widget.saved-links div.post-lead + div.post-lead {
-  border-top: 1px solid #cbcbcb;
-}
 body .widget.saved-links h3 {
-  text-align: center;
+  text-align: left;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
 }
 body .widget.saved-links h5 {
   font-weight: 400;
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  color: hsl(233, 6%, 30%);
+}
+body .widget.saved-links h5 a {
+  color: inherit;
+}
+body .widget.saved-links p {
+  color: hsl(0, 0%, 49%);
+  font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
+  margin: 0.5em 0 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+body .widget.saved-links p a {
+  color: inherit;
+}
+body .widget.saved-links .sourcelabel {
+  display: none;
+}
+body .widget.saved-links p.morelink {
+  color: hsl(193, 89%, 28%);
 }
 body .widget.saved-links ul li {
   padding-top: 2em;
   padding-bottom: 1em;
 }
 body .widget.saved-links ul li + li {
-  border-top: 1px solid #7E7E7E;
+  border-top: 1px solid hsl(0, 0%, 49%);
 }
 .textwidget #mc-embedded-subscribe-form label {
   display: inline-block;

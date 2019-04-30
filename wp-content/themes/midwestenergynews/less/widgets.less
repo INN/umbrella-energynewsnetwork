@@ -7,7 +7,6 @@
  */
 .widget {
   margin-bottom: 2em;
-  margin-top: 2em;
 }
 
 /*
@@ -288,28 +287,43 @@
  * Recent Saved Links widget
  */
 body .widget.saved-links {
-  p {
-    font-size: 14px;
-  }
   div.post-lead {
-    padding-top: 2em;
-    padding-bottom: 2em;
+    margin-bottom: 1em;
     width: 100%;
     img {
       max-width: 100px;
       height: auto;
     }
   }
-  div.post-lead + div.post-lead {
-    border-top: 1px solid @greyXL;
-  }
   h3 {
-    text-align: center;
+    text-align: left;
     font-family: @sans;
+    font-weight: 400;
+    font-size: 18px;
   }
   h5 {
     font-weight: 400;
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    color: @greyD;
+    a {
+      color: inherit;
+    }
+  }
+  p {
+    color: @greyL;
+    font-family: @sans;
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    a {
+      color: inherit;
+    }
+  }
+  .sourcelabel {
+    display: none;
+  }
+  p.morelink {
+    color: @link;
   }
   ul li {
     padding-top: 2em;

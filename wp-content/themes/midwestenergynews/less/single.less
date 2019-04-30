@@ -91,7 +91,7 @@
     }
     .widgettitle {
       font-size: 18px;
-      color: @white;
+      color: @greyXL;
     }
     h5 a {
       font-family: @headline;
@@ -105,6 +105,11 @@
     }
     .widget {
       padding: 0;
+    }
+    .widget.saved-links {
+      p {
+        color: @greyXL;
+      }
     }
   }
   .widget {
@@ -437,14 +442,6 @@ div.article-bottom {
 #comments {
   .archive-links;
 }
-
-body.single .widget.saved-links,
-body.page .widget.saved-links {
-  div.post-lead + div.post-lead {
-    border-top: 1px solid @greyL;
-  }
-}
-
 
 /* Custom Block quotes
 ----------------------------- */
