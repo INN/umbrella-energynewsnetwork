@@ -268,7 +268,7 @@ function lmp_exclude_roundups( $query ) {
 	 * and is_admin is true when updating a post or updating a term meta
 	 * so we cannot simply allow or disallow based on is_admin
 	 */
-	if ( isset( $_POST ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
+	if ( isset( $_POST ) && isset( $_post['action'] ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
 		$query->set( 'post_type', array('post') );
 	}
 	return $query;
