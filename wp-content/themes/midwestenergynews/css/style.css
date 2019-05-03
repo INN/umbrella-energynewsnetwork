@@ -2579,11 +2579,14 @@ body.category-national .archive-description {
 /*
  * Link Roundups
  */
-.link-roundups .post-lead span,
-.link-roundups .post-lead p {
+.usen-roundups-widget.rev .post-lead span,
+.link-roundups.rev .post-lead span,
+.usen-roundups-widget.rev .post-lead p,
+.link-roundups.rev .post-lead p {
   display: none;
 }
-.link-roundups h4 {
+.usen-roundups-widget.rev h4,
+.link-roundups.rev h4 {
   margin-bottom: 0;
 }
 /*
