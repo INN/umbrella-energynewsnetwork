@@ -49,7 +49,7 @@ class mwen_mailchimp_signup_widget extends WP_Widget {
 						</li>
 						<li>
 							<input type="checkbox" value="16" name="group[6829][16]" id="mce-group[6829]-6829-4">
-							<label for="mce-group[6829]-6829-4">Southwest Energy News</label>
+							<label for="mce-group[6829]-6829-4">Western Energy News</label>
 						</li>
 						<li>
 							<input type="checkbox" value="4" name="group[6829][4]" id="mce-group[6829]-6829-2">
