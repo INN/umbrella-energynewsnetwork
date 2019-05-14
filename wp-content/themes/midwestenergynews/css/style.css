@@ -2541,14 +2541,20 @@ body.category-national .archive-description {
 /**
  * General widget styles
  */
-.widget {
-  margin-bottom: 24px;
-}
-.widget h3.widgettitle {
+.widgettitle,
+.stories h3.widgettitle {
   text-align: left;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  font-weight: 400;
-  font-size: 17px;
+  font-weight: bold;
+  font-size: 16px;
+  color: hsl(235, 6%, 35%);
+}
+.widgettitle a,
+.stories h3.widgettitle a {
+  color: inherit;
+}
+.widget {
+  margin-bottom: 24px;
 }
 .widget.rev {
   background-color: hsl(0, 0%, 89%);
@@ -2557,7 +2563,6 @@ body.category-national .archive-description {
   padding-bottom: 24px;
 }
 .widget.default + .widget.rev {
-  margin-top: -24px;
   padding-top: 24px;
 }
 .widget.rev .widgettitle {
@@ -2588,6 +2593,10 @@ body.category-national .archive-description {
 .usen-roundups-widget.rev h4,
 .link-roundups.rev h4 {
   margin-bottom: 0;
+}
+.usen-roundups-widget.rev p.morelink,
+.link-roundups.rev p.morelink {
+  margin-top: 1em;
 }
 /*
  * MWEN custom Link Roundups widget, called "Today's headlines"
@@ -2782,7 +2791,7 @@ body.category-national .archive-description {
 .mailchimp-signup-widget.rev {
   background-color: hsl(0, 0%, 89%);
   border: none;
-  color: #fff;
+  color: hsl(0, 0%, 16%);
 }
 .widget_text.rev h3.pitch span,
 .mailchimp-signup-widget.rev h3.pitch span {
@@ -2790,8 +2799,8 @@ body.category-national .archive-description {
 }
 .widget_text.rev input[type=submit],
 .mailchimp-signup-widget.rev input[type=submit] {
-  background-color: hsl(19, 98%, 59%);
-  border-color: hsl(19, 98%, 59%);
+  background-color: hsl(196, 49%, 49%);
+  border-color: hsl(196, 49%, 49%);
 }
 .widget_text p:last-child,
 .mailchimp-signup-widget p:last-child {
@@ -2808,6 +2817,12 @@ body.category-national .archive-description {
   border: 1px solid hsl(0, 0%, 79%);
   box-sizing: content-box;
   padding: 18px 34px;
+}
+.archive .widget_text.rev,
+.home .widget_text.rev,
+.archive .mailchimp-signup-widget.rev,
+.home .mailchimp-signup-widget.rev {
+  border: none;
 }
 .archive .widget_text input[type=email],
 .home .widget_text input[type=email],

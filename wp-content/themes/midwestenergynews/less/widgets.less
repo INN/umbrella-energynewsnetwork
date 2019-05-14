@@ -5,18 +5,22 @@
 /**
  * General widget styles
  */
+.widgettitle,
+.stories h3.widgettitle {
+  text-align: left;
+  font-family: @sans;
+  font-weight: bold;
+  font-size: 16px;
+  color: @greyM;
+  a {
+    color: inherit;
+  }
+}
 .widget {
   margin-bottom: 24px;
 
-  h3.widgettitle {
-    text-align: left;
-    font-family: @sans;
-    font-weight: 400;
-    font-size: 17px;
-  }
   &.rev {
     .widget.default + & {
-      margin-top: -24px;
       padding-top: 24px;
     }
     background-color: @greyXXL;
@@ -56,6 +60,9 @@
   }
   h4 {
     margin-bottom: 0;
+  }
+  p.morelink {
+    margin-top: 1em;
   }
 }
 
@@ -215,13 +222,13 @@
   &.rev {
     background-color: @greyXXL;
     border: none;
-    color: @white;
+    color: @black;
     h3.pitch span {
       color: @white;
     }
     input[type=submit] {
-      background-color: @orange;
-      border-color: @orange;
+      background-color: @blue;
+      border-color: @blue;
     }
   }
   p:last-child {
@@ -239,6 +246,10 @@
 .archive .mailchimp-signup-widget,
 .home .mailchimp-signup-widget {
   border: 1px solid @greyXL;
+  &.rev {
+    border: none;
+  }
+
   box-sizing: content-box;
   padding: 18px 34px;
   input[type=email] {
