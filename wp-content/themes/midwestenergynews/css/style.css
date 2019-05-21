@@ -2888,14 +2888,6 @@ body .widget.saved-links h5 {
   margin-bottom: 0;
   color: hsl(233, 6%, 30%);
 }
-body .widget.saved-links h5::before {
-  content: '\2022';
-  display: inline-block;
-  text-align: center;
-  width: 1em;
-  float: left;
-  margin-left: -1em;
-}
 body .widget.saved-links h5 a {
   color: inherit;
 }
@@ -2910,7 +2902,7 @@ body .widget.saved-links p {
   font-weight: 400;
 }
 body .widget.saved-links p a {
-  color: inherit;
+  color: hsl(193, 89%, 28%);
 }
 body .widget.saved-links .sourcelabel {
   display: none;
