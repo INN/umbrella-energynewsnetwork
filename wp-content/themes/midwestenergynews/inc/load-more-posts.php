@@ -22,7 +22,6 @@ function mwen_largo_lmp_template_partial( $partial, $post_query ) {
 		&& ( ! isset ( $query_vars['cat'] ) || empty ( $query_vars['cat'] ) )
 		&& ( ! isset ( $query_vars['tag'] ) || empty ( $query_vars['tag'] ) )
 	) {
-		error_log(var_export( 'aaa?', true));
 		$partial = 'region';
 	}
 	return $partial;
