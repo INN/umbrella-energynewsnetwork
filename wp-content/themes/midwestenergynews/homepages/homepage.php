@@ -21,7 +21,7 @@ class MWENHomepageLayout extends Homepage {
 			),
 			'prominenceTerms' => array(
 				array(
-					'name' 			=> __( 'Top Story', 'largo' ),
+					'name' 			=> __( 'Homepage Top Story', 'largo' ),
 					'description' 	=> __( 'Add this label to a post to make it the Top Story on the homepage', 'largo' ),
 					'slug' 			=> 'top-story'
 				),
