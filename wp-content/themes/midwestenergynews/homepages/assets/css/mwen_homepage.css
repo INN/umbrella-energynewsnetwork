@@ -1,133 +1,6 @@
-/* ==========================================================================
-Homepage Styles
-========================================================================== */
-/* ==========================================================================
-Colors
-========================================================================== */
-/* ==========================================================================
-Fonts -- be sure to see _typography.less
-========================================================================== */
-/* @headline
- * Kepler Standard Display
- * For bold headlines
------------------------------ */
-/* @serif
- * Kepler Standard
- * For body and other general aplications
------------------------------ */
-/* @sans
- * Proxima Nova
- * For labels, bylines, photo credits, etc
- * NOTE: Be sure to see override in _typography.less
------------------------------ */
-/**
- * Largo navbar color changes
- */
 /*
- * Animations
+ * Homepage Styles
  */
-.underline-animation {
-  transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-.background-animation {
-  transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-.color-animation {
-  transition: color 0.15s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: color 0.15 cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: color 0.15s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-/* 
- * Links
- */
-.archive-links a,
-.archive-links a:link,
-.archive-links a:visited {
-  color: #282828;
-}
-.archive-links a:hover {
-  text-decoration: underline;
-}
-/*
- * Article Link style mixins
- */
-.fancy-links a,
-.fancy-links a:link,
-.fancy-links a:visited {
-  text-decoration: none;
-  vertical-align: baseline;
-  border-bottom: 0.2vw solid #b4d7e6;
-  box-shadow: inset 0 -0.4vw 0 #b4d7e6;
-  color: inherit;
-}
-.fancy-links a:hover {
-  background: #b4d7e6;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-/*
- * Larger Homepage Headlines
- */
-.headline-links a,
-.headline-links a:link,
-.headline-links a:visited {
-  border-bottom: none;
-  box-shadow: none;
-  color: #282828;
-  transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-.headline-links a:hover {
-  background: none;
-  color: #282828;
-  text-decoration: none;
-  border-bottom: 0.2vw solid #282828;
-  box-shadow: inset 0 -0.4vw 0 #282828;
-}
-/*
- * Smaller Homepage Headlines Beneath Photos
- */
-.has-photo-links a,
-.has-photo-links a:link,
-.has-photo-links a:visited {
-  border-bottom: none;
-  box-shadow: none;
-  color: #282828;
-  transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-.has-photo-links a:hover {
-  background: none;
-  color: #282828;
-  text-decoration: none;
-  border-bottom: 0.1vw solid #282828;
-  box-shadow: inset 0 -0.25vw 0 #282828;
-}
-/*
- * Button Styler function
- */
-/*
- * Horizontal Bylines function
- *
- * Can be added to any container that houses Largo-style byline HTML
- */
-/*
- * Double Rule Border
- */
-.double-rule-border {
-  box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -webkit-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-  -moz-box-shadow: 0 0 0 1px #cbcbcb, 0 0 0 3px #fff, 0 0 0 4px #cbcbcb;
-}
 /* Largo defualt spacing fixes
 ----------------------------- */
 #content.MWENHomepageLayout {
@@ -135,32 +8,24 @@ Fonts -- be sure to see _typography.less
   padding: 0;
 }
 #homepage-top .by-author {
-  margin-bottom: 1em;
   margin-right: 3px;
   display: block;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 #homepage-top .by-author div.by {
   display: inline;
   font-weight: 300;
 }
 #homepage-top .by-author a {
-  color: #282828;
-}
-#homepage-top .widget_text {
-  padding-top: 0;
-}
-#homepage-top .span4 {
-  padding-left: 32px;
+  color: hsl(0, 0%, 16%);
 }
 #homepage-top h2 {
-  font-size: 72px;
   margin-bottom: 8px;
   line-height: 1.1;
 }
 #homepage-top h2 a {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
   line-height: 1.08;
   transition: color 0.15s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: color 0.15 cubic-bezier(0.17, 0.67, 0.83, 0.67);
@@ -168,21 +33,18 @@ Fonts -- be sure to see _typography.less
   vertical-align: baseline;
 }
 #homepage-top h2 a:hover {
-  color: #3F9ABA;
-  text-decoration: none;
+  color: hsl(193, 89%, 28%);
+}
+#homepage-top .hero {
+  background-color: transparent;
+  text-align: left;
 }
 #homepage-top .hero header {
-  max-width: 90%;
-  margin: -8em auto 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 24px;
+  padding: 0 24px 0;
   position: relative;
 }
-#homepage-top .hero h2 {
-  font-size: 48px;
-}
 #homepage-top a.url.fn.n {
-  color: #282828;
+  color: hsl(0, 0%, 16%);
 }
 .stories article {
   border-bottom: 0;
@@ -195,123 +57,9 @@ h5.top-tag,
 .row-fluid > [class*='span']:last-child > .widget {
   padding-right: 24px;
 }
-/* homepage bottom
------------------------------ */
-#homepage-bottom {
-  border-top: 1px solid #cbcbcb;
-  display: inline-block;
-  margin-bottom: 2.5em;
-}
-#homepage-bottom .by-author {
-  margin-bottom: 1em;
-  margin-right: 3px;
-  display: block;
-  font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  color: #282828;
-}
-#homepage-bottom .by-author div.by {
-  display: inline;
-  font-weight: 300;
-}
-#homepage-bottom .by-author a {
-  color: #282828;
-}
-#homepage-bottom .hg-row {
-  overflow: hidden;
-  padding-left: 2.12765957%;
-}
-#homepage-bottom .span4,
-#homepage-bottom .span6 {
-  margin-top: 2.5em;
-  border-right: 1px solid #cbcbcb;
-  margin-bottom: -999999px;
-  padding-bottom: 999999px;
-  padding-right: 2.12765957%;
-}
-#homepage-bottom .span4:last-child,
-#homepage-bottom .span6:last-child {
-  border-right: none;
-}
-#homepage-bottom .span4 article,
-#homepage-bottom .span6 article {
-  margin: 0;
-  padding: 0;
-}
-#homepage-bottom .span4 img,
-#homepage-bottom .span6 img {
-  border: 1px solid #cbcbcb;
-  max-width: 100%;
-  width: 100%;
-  float: none;
-  margin: 0 0 20px;
-}
-#homepage-bottom h5.top-tag {
-  font-size: 16px;
-}
-#homepage-bottom .span6:last-child article {
-  border-bottom: 0px;
-}
-#homepage-bottom .hg-row {
-  margin: 0 0 24px;
-  border-top: 1px solid #cbcbcb;
-  display: inherit;
-}
-@media (max-width: 767px) {
-  #homepage-bottom .hg-row {
-    margin: 0px;
-  }
-}
-#homepage-bottom .hg-row:first-child {
-  border: none;
-}
-#homepage-bottom .row:first-child {
-  border-top: none;
-  margin-top: 0;
-}
-#homepage-bottom h2 {
-  line-height: 1.1;
-  font-size: 44px;
-}
-#homepage-bottom h2 a,
-#homepage-bottom h2 a:link,
-#homepage-bottom h2 a:visited {
-  border-bottom: none;
-  box-shadow: none;
-  color: #282828;
-  transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-#homepage-bottom h2 a:hover {
-  background: none;
-  color: #282828;
-  text-decoration: none;
-  border-bottom: 0.2vw solid #282828;
-  box-shadow: inset 0 -0.4vw 0 #282828;
-}
-#homepage-bottom h2.has-photo {
-  font-size: 32px;
-  line-height: 1.2;
-}
-#homepage-bottom h2.has-photo a,
-#homepage-bottom h2.has-photo a:link,
-#homepage-bottom h2.has-photo a:visited {
-  border-bottom: none;
-  box-shadow: none;
-  color: #282828;
-  transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: box-shadow 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
-#homepage-bottom h2.has-photo a:hover {
-  background: none;
-  color: #282828;
-  text-decoration: none;
-  border-bottom: 0.1vw solid #282828;
-  box-shadow: inset 0 -0.25vw 0 #282828;
-}
-/* Responsive
------------------------------ */
+/* Responsive classes for mobile layout
+ * These change the layout around, but don't generally affect presentations
+ */
 @media (max-width: 850px) {
   #homepage-top .span8,
   #homepage-top .span4,
@@ -320,21 +68,82 @@ h5.top-tag,
     width: 100%;
     display: block;
   }
+}
+/* homepage bottom
+----------------------------- */
+#homepage-bottom {
+  border-top: 1px solid hsl(0, 0%, 79%);
+  padding-top: 2.5em;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+#homepage-bottom .by-author {
+  margin-right: 3px;
+  display: block;
+  font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
+  color: hsl(0, 0%, 16%);
+}
+#homepage-bottom .by-author div.by {
+  display: inline;
+  font-weight: 300;
+}
+#homepage-bottom .by-author a {
+  color: hsl(0, 0%, 16%);
+}
+#homepage-bottom article {
+  margin: 0;
+  padding: 0;
+}
+#homepage-bottom img {
+  max-width: 25%;
+  width: 100%;
+  float: left;
+  margin: 0 20px 20px 0;
+}
+#homepage-bottom h5.top-tag {
+  font-size: 16px;
+}
+#homepage-bottom h2 {
+  line-height: 1.1;
+}
+/**
+ * Homepage top styles
+ */
+@supports (display: flex) {
+  #homepage-top .hero {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+  }
+  #homepage-top .hero .hero-image,
+  #homepage-top .hero header {
+    max-width: 100%;
+    flex-basis: 300px;
+    flex-grow: 1;
+  }
+  #homepage-top .hero .hero-image {
+    margin-bottom: 24px;
+  }
+  #homepage-top .hero header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: unset;
+  }
+  #homepage-top .hero .excerpt {
+    margin: 1em 0;
+  }
+}
+@media (max-width: 850px) {
   #homepage-top {
     margin-top: 0;
     margin-bottom: 0;
   }
-  #homepage-top h2 {
-    font-size: 48px;
-  }
-  #homepage-top article {
-    margin-top: 24px;
-  }
   #homepage-top .hero {
     margin-bottom: 0;
-  }
-  #homepage-top .hero h2 {
-    font-size: 40px;
   }
   #homepage-top .hero p {
     margin-bottom: 0.25em;
@@ -348,34 +157,86 @@ h5.top-tag,
   #homepage-top .span8 {
     margin-bottom: 2em;
   }
-  #homepage-bottom {
-    margin-bottom: 12px;
-    padding-top: 12px;
-  }
-  #homepage-bottom .span4,
-  #homepage-bottom .span6 {
-    margin: 12px 0;
-    border-right: 0;
-    border-bottom: 1px solid #cbcbcb;
-    padding-bottom: 12px;
-  }
-  #homepage-bottom .hg-row {
-    border-top: 0px;
-  }
-  #homepage-bottom article .headline {
-    max-width: 100%;
-    margin-top: 0;
-  }
-  #homepage-bottom h2,
-  #homepage-bottom h2.has-photo {
-    font-size: 42px;
-    margin-bottom: 0.35em;
-    margin-top: 0;
-  }
 }
 @media (max-width: 480px) {
   #homepage-top article {
     margin-top: 0;
+  }
+}
+/**
+ * Homepage font sizes
+ */
+#homepage-top .hero h2 {
+  font-size: 26px;
+}
+@media (min-width: 600px) and (max-width: 1300px) {
+  #homepage-top .hero h2 {
+    font-size: calc(26px + (34 - 26) * ((100vw - 600px)/(1300 - 600)));
+  }
+}
+@media (min-width: 1300px) {
+  #homepage-top .hero h2 {
+    font-size: 34px;
+  }
+}
+#homepage-top .featured h2 {
+  font-size: 20px;
+}
+@media (min-width: 600px) and (max-width: 1300px) {
+  #homepage-top .featured h2 {
+    font-size: calc(20px + (26 - 20) * ((100vw - 600px)/(1300 - 600)));
+  }
+}
+@media (min-width: 1300px) {
+  #homepage-top .featured h2 {
+    font-size: 26px;
+  }
+}
+#homepage-bottom h2 {
+  font-size: 20px;
+}
+@media (min-width: 600px) and (max-width: 1300px) {
+  #homepage-bottom h2 {
+    font-size: calc(20px + (30 - 20) * ((100vw - 600px)/(1300 - 600)));
+  }
+}
+@media (min-width: 1300px) {
+  #homepage-bottom h2 {
+    font-size: 30px;
+  }
+}
+@supports (display: flex) {
+  #featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+  }
+  #featured .featured {
+    flex-basis: 350px;
+    flex-grow: 1;
+    min-width: 350px;
+  }
+  #homepage-top .featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    margin-bottom: 1em;
+  }
+  #homepage-top .featured img {
+    flex-grow: 1;
+    margin: 0;
+    max-width: 33%;
+    flex-basis: 30%;
+  }
+  #homepage-top .featured header {
+    flex-grow: 2;
+    padding: 0 1em;
   }
 }
 /*# sourceMappingURL=homepages/assets/css/mwen_homepage.css.map */

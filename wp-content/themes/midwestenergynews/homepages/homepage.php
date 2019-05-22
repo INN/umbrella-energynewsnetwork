@@ -1,8 +1,6 @@
 <?php
 
 include_once get_template_directory() . '/homepages/homepage-class.php';
-include_once get_stylesheet_directory() . '/homepages/zones/mwen-zones.php';
-
 
 /**
  * Define the MWEN homepage Layout
@@ -46,6 +44,10 @@ class MWENHomepageLayout extends Homepage {
 
 	function homepage_bottom() {
 		return zone_homepage_bottom();
+	}
+
+	function homepage_featured() {
+		return zone_homepage_featured();
 	}
 }
 
@@ -101,26 +103,7 @@ function mwen_custom_homepage_layouts() {
 add_action( 'init', 'mwen_custom_homepage_layouts', 10 );
 
 /**
- * Prints the tile/grid markup for the homepage
- *
- * The grid setup is this:
- *
- * div.row
- *     div.span6
- *     div.span6
- * div.row
- *     div.span4
- *     div.span4
- *     div.span4
- *
- * Inside each div is the following markup:
- *
- * article.hg-cell
- *     div.hg-cell-inner
- *         optional thumbnail
- *         headline
- *         byline
- *
+ * Prints the post layout for the homepage or the series page
  */
 function mwen_print_homepage_posts($query) {
 	global $shown_ids;
@@ -132,37 +115,9 @@ function mwen_print_homepage_posts($query) {
 		$shown_ids[] = get_the_ID();
 		$count++;
 
-		$span = ( $count <= 3 ) ? 'span4' : 'span6';
-
-		if ( $count === 1 || $count === 4 ) {
-			echo '<div class="hg-row">';
-		}
-		$image_size =  (( $count >= 4 ) ? 'large' : 'medium' );
-	?>
-
-	<div class="<?php echo $span; ?>">
-		<article class="hg-cell">
-			<div class="hg-cell-inner">
-				<!--<h5 class="top-tag"><?php largo_top_term();?></h5>-->
-				<?php
-					if ( has_post_thumbnail() ) {
-						echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
-						echo '<h2 class="has-photo"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-					} else {
-						echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-						largo_excerpt( $post->ID, 2 );
-					}
-
-					echo '<span class="hg-authors-byline">' . largo_byline() . '</span>';
-				?>
-			</div>
-		</article>
-	</div>
-	<?php
-		if ( $count === 3 || $count === 5 ) {
-			echo '</div>'; //end of row;
-		}
+		get_template_part( 'partials/content', 'region' );
 	} // end loop
+
 	$ret = ob_get_clean();
 	return $ret;
 }
@@ -214,3 +169,164 @@ function mwen_homepage_load_more_posts() {
 }
 add_action( 'wp_ajax_mwen_homepage_load_more_posts', 'mwen_homepage_load_more_posts' );
 add_action( 'wp_ajax_nopriv_mwen_homepage_load_more_posts', 'mwen_homepage_load_more_posts');
+
+/**
+ * The first homepage top story
+ *
+ * @todo: need to have a fallback here for when a top story is not set
+ */
+function zone_homepage_top() {
+	global $shown_ids;
+
+	// Display the first featured post.
+	$bigStoryPost = largo_home_single_top();
+	$shown_ids[] = $bigStoryPost->ID; // Don't repeat the current post
+
+	ob_start();
+
+	if ( has_post_thumbnail( $bigStoryPost->ID ) ) { ?>
+		<article class="hero">
+			<a class="hero-image" href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
+				<?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?>
+			</a>
+			<header>
+				<?php largo_maybe_top_term( array( 'post' => $bigStoryPost->ID ) ); ?>
+				<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>" class="has-photo"><?php echo $bigStoryPost->post_title; ?></a></h2>
+				<?php
+					if ( ! empty( $bigStoryPost->post_excerpt ) ) {
+						printf(
+							'<p class="excerpt">%1$s</p>',
+							wp_kses_post( $bigStoryPost->post_excerpt )
+						);
+					}
+				?>
+			</header>
+		</article>
+	<?php } else { ?>
+		<article>
+			<?php largo_maybe_top_term( array( 'post' => $bigStoryPost->ID ) ); ?>
+			<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
+			<?php
+				largo_byline( true, false, $bigStoryPost->ID );
+				if ( ! empty( $bigStoryPost->post_excerpt ) ) {
+					printf(
+						'<p class="excerpt">%1$s</p>',
+						wp_kses_post( $bigStoryPost->post_excerpt )
+					);
+				}
+			?>
+		</article>
+
+	<?php }
+
+	dynamic_sidebar('homepage-featured-advert');
+
+	return ob_get_clean();
+}
+
+/**
+ * The featured template on the homepage
+ */
+function zone_homepage_featured() {
+	global $shown_ids;
+	$stories = largo_home_featured_stories( 2 );
+
+	ob_start();
+
+	echo '<div id="featured">';
+
+	foreach ( $stories as $story ) {
+		$shown_ids[] = $story->ID;
+		setup_postdata( $story );
+		?>
+			<article class="featured">
+				<?php echo get_the_post_thumbnail( $story->ID, 'rect_thumb_half' ); ?>
+				<header>
+					<?php largo_maybe_top_term( array( 'post' => $story->ID ) ); ?>
+					<h2><a href="<?php echo get_permalink( $story->ID ); ?>" class="has-photo"><?php echo $story->post_title; ?></a></h2>
+				</header>
+			</article>
+		<?php
+	}
+	wp_reset_postdata();
+
+	echo '</div>';
+	return ob_get_clean();
+}
+
+/**
+ * Then the bottom grid on the homepage
+ */
+function zone_homepage_bottom() {
+	global $shown_ids;
+
+	$args = array (
+		'posts_per_page'	=> '5',
+		'post_type'			=> 'post',
+		'tax_query' => array(
+			array(
+				'taxonomy'	=> 'prominence',
+				'field'		=> 'slug',
+				'terms'		=> 'homepage-featured'
+			),
+		),
+		'post__not_in'		=> $shown_ids,
+	);
+	$homepageposts = new WP_Query( $args );
+
+	if ( count( $homepageposts->posts ) < 5 ) {
+		$posts_needed = 5 - count( $homepageposts->posts );
+
+		$args = array (
+			'posts_per_page'	=> $posts_needed,
+			'post_type'			=> 'post',
+			'category_name'		=> 'news',
+			'post__not_in'		=> $shown_ids,
+		);
+
+		$backupposts = new WP_Query( $args );
+		$homepageposts->posts = array_merge( $homepageposts->posts, $backupposts->posts );
+		$homepageposts->post_count = count( $homepageposts->posts );
+		LoadMorePostsHelper::setQuery($backupposts->query);
+	} else
+		LoadMorePostsHelper::setQuery($homepageposts->query);
+
+	add_action('wp_footer', array('LoadMorePostsHelper', 'printJSON'));
+
+	ob_start();
+	print mwen_print_homepage_posts( $homepageposts );
+	return ob_get_clean();
+}
+
+/**
+ * A simple class to help with printing the required JSON object to the page
+ * complete with $shown_ids after the markup for the homepage tiles has been
+ * printed.
+ */
+class LoadMorePostsHelper {
+
+	private static $query;
+
+	public static function setQuery($query) {
+		self::$query = $query;
+	}
+
+	public static function printJSON() {
+		global $shown_ids;
+
+		// Account for posts that have already been printed to homepage tiles
+		self::$query = array_merge(self::$query, array('post__not_in' => $shown_ids));
+
+		$HPP = array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
+			'query' => self::$query,
+			'is_home' => true
+		);
+?>
+		<script type="text/javascript">
+			var HPP = <?php echo json_encode($HPP); ?>;
+		</script>
+<?php
+	}
+}

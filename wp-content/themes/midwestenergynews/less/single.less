@@ -54,6 +54,16 @@
       margin: 25px 0;
     }
   }
+  .entry-title {
+    // https://fvsch.com/css-locks/
+    font-size: calc( 10px + 4vw );
+    @media( max-width: 360px ) {
+      font-size: 24px;
+    }
+    @media( min-width: 979px ) {
+      font-size: 50px;
+    }
+  }
   .hero {
     margin-bottom: 1.25em;
     background-color: #efefef;
@@ -65,11 +75,9 @@
     }
   }
   .entry-title {
-    font-size: 64px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin-bottom: 0.5em;
-    line-height: 1.1;
   }
   #sidebar {
     margin-top: 1em;
@@ -83,7 +91,7 @@
     }
     .widgettitle {
       font-size: 18px;
-      color: @white;
+      color: @greyXL;
     }
     h5 a {
       font-family: @headline;
@@ -97,6 +105,11 @@
     }
     .widget {
       padding: 0;
+    }
+    .widget.saved-links {
+      p {
+        color: @greyXL;
+      }
     }
   }
   .widget {
@@ -242,6 +255,23 @@ h5.byline {
     clear: both;
     margin-bottom: 1.5em;
   }
+  @media (min-width: 768px) {
+    // so that it presents small and round on phones
+    .byline .avatar {
+      // undo Largo's byline avatar rounding and sizing
+      display: block;
+      clear: both;
+      border-radius: 0;
+      max-width: 100%;
+      max-height: unset;
+
+      // make sure it matches display of avatar in author bio widget
+      padding: 4px;
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+  }
 }
 
 
@@ -372,7 +402,6 @@ div.article-bottom {
       padding-left: 0;
     }
     h4 {
-      .headline-links;
       font-weight: 700;
       font-size: 28px;
       line-height: 1.2;
@@ -412,14 +441,6 @@ div.article-bottom {
 #comments {
   .archive-links;
 }
-
-body.single .widget.saved-links,
-body.page .widget.saved-links {
-  div.post-lead + div.post-lead {
-    border-top: 1px solid @greyL;
-  }
-}
-
 
 /* Custom Block quotes
 ----------------------------- */
@@ -480,10 +501,6 @@ aside.align-left.type-pull-quote {
     #page {
       background-color: @white;
     }
-    .entry-title {
-      font-size: 54px;
-      line-height: 1.2;
-    }
     #sidebar,
     .share-text,
     .by {
@@ -492,7 +509,7 @@ aside.align-left.type-pull-quote {
     #main #content {
       box-shadow: 0 0 0 0;
     }
-    .author:after {
+    .byline .author:after {
       content: " | ";
     }
     .mwen-article .align-left {
@@ -566,15 +583,16 @@ aside.align-left.type-pull-quote {
  * MEDIA QUERY: Mobile
  */
 @media (max-width: 480px) {
+  #mwen_post_social_links {
+    // declutter on mobile
+    display: none;
+  }
   .page,
   .single {
     #page {
       padding-right: 18px;
       padding-left: 18px;
       background-color: @white;
-    }
-    .entry-title {
-      font-size: 42px;
     }
     .article header {
       margin: 38px 0 14px;

@@ -11,6 +11,15 @@ $queried_object = get_queried_object();
 $bigStoryPost = mwen_get_featured_posts_in_region( $queried_object->slug, 1 );
 $have_featured = ! empty( $bigStoryPost );
 $bigStoryPost = $bigStoryPost[0];
+
+// enqueue the homepage CSS file for the region taxonomy archive, since they have the same layout
+$suffix = (LARGO_DEBUG) ? '' : '.min';
+wp_enqueue_style(
+	'mwen-homepage',
+	get_stylesheet_directory_uri().'/homepages/assets/css/mwen_homepage' . $suffix . '.css',
+	array( 'mwen' )
+);
+
 ?>
 
 <div class="clearfix">
@@ -78,63 +87,31 @@ $bigStoryPost = $bigStoryPost[0];
 		<div id="homepage-top" class="row-fluid">
 			<div class="span8">
 				<article class="hero">
-					<a href="<?php echo esc_attr( get_permalink( $bigStoryPost ) ); ?>"><?php echo get_the_post_thumbnail( $bigStoryPost->ID, 'full' ); ?></a>
+					<a class="hero-image" href="<?php echo esc_attr( get_permalink( $bigStoryPost ) ); ?>"><?php echo get_the_post_thumbnail( $bigStoryPost->ID, 'full' ); ?></a>
 					<header>
+						<?php largo_maybe_top_term( array( 'post' => $bigStoryPost->ID ) ); ?>
 						<h2><a href="<?php echo get_permalink( $bigStoryPost ); ?>" class="has-photo"><?php echo get_the_title( $bigStoryPost ); ?></a></h2>
-						<?php largo_byline( true, false, $bigStoryPost->ID ); ?>
 						<p class="excerpt"><?php echo get_the_excerpt( $bigStoryPost ); ?></p>
 					</header>
 				</article>
+				<div id="homepage-bottom">
+					<?php
+						rewind_posts();
+						global $wp_query;
+
+						echo mwen_print_homepage_posts( $wp_query );
+
+						largo_content_nav( 'nav-below' ); 
+					?>
+					<?php ?>
+				</div><!-- #homepage-bottom -->
 			</div>
+
 			<?php
 				get_sidebar();
 			?>
 		</div>
 
-		<div id="homepage-bottom">
-			<?php
-				global $shown_ids;
-				
-				rewind_posts();
-				while ( have_posts() ) {
-					the_post();
-					$shown_ids[] = get_the_ID();
-					$count++;
-
-					$span = ( $count <= 3 ) ? 'span4' : 'span6';
-
-					if ( $count === 1 || $count === 4 ) {
-						echo '<div class="hg-row">';
-					}
-					$image_size =  (( $count >= 4 ) ? 'large' : 'medium' );
-				?>
-
-				<div class="<?php echo $span; ?>">
-					<article class="hg-cell">
-						<div class="hg-cell-inner">
-							<!--<h5 class="top-tag"><?php largo_top_term();?></h5>-->
-							<?php
-								if ( has_post_thumbnail() ) {
-									echo '<a href="' . get_permalink() . '" >' . get_the_post_thumbnail( $post->ID, $image_size ) . '</a>';
-									echo '<h2 class="has-photo"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-								} else {
-									echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-									largo_excerpt( $post->ID, 2 );
-								}
-
-								echo '<span class="hg-authors-byline">' . largo_byline() . '</span>';
-							?>
-						</div>
-					</article>
-				</div>
-				<?php
-					if ( $count === 3 || $count === 5 ) {
-						echo '</div>'; //end of row;
-					}
-				} // end loop
-			?>
-			<?php largo_content_nav( 'nav-below' ); ?>
-		</div><!-- #homepage-bottom -->
 
 
 		<?php } else {

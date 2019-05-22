@@ -27,16 +27,6 @@ foreach ( $includes as $include ) {
 }
 
 /**
- * Include fonts from Typekit
- */
-function mwen_typekit() { ?>
-	<script src="//use.typekit.net/ljj5rel.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<?php }
-add_action( 'wp_head', 'mwen_typekit' );
-
-
-/**
  * Include compiled style.css and homepage custom LMP
  *
  * @since 0.1
@@ -62,6 +52,12 @@ function mwen_stylesheet() {
 		);
 		wp_dequeue_script('load-more-posts');
 	}
+
+	// Typekit Energy News kit
+	wp_enqueue_style(
+		'typekit',
+		'https://use.typekit.net/xre8nwm.css'
+	);
 }
 add_action( 'wp_enqueue_scripts', 'mwen_stylesheet', 20 );
 
@@ -157,21 +153,6 @@ function mwen_remove_feature_img($content) {
 }
 add_filter('the_content','mwen_remove_feature_img',1);
 
-/**
- * Add largo_top_term in the post header
- */
-function mwen_top_term() {
-	$post_type = get_post_type();
-	if ( $post_type === 'roundup' ) {
-		$categories = get_the_terms( $post->ID, 'category' );
-		echo '<h5 class="top-tag"><a href="' . get_category_link( $categories[0]->term_id ) . '">' . $categories[0]->name . '</a></h5>';
-	} else {
-		echo '<h5 class="top-tag">';
-		largo_top_term(); // The defaults are sane
-		echo '</h5>';
-	}
-}
-add_action('largo_before_hero', 'mwen_top_term');
 
 /**
  * Add a "Sponsored: " prefix to Saved Links that have the "sponsored" class
@@ -277,7 +258,6 @@ function lmp_exclude_roundups( $query ) {
 	 * make it happen when loading the page
 	 */
 	if ( ! is_admin() && $query->is_tax('region') && $query->is_main_query() ) {
-		error_log(var_export( '1', true));
 		$query->set( 'post_type', array('post') );
 	}
 
@@ -288,10 +268,19 @@ function lmp_exclude_roundups( $query ) {
 	 * and is_admin is true when updating a post or updating a term meta
 	 * so we cannot simply allow or disallow based on is_admin
 	 */
-	if ( isset( $_POST ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
-		error_log(var_export( '2', true));
+	if ( isset( $_POST ) && isset( $_post['action'] ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
 		$query->set( 'post_type', array('post') );
 	}
 	return $query;
 }
 add_action( 'pre_get_posts', 'lmp_exclude_roundups' );
+
+/**
+ * Add new image size
+ *
+ * @todo Remove this when https://github.com/INN/largo/pull/1584 has been merged
+ */
+function mwen_image_sizes() {
+	add_image_size( 'rect_thumb_half', 400, 300, true ); // smaller version of rect_thumb
+}
+add_action( 'after_setup_theme', 'mwen_image_sizes' );

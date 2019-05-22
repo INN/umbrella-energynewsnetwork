@@ -2,15 +2,18 @@
 
 /**
  * Rewrite byline for vertical / horizontal stuff
+ *
+ * Note that this completely ignores the Largo_Byline class.
+ *
  */
-function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
-	if (!empty($post)) {
-		if (is_object($post))
+function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
+	if (!empty($post_id)) {
+		if (is_object($post_id)) {
 			$post_id = $post->ID;
-		else if (is_numeric($post))
-			$post_id = $post;
-	} else
+		}
+	} else {
 		$post_id = get_the_ID();
+	}
 
 	$values = get_post_custom( $post_id );
 
@@ -21,7 +24,18 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 			if ( $org = $author->organization )
 				$byline_text .= ' (' . $org . ')';
 
-			$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+			if ( is_single() ) {
+				$avatar = coauthors_get_avatar( $author );
+			} else {
+				$avatar = '';
+			}
+			$out[] = sprintf(
+				'%4$s <a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a>',
+				get_author_posts_url( $author->ID, $author->user_nicename ),
+				esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ),
+				esc_html( $byline_text ),
+				$avatar
+			);
 
 		}
 
@@ -36,7 +50,8 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 		}
 
 	} else {
-		$authors = largo_author_link( false, $post_id );
+		$avatar = ( is_single() ) ? get_avatar( get_the_author_meta( 'ID' ) ) : '';
+		$authors = $avatar . ' ' . largo_author_link( false, $post_id );
 	}
 
 	if ( is_single() ) {
@@ -47,7 +62,11 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
 
 	$byline_tease = $teaser;
 
-	$output = '<span class="by-author"><span class="by">'. $byline_tease . '</span><span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+	$output = sprintf(
+		'<span class="by-author"><span class="by">%1$s</span><span class="author vcard" itemprop="author">%2$s</span></span>',
+		$byline_tease,
+		$authors
+	);
 	if ( is_single() && ! $exclude_date ) {
 		$output .= '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 	}
@@ -70,33 +89,46 @@ function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
  * @see partials/content-single-classic.php
  */
 function mwen_post_social_links( $echo = true ) {
-		$utilities = of_get_option( 'article_utilities' );
-		$output = '<div id="mwen_post_social_links" class="post-social clearfix"><div class="left">';
-		
-		if ( $utilities['facebook'] === '1' ) {
-			$output .= sprintf( '<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>');
-		}
-		
-		if ( $utilities['twitter'] === '1' ) {
-			$output .= sprintf( '<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>');
-		}
-		
-		if ($utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="custom-share-button icon-mail"></span>';
-		}
+	$utilities = of_get_option( 'article_utilities' );
+	$output = '<div id="mwen_post_social_links" class="post-social clearfix"><div class="left">';
 
-		if ( $utilities['print'] === '1' ) {
-			$output .= '<span><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="custom-share-button icon-print"></i></a></span>';
-		}
-
-		
-		$output .= '</div><div class="right">';
-		
-		
-		$output .= '</div></div>';
-		if ( $echo ) {
-			echo $output;
-		} else {
-			return $output;
-		}
+	if ( isset( $utilities['facebook'] ) && $utilities['facebook'] === '1' ) {
+		$output .= sprintf( '<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>');
 	}
+
+	if ( isset( $utilities['twitter'] ) && $utilities['twitter'] === '1' ) {
+		$output .= sprintf( '<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>');
+	}
+
+	if ( isset( $utilites['email'] ) && $utilities['email'] === '1' ) {
+		$output .= '<span data-service="email" class="custom-share-button icon-mail"></span>';
+	}
+
+	if ( isset( $utilities['print'] ) && $utilities['print'] === '1' ) {
+		$output .= '<span><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="custom-share-button icon-print"></i></a></span>';
+	}
+
+	$output .= '</div><div class="right">';
+
+	$output .= '</div></div>';
+	if ( $echo ) {
+		echo $output;
+	} else {
+		return $output;
+	}
+}
+
+/**
+ * Add largo_top_term in the post header
+ */
+function mwen_top_term() {
+	$post_type = get_post_type();
+	if ( $post_type === 'roundup' ) {
+		$categories = get_the_terms( $post->ID, 'category' );
+		echo '<h5 class="top-tag"><a href="' . get_category_link( $categories[0]->term_id ) . '">' . $categories[0]->name . '</a></h5>';
+	} else {
+		echo '<h5 class="top-tag">';
+		largo_maybe_top_term(); // The defaults are sane
+		echo '</h5>';
+	}
+}
