@@ -184,6 +184,8 @@ function zone_homepage_top() {
 
 	ob_start();
 
+	dynamic_sidebar('homepage-featured-advert');
+
 	if ( has_post_thumbnail( $bigStoryPost->ID ) ) { ?>
 		<article class="hero">
 			<a class="hero-image" href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
@@ -218,8 +220,6 @@ function zone_homepage_top() {
 		</article>
 
 	<?php }
-
-	dynamic_sidebar('homepage-featured-advert');
 
 	return ob_get_clean();
 }
