@@ -179,7 +179,15 @@ function zone_homepage_top() {
 	global $shown_ids;
 
 	// Display the first featured post.
-	$bigStoryPost = largo_home_single_top();
+	$args = array (
+		'posts_per_page'   => 1,
+		'post_type'        => 'post',
+		'post__not_in'     => $shown_ids,
+		'suppress_filters' => true, // because of Link Roundups
+	);
+	$bigStoryPosts = new WP_Query( $args );
+	$bigStoryPost = $bigStoryPosts->posts[0];
+
 	$shown_ids[] = $bigStoryPost->ID; // Don't repeat the current post
 
 	ob_start();
@@ -229,18 +237,26 @@ function zone_homepage_top() {
  */
 function zone_homepage_featured() {
 	global $shown_ids;
-	$stories = largo_home_featured_stories( 2 );
+	$args = array (
+		'posts_per_page'	=> 2,
+		'post_type'			=> 'post',
+		'post__not_in'		=> $shown_ids,
+		'suppress_filters' => true, // because of Link Roundups
+	);
+	$stories = new WP_Query( $args );
 
 	ob_start();
 
 	echo '<div id="featured">';
 
-	foreach ( $stories as $story ) {
+	foreach ( $stories->posts as $story ) {
 		$shown_ids[] = $story->ID;
 		setup_postdata( $story );
 		?>
 			<article class="featured">
-				<?php echo get_the_post_thumbnail( $story->ID, 'rect_thumb_half' ); ?>
+				<?php
+					echo get_the_post_thumbnail( $story->ID, 'rect_thumb_half' );
+				?>
 				<header>
 					<?php largo_maybe_top_term( array( 'post' => $story->ID ) ); ?>
 					<h2><a href="<?php echo get_permalink( $story->ID ); ?>" class="has-photo"><?php echo $story->post_title; ?></a></h2>
@@ -261,16 +277,10 @@ function zone_homepage_bottom() {
 	global $shown_ids;
 
 	$args = array (
-		'posts_per_page'	=> '5',
+		'posts_per_page'	=> get_option( 'posts_per_page', 5),
 		'post_type'			=> 'post',
-		'tax_query' => array(
-			array(
-				'taxonomy'	=> 'prominence',
-				'field'		=> 'slug',
-				'terms'		=> 'homepage-featured'
-			),
-		),
 		'post__not_in'		=> $shown_ids,
+		'suppress_filters' => true, // because of Link Roundups
 	);
 	$homepageposts = new WP_Query( $args );
 
