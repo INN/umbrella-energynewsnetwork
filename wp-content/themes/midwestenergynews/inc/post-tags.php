@@ -5,14 +5,23 @@
  *
  * Note that this completely ignores the Largo_Byline class.
  *
+ * This MUST be compatible with Largo's implementation: https://github.com/INN/largo/blob/v0.6.4/inc/post-tags.php#L123
+ *
  */
 function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 	if (!empty($post_id)) {
-		if (is_object($post_id)) {
+		if (is_object($post)) {
 			$post_id = $post->ID;
+		} else if (is_numeric($post)) {
+			$post_id = $post;
 		}
+
 	} else {
 		$post_id = get_the_ID();
+
+		if ( WP_DEBUG || LARGO_DEBUG ) {
+			_doing_it_wrong( 'largo_byline', 'largo_byline must be called with a post or post ID specified as the third argument. For more information, see https://github.com/INN/largo/issues/1517 .', '0.6' );
+		}
 	}
 
 	$values = get_post_custom( $post_id );

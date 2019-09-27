@@ -21,7 +21,7 @@
 
 	<div class="row story-row">
 		<div class="span3">
-			<h5 class="byline"><?php largo_byline(); ?></h5>
+			<h5 class="byline"><?php largo_byline( true, false, $post->ID ); ?></h5>
 			<?php
 				if ( $thumb_id = get_post_thumbnail_id( $post->ID ) ) {
 					$thumb_custom = get_post_custom( $thumb_id );
