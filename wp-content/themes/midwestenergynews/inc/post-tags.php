@@ -7,6 +7,10 @@
  *
  * This MUST be compatible with Largo's implementation: https://github.com/INN/largo/blob/v0.6.4/inc/post-tags.php#L123
  *
+ * @param Boolean $echo Echo the string or return it (default: echo)
+ * @param Boolean $exclude_date Whether to exclude the date from byline (default: false)
+ * @param WP_Post|Integer $post The post object or ID to get the byline for. Defaults to current post.
+ * @return String Byline as formatted html
  */
 function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 	if (!empty($post_id)) {
