@@ -48,7 +48,6 @@ add_filter( 'largo_lmp_template_partial', 'mwen_largo_lmp_template_partial', 10,
  * @since WordPress 4.9.2
  */
 function lmp_exclude_roundups( $query ) {
-
 	/*
 	 * make it happen when loading the page
 	 */
@@ -63,7 +62,12 @@ function lmp_exclude_roundups( $query ) {
 	 * and is_admin is true when updating a post or updating a term meta
 	 * so we cannot simply allow or disallow based on is_admin
 	 */
-	if ( isset( $_POST ) && isset( $_post['action'] ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
+	if (
+		isset( $_POST )
+		&& isset( $_POST['action'] )
+		&& 'load_more_posts' === $_POST['action']
+		&& $query->is_tax('region')
+	) {
 		$query->set( 'post_type', array('post') );
 	}
 	return $query;
