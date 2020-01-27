@@ -98,14 +98,6 @@ function mwe_responsive_embed($html, $url, $attr, $post_ID) {
 add_filter( 'embed_oembed_html', 'mwe_responsive_embed', 10, 4 );
 
 /**
- * Change 'Load more posts' button text to 'More posts'
- */
-function mwen_next_posts_link($link) {
-  return str_replace('Load more posts', 'More posts', $link);
-}
-add_filter('largo_next_posts_link', 'mwen_next_posts_link');
-
-/**
  * Remove the top image from posts pre-migration.
  *
  * This is similar to `largo_remove_hero`, and derives from it, but is different.
@@ -241,39 +233,6 @@ function mwen_comments_roundups( $value ) {
     return $value;
 }
 add_filter( 'close_comments_for_post_types', 'mwen_comments_roundups' );
-
-/**
- * exclude Roundups from Regions loop
- *
- * This should _only_ run on the regions page, and not anywhere else
- *
- * @param query WP_Query the query that may be about to be run
- * @return WP_Query the query
- * @since Largo 0.5.5.4
- * @since WordPress 4.9.2
- */
-function lmp_exclude_roundups( $query ) {
-
-	/*
-	 * make it happen when loading the page
-	 */
-	if ( ! is_admin() && $query->is_tax('region') && $query->is_main_query() ) {
-		$query->set( 'post_type', array('post') );
-	}
-
-	/*
-	 * make it happen for Load More Posts
-	 *
-	 * Note that is_admin may be true while running LMP
-	 * and is_admin is true when updating a post or updating a term meta
-	 * so we cannot simply allow or disallow based on is_admin
-	 */
-	if ( isset( $_POST ) && isset( $_post['action'] ) && 'load_more_posts' === $_POST['action'] && $query->is_tax('region') ) {
-		$query->set( 'post_type', array('post') );
-	}
-	return $query;
-}
-add_action( 'pre_get_posts', 'lmp_exclude_roundups' );
 
 /**
  * Add new image size
