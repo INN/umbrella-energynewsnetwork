@@ -13,8 +13,11 @@
  */
 function mwen_region_search_query( $query ) {
 	if ( ! is_admin() && $query->is_main_query() ) {
+		$maybe_increase_count = false;
 		if ( isset( $_GET['digest-search'] ) && ! empty( $_GET['digest-search'] ) ) {
 			$query->set( 's', sanitize_title_for_query( $_GET['digest-search'] ) );
+
+			$maybe_increase_count = true;
 		}
 
 		if ( isset( $_GET['digest-search-region'] ) && ! empty( $_GET['digest-search-region'] ) ) {
@@ -43,8 +46,19 @@ function mwen_region_search_query( $query ) {
 					)
 				);
 			}
+			
+			if ( 1 < count( $tax_query, COUNT_NORMAL ) ) {
+				$tax_query['relation'] = 'OR';
+			}
 
 			$query->set( 'tax_query', $tax_query );
+
+			$maybe_increase_count = true;
+		}
+
+		if ( true === $maybe_increase_count ) {
+			// as a temporary thing because LMP isn't working at this time
+			$query->set( 'count', 20 );
 		}
 	}
 	return $query;
