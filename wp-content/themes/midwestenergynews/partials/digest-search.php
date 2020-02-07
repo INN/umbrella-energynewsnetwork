@@ -26,7 +26,6 @@
 				$region_query_params = array( $region_query_params );
 			}
 			$region_query_params = array_map( 'sanitize_title_for_query', $region_query_params );
-			error_log(var_export( $region_query_params, true));
 
 			foreach ( $regions as $region ) {
 				$checked = '';
