@@ -2485,6 +2485,24 @@ body.category-national .archive-description {
   color: hsl(0, 0%, 16%);
 }
 /**
+ * Stuff specific to partials/digest-search.php
+ */
+.digest-search {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid hsl(0, 0%, 79%);
+}
+.digest-search legend {
+  line-height: 1;
+  margin-top: 1em;
+  font-size: 1rem;
+  border-bottom: none;
+}
+.digest-search label.checkbox + label.checkbox {
+  margin-left: 2ch;
+}
+/**
  * Styles for specific widgets in general or in specific contexts.
  */
 /**
