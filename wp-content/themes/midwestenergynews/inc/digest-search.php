@@ -13,7 +13,6 @@
  */
 function mwen_region_search_query( $query ) {
 	if ( ! is_admin() && $query->is_main_query() ) {
-		error_log(var_export( $_GET, true));
 		if ( isset( $_GET['digest-search'] ) && ! empty( $_GET['digest-search'] ) ) {
 			$query->set( 's', sanitize_title_for_query( $_GET['digest-search'] ) );
 		}
