@@ -16,8 +16,6 @@ function mwen_region_search_query( $query ) {
 		$maybe_increase_count = false;
 		if ( isset( $_GET['digest-search'] ) && ! empty( $_GET['digest-search'] ) ) {
 			$query->set( 's', sanitize_title_for_query( $_GET['digest-search'] ) );
-
-			$maybe_increase_count = true;
 		}
 
 		if ( isset( $_GET['digest-search-region'] ) && ! empty( $_GET['digest-search-region'] ) ) {
@@ -28,13 +26,11 @@ function mwen_region_search_query( $query ) {
 			$region_query_params = array_map( 'sanitize_title_for_query', $region_query_params );
 
 			$tax_query = $query->get( 'tax_query' );
-			error_log(var_export( $tax_query, true));
 			if ( empty( $tax_query ) ) {
 				$tax_query = array();
 			}
 
 			foreach( $region_query_params as $region ) {
-				error_log(var_export( $region, true));
 				$tax_query = array_merge(
 					$tax_query,
 					array(
@@ -52,13 +48,11 @@ function mwen_region_search_query( $query ) {
 			}
 
 			$query->set( 'tax_query', $tax_query );
-
-			$maybe_increase_count = true;
 		}
 
-		if ( true === $maybe_increase_count ) {
+		if ( $query->is_category( 'digest' ) ) {
 			// as a temporary thing because LMP isn't working at this time
-			$query->set( 'count', 20 );
+			$query->set( 'posts_per_page', 20 );
 		}
 	}
 	return $query;
