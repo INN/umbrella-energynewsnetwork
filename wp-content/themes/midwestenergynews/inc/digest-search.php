@@ -50,6 +50,36 @@ function mwen_region_search_query( $query ) {
 			$query->set( 'tax_query', $tax_query );
 		}
 
+		$date_query = array();
+
+		if ( isset( $_GET['after'] ) && ! empty( $_GET['after'] ) ) {
+			/*
+			 * browsers with standards-compliant datepickers will submit a value in YYYY-MM-DD, according
+			 * to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date .
+			 * @link: https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+			 */
+			$maybe_after = sanitize_key( $_GET['after'] );
+			if ( ! empty( $maybe_after ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_after ) ) {
+				$date_query['before'] = $maybe_after;
+			}
+		}
+
+		if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
+			/*
+			 * browsers with standards-compliant datepickers will submit a value in YYYY-MM-DD, according
+			 * to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date .
+			 * @link: https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+			 */
+			$maybe_before = sanitize_key( $_GET['before'] );
+			if ( ! empty( $maybe_before ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_before ) ) {
+				$date_query['before'] = $maybe_before;
+			}
+		}
+
+		if ( ! empty( $date_query ) ) {
+			$query->set( 'date_query', $date_query );
+		}
+
 		if ( $query->is_category( 'digest' ) ) {
 			// as a temporary thing because LMP isn't working at this time
 			$query->set( 'posts_per_page', 20 );

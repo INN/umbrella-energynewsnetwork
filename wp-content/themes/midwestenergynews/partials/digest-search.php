@@ -4,11 +4,49 @@
  *
  * @link https://github.com/INN/umbrella-energynewsnetwork/issues/77
  */
+
+$after= '';
+$before = '';
+
+if ( isset( $_GET['after'] ) && ! empty( $_GET['after'] ) ) {
+	$maybe_after = sanitize_key( $_GET['after'] );
+	if ( ! empty( $maybe_after ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_after ) ) {
+		$after = $maybe_after;
+	}
+}
+if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
+	$maybe_before = sanitize_key( $_GET['before'] );
+	if ( ! empty( $maybe_before ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_before ) ) {
+		$before = $maybe_before;
+	}
+}
+
+
 ?>
 <form class="digest-search form-search" role="search" method="get" action="<?php echo esc_url( get_term_link( get_queried_object())); ?>">
 	<div class="input-append">
 		<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="searchbox search-query" value="<?php the_search_query(); ?>" name="digest-search" /><button type="submit" name="search submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
 	</div>
+	<fieldset id="date-filter" name="date-selectors">
+		<label for="after">
+			<?php esc_html_e( 'Digests after:', 'enn' ); ?>
+			<input
+				type="date"
+				name="after"
+				pattern="\d{4}-\d{2}-\d{2}"
+				value="<?php esc_attr_e( $after ); ?>"
+			>
+		</label>
+		<label for="before">
+			<?php esc_html_e( 'Digests before:', 'enn' ); ?>
+			<input
+				type="date"
+				name="before"
+				pattern="\d{4}-\d{2}-\d{2}"
+				value="<?php esc_attr_e( $before ); ?>"
+			>
+		</label>
+	</fieldset>
 
 	<fieldset id="filter-buttons" name="region-selectors">
 		<legend>Select a region:</legend>
