@@ -2529,6 +2529,16 @@ body.category-national .archive-description {
   width: 100%;
   box-sizing: border-box;
 }
+#date-filter .invalid {
+  display: none;
+}
+#date-filter input:invalid + .invalid {
+  display: block;
+}
+#date-filter input:invalid {
+  border-color: red;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px red;
+}
 /**
  * Styles for specific widgets in general or in specific contexts.
  */

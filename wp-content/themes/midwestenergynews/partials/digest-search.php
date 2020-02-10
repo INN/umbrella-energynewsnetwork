@@ -36,6 +36,7 @@ if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 				pattern="\d{4}-\d{2}-\d{2}"
 				value="<?php esc_attr_e( $after ); ?>"
 			>
+			<span class="invalid"><?php esc_html_e( 'Expected format is YYYY-MM-DD', 'enn' ); ?></span>
 		</label>
 		<label for="before">
 			<?php esc_html_e( 'Digests before:', 'enn' ); ?>
@@ -45,6 +46,7 @@ if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 				pattern="\d{4}-\d{2}-\d{2}"
 				value="<?php esc_attr_e( $before ); ?>"
 			>
+			<span class="invalid"><?php esc_html_e( 'Expected format is YYYY-MM-DD', 'enn' ); ?></span>
 		</label>
 	</fieldset>
 
