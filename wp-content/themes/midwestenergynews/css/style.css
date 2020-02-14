@@ -2485,6 +2485,61 @@ body.category-national .archive-description {
   color: hsl(0, 0%, 16%);
 }
 /**
+ * Stuff specific to partials/digest-search.php
+ */
+.digest-search {
+  margin-top: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid hsl(0, 0%, 79%);
+  margin-bottom: 1em;
+}
+.digest-search .input-append {
+  display: flex;
+}
+.digest-search .input-append input {
+  flex: 1 1 auto;
+}
+.digest-search .input-append button {
+  flex: 0 1 auto;
+}
+.digest-search legend {
+  line-height: 1;
+  margin-top: 0;
+  font-size: 1rem;
+  border-bottom: none;
+}
+.digest-search label.checkbox + label.checkbox {
+  margin-left: 2ch;
+}
+#filter-buttons,
+#date-filter {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+#date-filter {
+  display: flex;
+  flex-wrap: nowrap;
+}
+#date-filter label {
+  flex: 1 1 50%;
+}
+#date-filter label input {
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+}
+#date-filter .invalid {
+  display: none;
+}
+#date-filter input:invalid + .invalid {
+  display: block;
+}
+#date-filter input:invalid {
+  border-color: red;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px red;
+}
+/**
  * Styles for specific widgets in general or in specific contexts.
  */
 /**

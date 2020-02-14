@@ -1,0 +1,64 @@
+/**
+ * Stuff specific to partials/digest-search.php
+ */
+.digest-search {
+	margin-top: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid @greyXL;
+	margin-bottom: 1em;
+
+	.input-append {
+		display: flex;
+		input {
+			flex: 1 1 auto;
+		}
+		button {
+			flex: 0 1 auto;
+		}
+	}
+
+	legend {
+		line-height: 1;
+		margin-top: 0;
+		font-size: 1rem;
+		border-bottom: none;
+	}
+	label.checkbox + label.checkbox {
+		margin-left: 2ch;
+	}
+}
+
+#filter-buttons,
+#date-filter {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#date-filter {
+	display: flex;
+	flex-wrap: nowrap;
+
+	label {
+		flex: 1 1 50%;
+	}
+
+	label input {
+		clear: both;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.invalid {
+		display: none;
+	}
+	input:invalid + .invalid {
+		display: block;
+	}
+	input:invalid {
+		border-color: red;
+		box-shadow:
+			inset 0 1px 1px rgba(0,0,0,.075),
+			0 0 8px red
+		;
+	}
+}

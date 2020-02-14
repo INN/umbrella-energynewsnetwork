@@ -14,10 +14,10 @@
  */
 function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 	if (!empty($post_id)) {
-		if (is_object($post)) {
-			$post_id = $post->ID;
-		} else if (is_numeric($post)) {
-			$post_id = $post;
+		if (is_object($post_id)) {
+			$post_id = $post_id->ID;
+		} else if (is_numeric($post_id)) {
+			$post_id = $post_id;
 		}
 
 	} else {

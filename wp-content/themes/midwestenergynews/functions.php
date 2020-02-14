@@ -20,6 +20,7 @@ $includes = array(
 	'/inc/newsletter-shortcode.php',
 	'/inc/term-debt-consolidator.php',
 	'/inc/regions.php',
+	'/inc/digest-search.php',
 	'/homepages/homepage.php',
 );
 foreach ( $includes as $include ) {
