@@ -126,6 +126,14 @@
     margin-bottom: 24px;
   }
 }
+
+// Fix for in header ad zone https://github.com/INN/largo/blob/c41d8519370b48a6e53ce36b3b516d3e54e39d66/less/inc/ads.less#L28-L30
+#header-ad-zone-container .mailchimp-signup-widget {
+  .hidden {
+    display: none !important;
+  }
+}
+
 // fix for on archive pages
 #sidebar .usen-roundups-widget.default,
 #sidebar .mwen-roundups-widget.default {
@@ -160,6 +168,9 @@
  * Mailchimp Newsletter Signup Widget
  */
 
+.mailchimp-signup-widget {
+  text-align: left;
+}
 .widget_text,
 .mailchimp-signup-widget {
   display: block;
@@ -237,6 +248,7 @@
     margin-top: 0.5em;
   }
 }
+.header-ad-zone .mailchimp-signup-widget,
 .archive .widget_text,
 .home .widget_text,
 .archive .mailchimp-signup-widget,
