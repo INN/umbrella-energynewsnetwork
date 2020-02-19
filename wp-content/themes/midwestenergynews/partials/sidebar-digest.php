@@ -10,5 +10,4 @@
 $custom_sidebar = largo_get_custom_sidebar();
 if ( !dynamic_sidebar( 'digest-sidebar' ) ) { // try custom sidebar registered in functions.php
 	// do nothing.
-	echo 'aaa';
 }
