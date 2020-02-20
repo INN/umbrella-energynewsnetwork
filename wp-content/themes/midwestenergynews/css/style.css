@@ -2699,6 +2699,11 @@ body.category-national .archive-description {
 .single #sidebar .widget + .mwen-roundups-widget.default {
   margin-top: 2.5em;
 }
+@media (max-width: 768px) {
+  #sidebar .widget {
+    padding-left: 24px;
+  }
+}
 /*
  * Mailchimp Newsletter Signup Widget
  */
@@ -2810,35 +2815,64 @@ body.category-national .archive-description {
   margin-top: 0.5em;
 }
 .header-ad-zone .mailchimp-signup-widget,
-.archive .widget_text,
-.home .widget_text,
-.archive .mailchimp-signup-widget,
-.home .mailchimp-signup-widget {
+.archive #sidebar .widget_text,
+.home #sidebar .widget_text,
+.archive #sidebar .mailchimp-signup-widget,
+.home #sidebar .mailchimp-signup-widget {
   border: 1px solid hsl(0, 0%, 79%);
   box-sizing: content-box;
-  padding: 18px 34px;
+  padding: 18px 24px;
+}
+.header-ad-zone .mailchimp-signup-widget .default > :first-child,
+.archive #sidebar .widget_text .default > :first-child,
+.home #sidebar .widget_text .default > :first-child,
+.archive #sidebar .mailchimp-signup-widget .default > :first-child,
+.home #sidebar .mailchimp-signup-widget .default > :first-child {
+  margin-top: 0;
+}
+.header-ad-zone .mailchimp-signup-widget .default > :last-child,
+.archive #sidebar .widget_text .default > :last-child,
+.home #sidebar .widget_text .default > :last-child,
+.archive #sidebar .mailchimp-signup-widget .default > :last-child,
+.home #sidebar .mailchimp-signup-widget .default > :last-child {
+  margin-bottom: 0;
 }
 .header-ad-zone .mailchimp-signup-widget.rev,
-.archive .widget_text.rev,
-.home .widget_text.rev,
-.archive .mailchimp-signup-widget.rev,
-.home .mailchimp-signup-widget.rev {
+.archive #sidebar .widget_text.rev,
+.home #sidebar .widget_text.rev,
+.archive #sidebar .mailchimp-signup-widget.rev,
+.home #sidebar .mailchimp-signup-widget.rev {
   border: none;
 }
+@media (max-width: 768px) {
+  .header-ad-zone .mailchimp-signup-widget,
+  .archive #sidebar .widget_text,
+  .home #sidebar .widget_text,
+  .archive #sidebar .mailchimp-signup-widget,
+  .home #sidebar .mailchimp-signup-widget {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
 .header-ad-zone .mailchimp-signup-widget input[type=email],
-.archive .widget_text input[type=email],
-.home .widget_text input[type=email],
-.archive .mailchimp-signup-widget input[type=email],
-.home .mailchimp-signup-widget input[type=email] {
+.archive #sidebar .widget_text input[type=email],
+.home #sidebar .widget_text input[type=email],
+.archive #sidebar .mailchimp-signup-widget input[type=email],
+.home #sidebar .mailchimp-signup-widget input[type=email] {
   margin: 0 auto 12px;
   display: block;
   padding: 12px;
 }
+.header-ad-zone .mailchimp-signup-widget .btn,
+.archive #sidebar .widget_text .btn,
+.home #sidebar .widget_text .btn,
+.archive #sidebar .mailchimp-signup-widget .btn,
+.home #sidebar .mailchimp-signup-widget .btn,
 .header-ad-zone .mailchimp-signup-widget input[type=submit],
-.archive .widget_text input[type=submit],
-.home .widget_text input[type=submit],
-.archive .mailchimp-signup-widget input[type=submit],
-.home .mailchimp-signup-widget input[type=submit] {
+.archive #sidebar .widget_text input[type=submit],
+.home #sidebar .widget_text input[type=submit],
+.archive #sidebar .mailchimp-signup-widget input[type=submit],
+.home #sidebar .mailchimp-signup-widget input[type=submit] {
   color: #fff;
   background: hsl(196, 49%, 49%);
   border-color: hsl(196, 49%, 49%);
@@ -2846,33 +2880,41 @@ body.category-national .archive-description {
   border-width: 0;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
   margin: 16px 0;
-  padding: 0.75em 2.3em;
-  width: auto;
+  padding: 0.75em 0.75em;
+  text-align: center;
+  width: 100%;
   font-size: 15px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+.header-ad-zone .mailchimp-signup-widget .btn:hover,
+.archive #sidebar .widget_text .btn:hover,
+.home #sidebar .widget_text .btn:hover,
+.archive #sidebar .mailchimp-signup-widget .btn:hover,
+.home #sidebar .mailchimp-signup-widget .btn:hover,
 .header-ad-zone .mailchimp-signup-widget input[type=submit]:hover,
-.archive .widget_text input[type=submit]:hover,
-.home .widget_text input[type=submit]:hover,
-.archive .mailchimp-signup-widget input[type=submit]:hover,
-.home .mailchimp-signup-widget input[type=submit]:hover {
+.archive #sidebar .widget_text input[type=submit]:hover,
+.home #sidebar .widget_text input[type=submit]:hover,
+.archive #sidebar .mailchimp-signup-widget input[type=submit]:hover,
+.home #sidebar .mailchimp-signup-widget input[type=submit]:hover {
   background: hsl(193, 89%, 28%);
   transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 .header-ad-zone .mailchimp-signup-widget input[type=email],
-.archive .widget_text input[type=email],
-.home .widget_text input[type=email],
-.archive .mailchimp-signup-widget input[type=email],
-.home .mailchimp-signup-widget input[type=email] {
+.archive #sidebar .widget_text input[type=email],
+.home #sidebar .widget_text input[type=email],
+.archive #sidebar .mailchimp-signup-widget input[type=email],
+.home #sidebar .mailchimp-signup-widget input[type=email] {
   width: 100%;
   box-sizing: border-box;
 }
 .header-ad-zone .mailchimp-signup-widget form ul,
-.archive .widget_text form ul,
-.home .widget_text form ul,
-.archive .mailchimp-signup-widget form ul,
-.home .mailchimp-signup-widget form ul {
+.archive #sidebar .widget_text form ul,
+.home #sidebar .widget_text form ul,
+.archive #sidebar .mailchimp-signup-widget form ul,
+.home #sidebar .mailchimp-signup-widget form ul {
   text-align: left;
   margin-bottom: 0;
 }
@@ -3006,6 +3048,17 @@ body .widget.saved-links ul li + li {
 .textwidget #mc-embedded-subscribe-form label {
   display: inline-block;
   margin-left: 0.3em;
+}
+#sidebar .field-wrap button,
+#sidebar .field-wrap input[type="button"],
+#sidebar .field-wrap input[type="submit"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.home #sidebar .widget.widget_ninja_forms_widget,
+.archive #sidebar .widget.widget_ninja_forms_widget {
+  padding-right: 24px;
 }
 /**
  * Print styles

@@ -1,0 +1,15 @@
+// to prevent injected styles from making buttons wider than they should be
+#sidebar {
+  .field-wrap button,
+  .field-wrap input[type="button"],
+  .field-wrap input[type="submit"] {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+// Ninja forms
+.home #sidebar .widget.widget_ninja_forms_widget,
+.archive #sidebar .widget.widget_ninja_forms_widget {
+  padding-right: 24px;
+}
