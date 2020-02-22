@@ -164,6 +164,13 @@
   }
 }
 
+// Override the media query in https://github.com/INN/largo/blob/1744bbc7ae99f501129d158c3b585cddf6b5409e/less/inc/widgets.less#L214-L222
+@media ( max-width: 768px ) {
+  #sidebar .widget {
+    padding-left: 24px;
+  }
+}
+
 /*
  * Mailchimp Newsletter Signup Widget
  */
@@ -249,28 +256,45 @@
   }
 }
 .header-ad-zone .mailchimp-signup-widget,
-.archive .widget_text,
-.home .widget_text,
-.archive .mailchimp-signup-widget,
-.home .mailchimp-signup-widget {
+.archive #sidebar .widget_text,
+.home #sidebar .widget_text,
+.archive #sidebar .mailchimp-signup-widget,
+.home #sidebar .mailchimp-signup-widget {
   border: 1px solid @greyXL;
+  .default {
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
   &.rev {
     border: none;
   }
 
   box-sizing: content-box;
-  padding: 18px 34px;
+  padding: 18px 24px;
+  // override https://github.com/INN/largo/blob/1744bbc7ae99f501129d158c3b585cddf6b5409e/less/inc/widgets.less#L214-L222
+  @media ( max-width: 768px ) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
   input[type=email] {
     margin: 0 auto 12px;
     display: block;
     padding: 12px;
   }
+  .btn,
   input[type=submit] {
     .btn-styles('primary');
     margin: 16px 0;
-    padding: 0.75em 2.3em;
-    width: auto;
+    padding: 0.75em 0.75em;
+    text-align: center;
+    width: 100%;
     font-size: 15px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   input[type=email] {
     width: 100%;
@@ -404,3 +428,4 @@ body .widget.saved-links {
     margin-left: 0.3em;
   }
 }
+
