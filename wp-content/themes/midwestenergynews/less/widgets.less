@@ -249,6 +249,25 @@
     margin-bottom: 0;
   }
 }
+.archive.category-digest {
+  #sidebar {
+    .mailchimp-signup-widget {
+      li {
+        margin-bottom: 5px;
+      }
+      input[type=checkbox] {
+        width: 14px;
+        height: 14px;
+        margin-top: -0.5em;
+      }
+      label {
+        font-size: 16px;
+        font-family: @serif;
+        margin-left: 0.3em;
+      }
+    }
+  }
+}
 .widget_text {
   .widgettitle {
     margin-bottom: 0.5em;
@@ -259,7 +278,8 @@
 .archive #sidebar .widget_text,
 .home #sidebar .widget_text,
 .archive #sidebar .mailchimp-signup-widget,
-.home #sidebar .mailchimp-signup-widget {
+.home #sidebar .mailchimp-signup-widget,
+.archive.category-digest #sidebar .widget_ninja_forms_widget {
   border: 1px solid @greyXL;
   .default {
     > :first-child {
@@ -429,3 +449,14 @@ body .widget.saved-links {
   }
 }
 
+.archive.category-digest #sidebar .widget_ninja_forms_widget {
+  .nf-field-element {
+    input {
+      font-family: @sans;
+      font-size: 12px;
+      margin: 0 auto 12px;
+      display: block;
+      padding: 12px;
+    }
+  }
+}

@@ -25,7 +25,7 @@ if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 ?>
 <form class="digest-search form-search" role="search" method="get" action="<?php echo esc_url( get_term_link( get_queried_object())); ?>">
 	<div class="input-append">
-		<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="searchbox search-query" value="<?php the_search_query(); ?>" name="digest-search" /><button type="submit" name="search submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
+		<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="searchbox search-query" value="<?php the_search_query(); ?>" name="digest-search" />
 	</div>
 	<fieldset id="date-filter" name="date-selectors">
 		<label for="after">
@@ -85,4 +85,7 @@ if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 
 		?>
 	</fieldset>
+	<div class="input-append">
+		<button type="submit" name="search submit" class="search-submit btn"><?php _e('Search', 'largo'); ?></button>
+	</div>
 </form>

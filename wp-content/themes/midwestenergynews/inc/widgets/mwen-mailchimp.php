@@ -36,23 +36,23 @@ class mwen_mailchimp_signup_widget extends WP_Widget {
 
 					<ul>
 						<li>
-							<input type="checkbox" value="1" name="group[6829][1]" id="mce-group[6829]-6829-0">
+							<input type="checkbox" value="1" name="group[6829][1]" id="mce-group[6829]-6829-0" checked>
 							<label for="mce-group[6829]-6829-0">Midwest Energy News</label>
 						</li>
 						<li>
-							<input type="checkbox" value="2" name="group[6829][2]" id="mce-group[6829]-6829-1">
+							<input type="checkbox" value="2" name="group[6829][2]" id="mce-group[6829]-6829-1" checked>
 							<label for="mce-group[6829]-6829-1">Southeast Energy News</label>
 						</li>
 						<li>
-							<input type="checkbox" value="8" name="group[6829][8]" id="mce-group[6829]-6829-3">
+							<input type="checkbox" value="8" name="group[6829][8]" id="mce-group[6829]-6829-3" checked>
 							<label for="mce-group[6829]-6829-3">Northeast Energy News</label>
 						</li>
 						<li>
-							<input type="checkbox" value="16" name="group[6829][16]" id="mce-group[6829]-6829-4">
+							<input type="checkbox" value="16" name="group[6829][16]" id="mce-group[6829]-6829-4" checked>
 							<label for="mce-group[6829]-6829-4">Western Energy News</label>
 						</li>
 						<li>
-							<input type="checkbox" value="4" name="group[6829][4]" id="mce-group[6829]-6829-2">
+							<input type="checkbox" value="4" name="group[6829][4]" id="mce-group[6829]-6829-2" checked>
 							<label for="mce-group[6829]-6829-2">U.S. Energy News</label>
 						</li>
 					</ul>
