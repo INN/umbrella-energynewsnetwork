@@ -87,14 +87,12 @@ $region = get_query_var( 'region', '' );
 				$counter = 1;
 				while ( have_posts() ) {
 					the_post();
-				// 	if ( in_array( the_post()->ID, $featured_posts ) ) {
-				// 		echo 'skipped ' . the_post()->ID;
-				// 	} else {
-						$post_type = get_post_type();
-						$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
-						get_template_part( 'partials/content', $partial );
-						do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
-				// 	}
+
+					$post_type = get_post_type();
+					$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
+					get_template_part( 'partials/content-search-digest', $partial );
+					do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
+
 					$counter++;
 				}
 			} elseif ( count($featured_posts) > 0 ) {
