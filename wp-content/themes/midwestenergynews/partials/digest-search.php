@@ -14,6 +14,7 @@ if ( isset( $_GET['after'] ) && ! empty( $_GET['after'] ) ) {
 		$after = $maybe_after;
 	}
 }
+
 if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 	$maybe_before = sanitize_key( $_GET['before'] );
 	if ( ! empty( $maybe_before ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_before ) ) {
@@ -21,11 +22,13 @@ if ( isset( $_GET['before'] ) && ! empty( $_GET['before'] ) ) {
 	}
 }
 
-
 ?>
 <form class="digest-search form-search" role="search" method="get" action="<?php echo esc_url( get_term_link( get_queried_object())); ?>">
-	<div class="input-append">
-		<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="searchbox search-query" value="<?php the_search_query(); ?>" name="digest-search" />
+	<div id="digest-search-container">
+		<label for="digest-search">
+			<?php esc_html_e( 'Search for:', 'mwen' ); ?>
+			<input type="text" class="searchbox search-query" value="<?php the_search_query(); ?>" name="digest-search" />
+		</label>
 	</div>
 	<fieldset id="date-filter" name="date-selectors">
 		<label for="after">
