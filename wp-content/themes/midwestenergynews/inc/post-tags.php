@@ -82,6 +82,13 @@ function largo_byline( $echo = true, $exclude_date = false, $post_id = null ) {
 	);
 	if ( is_single() && ! $exclude_date ) {
 		$output .= '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
+	// necessary to have date on the digests category, but not elsewhere
+	} else if ( is_category( 'digest' ) && ! $exclude_date ) {
+		$output .= sprintf(
+			'<time class="entry-date updated dtstamp pubdate" datetime="%1$s">%2$s</time>',
+			esc_attr( get_the_date( 'c', $post_id ) ),
+			largo_time( false, $post_id )
+		);
 	}
 
 	if ( is_single() && current_user_can( 'edit_post', $post_id ) ) {

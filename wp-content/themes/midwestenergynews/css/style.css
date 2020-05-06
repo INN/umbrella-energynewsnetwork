@@ -2187,14 +2187,14 @@ body.category-national .archive-description {
    * Apply Fancy Links to Posts only
    */
 }
-.archive .by-author,
-.search .by-author {
+.archive .entry-content h5.byline,
+.search .entry-content h5.byline {
   font-size: 16px;
 }
 .archive .by-author,
 .search .by-author {
   margin-right: 3px;
-  display: block;
+  display: inline-block;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
   color: hsl(0, 0%, 16%);
 }
@@ -2206,6 +2206,11 @@ body.category-national .archive-description {
 .archive .by-author a,
 .search .by-author a {
   color: hsl(0, 0%, 16%);
+}
+.archive .entry-date::before,
+.search .entry-date::before {
+  content: " | ";
+  display: inline;
 }
 .archive header.archive-background,
 .search header.archive-background {
@@ -2408,6 +2413,14 @@ body.category-national .archive-description {
 .search .stories article {
   border-bottom: 1px solid hsl(0, 0%, 79%);
   margin-bottom: 36px;
+  padding-bottom: 36px;
+}
+.archive .stories article .entry-content,
+.search .stories article .entry-content,
+.archive .stories article .entry-content > :last-child,
+.search .stories article .entry-content > :last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 @media (min-width: 769px) {
   .archive .stories,
