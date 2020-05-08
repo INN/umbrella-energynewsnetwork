@@ -42,7 +42,7 @@ class USEN_Roundups_Widget extends WP_Widget {
 		 */
 		$query1_args = array(
 			'post__not_in' => get_option( 'sticky_posts' ),
-			'excerpt'      => $instance['show_excerpt'],
+			'excerpt'      => isset( $instance['show_excerpt'] ) ? $instance['show_excerpt'] : '' ,
 			'post_type'    => 'roundup',
 			'post_status'  => 'publish',
 		);

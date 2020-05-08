@@ -126,6 +126,14 @@
     margin-bottom: 24px;
   }
 }
+
+// Fix for in header ad zone https://github.com/INN/largo/blob/c41d8519370b48a6e53ce36b3b516d3e54e39d66/less/inc/ads.less#L28-L30
+#header-ad-zone-container .mailchimp-signup-widget {
+  .hidden {
+    display: none !important;
+  }
+}
+
 // fix for on archive pages
 #sidebar .usen-roundups-widget.default,
 #sidebar .mwen-roundups-widget.default {
@@ -156,10 +164,20 @@
   }
 }
 
+// Override the media query in https://github.com/INN/largo/blob/1744bbc7ae99f501129d158c3b585cddf6b5409e/less/inc/widgets.less#L214-L222
+@media ( max-width: 768px ) {
+  #sidebar .widget {
+    padding-left: 24px;
+  }
+}
+
 /*
  * Mailchimp Newsletter Signup Widget
  */
 
+.mailchimp-signup-widget {
+  text-align: left;
+}
 .widget_text,
 .mailchimp-signup-widget {
   display: block;
@@ -231,34 +249,72 @@
     margin-bottom: 0;
   }
 }
+.archive.category-digest {
+  #sidebar {
+    .mailchimp-signup-widget {
+      li {
+        margin-bottom: 5px;
+      }
+      input[type=checkbox] {
+        width: 14px;
+        height: 14px;
+        margin-top: -0.5em;
+      }
+      label {
+        font-size: 16px;
+        font-family: @serif;
+        margin-left: 0.3em;
+      }
+    }
+  }
+}
 .widget_text {
   .widgettitle {
     margin-bottom: 0.5em;
     margin-top: 0.5em;
   }
 }
-.archive .widget_text,
-.home .widget_text,
-.archive .mailchimp-signup-widget,
-.home .mailchimp-signup-widget {
+.header-ad-zone .mailchimp-signup-widget,
+.archive #sidebar .widget_text,
+.home #sidebar .widget_text,
+.archive #sidebar .mailchimp-signup-widget,
+.home #sidebar .mailchimp-signup-widget,
+.archive.category-digest #sidebar .widget_ninja_forms_widget {
   border: 1px solid @greyXL;
+  .default {
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
   &.rev {
     border: none;
   }
 
   box-sizing: content-box;
-  padding: 18px 34px;
+  padding: 18px 24px;
+  // override https://github.com/INN/largo/blob/1744bbc7ae99f501129d158c3b585cddf6b5409e/less/inc/widgets.less#L214-L222
+  @media ( max-width: 768px ) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
   input[type=email] {
     margin: 0 auto 12px;
     display: block;
     padding: 12px;
   }
+  .btn,
   input[type=submit] {
     .btn-styles('primary');
     margin: 16px 0;
-    padding: 0.75em 2.3em;
-    width: auto;
+    padding: 0.75em 0.75em;
+    text-align: center;
+    width: 100%;
     font-size: 15px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   input[type=email] {
     width: 100%;
@@ -390,5 +446,17 @@ body .widget.saved-links {
   label {
     display: inline-block;
     margin-left: 0.3em;
+  }
+}
+
+.archive.category-digest #sidebar .widget_ninja_forms_widget {
+  .nf-field-element {
+    input {
+      font-family: @sans;
+      font-size: 12px;
+      margin: 0 auto 12px;
+      display: block;
+      padding: 12px;
+    }
   }
 }

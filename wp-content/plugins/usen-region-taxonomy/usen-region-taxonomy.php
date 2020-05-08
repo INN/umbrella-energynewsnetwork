@@ -193,6 +193,7 @@ final class USEN_Regions_Taxonomy {
 		$args = array(
 			'public' => true,
 			'pubicly_queryable' => true,
+			'show_in_rest' => true,
 			'show_ui' => true,
 			'show_tagcloud' => false,
 			'show_admin_column' => false,

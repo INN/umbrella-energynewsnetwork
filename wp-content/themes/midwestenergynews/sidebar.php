@@ -16,12 +16,15 @@ do_action('largo_before_sidebar'); ?>
 		<?php
 			do_action('largo_before_sidebar_widgets');
 
-			if (is_archive() && !is_date())
+			if ( is_category( 'digest' ) ) {
+				get_template_part('partials/sidebar', 'digest');
+			} else if (is_archive() && !is_date()) {
 				get_template_part('partials/sidebar', 'archive');
-			else if (is_single() || is_singular())
+			} else if (is_single() || is_singular()) {
 				get_template_part('partials/sidebar', 'single');
-			else
+			} else {
 				get_template_part('partials/sidebar');
+			}
 
 			do_action('largo_after_sidebar_widgets');
 		?>

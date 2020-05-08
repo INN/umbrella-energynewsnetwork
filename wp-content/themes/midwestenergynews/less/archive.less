@@ -40,7 +40,28 @@ body.category-national {
 
 .archive,
 .search {
-  .horizontal-byline(16px);
+  .entry-content h5.byline {
+    font-size: 16px;
+  }
+  .by-author {
+    margin-right: 3px;
+    display: inline-block;
+    font-family: @sans;
+    color: @black;
+
+    div.by {
+      display: inline;
+      font-weight: 300;
+    }
+
+    a {
+      color: @black;
+    }
+  }
+  .entry-date::before {
+    content: " | ";
+    display: inline;
+  }
 
   /*
    * Header
@@ -201,6 +222,12 @@ body.category-national {
     article {
       border-bottom: 1px solid @greyXL;
       margin-bottom: 36px;
+      padding-bottom: 36px;
+      .entry-content,
+      .entry-content > :last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
     }
     @media (min-width: 769px) {
       padding-right: 36px;
@@ -277,5 +304,13 @@ body.category-national {
   .gs-webResult div.gs-visibleUrl,
   .gs-imageResult div.gs-visibleUrl {
       color: @black;
+  }
+}
+
+.archive.category-digest {
+  #sidebar {
+    .btn.btn-primary {
+      font-weight: 400;
+    }
   }
 }

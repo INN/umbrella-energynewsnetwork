@@ -20,6 +20,7 @@ $includes = array(
 	'/inc/newsletter-shortcode.php',
 	'/inc/term-debt-consolidator.php',
 	'/inc/regions.php',
+	'/inc/digest-search.php',
 	'/homepages/homepage.php',
 );
 foreach ( $includes as $include ) {
@@ -243,3 +244,22 @@ function mwen_image_sizes() {
 	add_image_size( 'rect_thumb_half', 400, 300, true ); // smaller version of rect_thumb
 }
 add_action( 'after_setup_theme', 'mwen_image_sizes' );
+
+/**
+ * Register custom sidebars that aren't related to the homepage
+ *
+ * @link https://codex.wordpress.org/Widgetizing_Themes
+ */
+function mwen_register_sidebars() {
+	// @link https://github.com/INN/umbrella-energynewsnetwork/issues/86
+	register_sidebar( array(
+		'name' => 'Digest Sidebar',
+		'id' => 'digest-sidebar',
+		'description' => __( 'Only output on the category-digest.php template, used on the <a href="/category/digest/">Digests</a> archive.', 'mwen' ),
+		'before_widget' => '<!-- Sidebar: hardcoded digest-sidebar --><aside id="%1$s" class="%2$s clearfix">',
+		'after_widget' => '</aside>',
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
+	) ) ;
+}
+add_action( 'widgets_init', 'mwen_register_sidebars', 11 );
