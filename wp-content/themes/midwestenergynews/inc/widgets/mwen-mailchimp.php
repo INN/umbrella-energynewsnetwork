@@ -64,47 +64,48 @@ class mwen_mailchimp_signup_widget extends WP_Widget {
 						</li>
 					</ul>
 
-					<div class="content__gdpr">
-						<label for="interestgroup_field">Please select all the ways you would like to hear from Energy News Network:</label>
-						<fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
-							<ul>
-								<li>
-									<input type="checkbox" id="gdpr_87" name="gdpr[87]" value="Y" class="av-checkbox gdpr">
-									<label class="subfield" for="gdpr_87">
-										<span>Email</span>
-									</label>
-								</li>
-								<li>
-									<input type="checkbox" id="gdpr_91" name="gdpr[91]" value="Y" class="av-checkbox gdpr">
-									<label class="subfield" for="gdpr_91">
-										<span>Direct Mail</span>
-									</label>
-								</li>
-								<li>
-									<input type="checkbox" id="gdpr_95" name="gdpr[95]" value="Y" class="av-checkbox gdpr">
-									<label class="subfield" for="gdpr_95">
-										<span>Customized Online Advertising</span>
-									</label>
-								</li>
-							</ul>
-						</fieldset>
-						<p>
-							You can manage your subscription at any time by clicking the link in the footer of our emails.
-							<?php
-								$policy = get_privacy_policy_url();
-								if ( ! empty( $policy ) ) {
-									printf(
-										__( 'For information about our privacy practices, please visit <a class="privacy-policy-link" href="%s">our privacy policy</a>.' ),
-										esc_url( $privacy_policy_url ),
-									);
-								}
-							?>
-						</p>
-					</div>
+					<label for="interestgroup_field">Please select all the ways you would like to hear from Energy News Network:</label>
+					<fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
+						<ul>
+							<li>
+								<input type="checkbox" id="gdpr_87" name="gdpr[87]" value="Y" class="av-checkbox gdpr">
+								<label class="subfield" for="gdpr_87">
+									<span>Email</span>
+								</label>
+							</li>
+							<li>
+								<input type="checkbox" id="gdpr_91" name="gdpr[91]" value="Y" class="av-checkbox gdpr">
+								<label class="subfield" for="gdpr_91">
+									<span>Direct Mail</span>
+								</label>
+							</li>
+							<li>
+								<input type="checkbox" id="gdpr_95" name="gdpr[95]" value="Y" class="av-checkbox gdpr">
+								<label class="subfield" for="gdpr_95">
+									<span>Customized Online Advertising</span>
+								</label>
+							</li>
+						</ul>
+					</fieldset>
 
-					<div class="content__gdprLegal">
-						<p>We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank">Learn more about Mailchimp's privacy practices here.</a></p>
-					</div>
+					<p>
+						You can manage your subscription at any time by clicking the link in the footer of our emails.
+					</p>
+
+					<p>
+						<?php
+							$policy = get_privacy_policy_url();
+							if ( ! empty( $policy ) ) {
+								printf(
+									__( 'For information about our privacy practices, please visit <a class="privacy-policy-link" href="%s">our privacy policy</a>.' ),
+									esc_url( $privacy_policy_url ),
+								);
+							}
+						?>
+					</p>
+
+					<!-- Mailchimp boilerplate notice -->
+					<p class="content__gdprLegal">We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank">Learn more about Mailchimp's privacy practices here.</a></p>
 
 					<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class=" btn">
 
