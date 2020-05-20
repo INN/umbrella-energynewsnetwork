@@ -35,10 +35,6 @@ class mwen_mailchimp_signup_widget extends WP_Widget {
 					<div id="mailchimp-input-wrap">
 						<label for="mce-EMAIL">Email Address </label>
 						<input type="email" placeholder="Your email" name="EMAIL" class="required email" id="mce-EMAIL">
-
-					<?php if( !is_home() && !is_archive() ) { ?>
-						<input type="text" placeholder="Zip code" name="ZIPCODE" class="required zipcode" id="mce-ZIPCODE">
-					<?php } ?>
 					</div>
 
 					<ul>
