@@ -60,7 +60,7 @@ function mwen_region_search_query( $query ) {
 			 */
 			$maybe_after = sanitize_key( $_GET['after'] );
 			if ( ! empty( $maybe_after ) && 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $maybe_after ) ) {
-				$date_query['before'] = $maybe_after;
+				$date_query['after'] = $maybe_after;
 			}
 		}
 
