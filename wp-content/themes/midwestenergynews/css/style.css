@@ -2945,6 +2945,8 @@ body.category-national .archive-description {
 .archive.category-digest #sidebar .widget_ninja_forms_widget input[type=email] {
   width: 100%;
   box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
 }
 .header-ad-zone .mailchimp-signup-widget form ul,
 .archive #sidebar .widget_text form ul,
