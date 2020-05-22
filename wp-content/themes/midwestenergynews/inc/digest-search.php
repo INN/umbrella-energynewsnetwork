@@ -16,6 +16,8 @@ function mwen_region_search_query( $query ) {
 		$maybe_increase_count = false;
 		if ( isset( $_GET['digest-search'] ) && ! empty( $_GET['digest-search'] ) ) {
 			$query->set( 's', sanitize_title_for_query( $_GET['digest-search'] ) );
+			$query->set( 'orderby', 'date' );
+			$query->set( 'order', 'DESC' );
 		}
 
 		if ( isset( $_GET['digest-search-region'] ) && ! empty( $_GET['digest-search-region'] ) ) {
