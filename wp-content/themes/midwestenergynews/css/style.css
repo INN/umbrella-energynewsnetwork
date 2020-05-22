@@ -2762,6 +2762,10 @@ body.category-national .archive-description {
   font-size: 12px;
   font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
 }
+.widget_text input[type=checkbox],
+.mailchimp-signup-widget input[type=checkbox] {
+  vertical-align: baseline;
+}
 .widget_text input[type=email],
 .mailchimp-signup-widget input[type=email],
 .widget_text input[type=text],
@@ -2773,18 +2777,40 @@ body.category-national .archive-description {
   box-sizing: border-box;
   min-width: 100px;
 }
-.widget_text input[type=submit],
-.mailchimp-signup-widget input[type=submit] {
+.widget_text xinput[type=submit],
+.mailchimp-signup-widget xinput[type=submit] {
   background-color: hsl(196, 49%, 49%);
   color: #fff;
-  padding: 0.75em 2.3em;
-  width: 100px;
+}
+.widget_text input[type=submit],
+.mailchimp-signup-widget input[type=submit] {
+  color: #fff;
+  background: hsl(196, 49%, 49%);
+  border-color: hsl(196, 49%, 49%);
+  border-style: none;
+  border-width: 0;
+  font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
   display: block;
+  margin: 16px 0;
+  padding: 0.75em 0.75em;
+  text-align: center;
+  width: 100%;
+  font-size: 15px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.widget_text input[type=submit]:hover,
+.mailchimp-signup-widget input[type=submit]:hover {
+  background: hsl(193, 89%, 28%);
+  transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 .widget_text label,
 .mailchimp-signup-widget label {
+  font-family: "kepler-std", "Georgia", serif;
   display: inline;
-  font-size: 12px;
+  font-size: 16px;
 }
 .widget_text ul,
 .mailchimp-signup-widget ul {
@@ -2799,7 +2825,7 @@ body.category-national .archive-description {
 .mailchimp-signup-widget li {
   display: block;
   list-style-type: none;
-  margin-bottom: 0;
+  margin-bottom: 5px;
   white-space: nowrap;
 }
 .widget_text.rev,
@@ -2828,21 +2854,22 @@ body.category-national .archive-description {
   -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
   -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
+.widget_text p,
+.mailchimp-signup-widget p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-family: "kepler-std", "Georgia", serif;
+  font-size: 14px;
+}
 .widget_text p:last-child,
 .mailchimp-signup-widget p:last-child {
   margin-bottom: 0;
 }
-.archive.category-digest #sidebar .mailchimp-signup-widget li {
-  margin-bottom: 5px;
-}
 .archive.category-digest #sidebar .mailchimp-signup-widget input[type=checkbox] {
   width: 14px;
   height: 14px;
-  margin-top: -0.5em;
 }
-.archive.category-digest #sidebar .mailchimp-signup-widget label {
-  font-size: 16px;
-  font-family: "kepler-std", "Georgia", serif;
+.archive.category-digest #sidebar .mailchimp-signup-widget input + label {
   margin-left: 0.3em;
 }
 .widget_text .widgettitle {
@@ -2910,43 +2937,6 @@ body.category-national .archive-description {
 .archive #sidebar .mailchimp-signup-widget .btn,
 .home #sidebar .mailchimp-signup-widget .btn,
 .archive.category-digest #sidebar .widget_ninja_forms_widget .btn,
-.header-ad-zone .mailchimp-signup-widget input[type=submit],
-.archive #sidebar .widget_text input[type=submit],
-.home #sidebar .widget_text input[type=submit],
-.archive #sidebar .mailchimp-signup-widget input[type=submit],
-.home #sidebar .mailchimp-signup-widget input[type=submit],
-.archive.category-digest #sidebar .widget_ninja_forms_widget input[type=submit] {
-  color: #fff;
-  background: hsl(196, 49%, 49%);
-  border-color: hsl(196, 49%, 49%);
-  border-style: none;
-  border-width: 0;
-  font-family: "proxima-nova", "Helvetica Neue", "Helvetica", sans-serif;
-  margin: 16px 0;
-  padding: 0.75em 0.75em;
-  text-align: center;
-  width: 100%;
-  font-size: 15px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-.header-ad-zone .mailchimp-signup-widget .btn:hover,
-.archive #sidebar .widget_text .btn:hover,
-.home #sidebar .widget_text .btn:hover,
-.archive #sidebar .mailchimp-signup-widget .btn:hover,
-.home #sidebar .mailchimp-signup-widget .btn:hover,
-.archive.category-digest #sidebar .widget_ninja_forms_widget .btn:hover,
-.header-ad-zone .mailchimp-signup-widget input[type=submit]:hover,
-.archive #sidebar .widget_text input[type=submit]:hover,
-.home #sidebar .widget_text input[type=submit]:hover,
-.archive #sidebar .mailchimp-signup-widget input[type=submit]:hover,
-.home #sidebar .mailchimp-signup-widget input[type=submit]:hover,
-.archive.category-digest #sidebar .widget_ninja_forms_widget input[type=submit]:hover {
-  background: hsl(193, 89%, 28%);
-  transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -moz-transition: background 0.12 cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  -webkit-transition: background 0.12s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-}
 .header-ad-zone .mailchimp-signup-widget input[type=email],
 .archive #sidebar .widget_text input[type=email],
 .home #sidebar .widget_text input[type=email],
@@ -2955,6 +2945,8 @@ body.category-national .archive-description {
 .archive.category-digest #sidebar .widget_ninja_forms_widget input[type=email] {
   width: 100%;
   box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
 }
 .header-ad-zone .mailchimp-signup-widget form ul,
 .archive #sidebar .widget_text form ul,
